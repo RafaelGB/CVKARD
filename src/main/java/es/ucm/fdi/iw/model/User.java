@@ -38,12 +38,9 @@ public class User {
 	private Direction address;
 	private List<Message> receivedMessages;
 	private List<Message> sentMessages;
-	
-	@Lob
-	@Column(columnDefinition="TEXT")
 	private String card;//ambos, uno como curriculum y otro como descripcion
 	private String lastName;//solo employee
-	private String nick;//solo employee
+	private String nick;//solo employee 
 	private String DNI;//solo employee
 	private String roles; // separado con ,  para distinguir entre roles
 	private List<Proyect> proyects;//solo employee
@@ -97,6 +94,7 @@ public class User {
 		this.lastName = lastName;
 	}
 	
+	@Column(columnDefinition="VARCHAR(60000)")
 	public String getCard() {
 		return card;
 	}
@@ -110,7 +108,7 @@ public class User {
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
-	
+	@Column(columnDefinition="VARCHAR(11)")
 	public String getDNI() {
 		return DNI;
 	}
