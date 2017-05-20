@@ -1,0 +1,66 @@
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<sec:authorize access="isAnonymous()">
+<div>
+	<a href="/registro">¡Registrate aqui!</a>
+</div>
+</sec:authorize>
+<sec:authorize access="isAuthenticated()">
+ <header id="header" class="reveal" style="min-width=600px;">
+
+        <nav id="nav1">
+          <div class="line">
+             <div class="top-nav">                              
+                <div class="top-nav s-12 l-5">
+                   <ul class="right top-ul chevron">
+                      <li><a href="home">Home</a>
+                      </li>
+                      <li><a href="curriculum">Porfolio</a>
+                      </li>
+                      <li><a href="proyecto">Proyectos</a>
+                      </li>
+                   </ul>
+                </div>
+                <ul class="s-12 l-2">
+                   <li class="logo hide-s hide-m">
+                      <h2><img src="${s}images/logo1.png" id ="logo1"/></h2>
+                   </li>
+                </ul>
+                <div class="top-nav s-12 l-3">
+                   <ul class="left top-ul chevron">
+                      <li><a href="ofertas">Ofertas</a>
+                      </li>
+                      <li><a href="empresas">Empresas</a></a> 
+                      </li>
+                      <li><a href="buzon"><img src="${s}images/sobre.png" id ="logo2"/></a>
+                      </li>
+                   </ul> 
+                </div>
+                <div class="top-nav s-12 l-4">
+                    <ul class="right top-ul chevron">
+                   		<!-- según el rol tendran acceso al tipo de perfil de acorde -->
+                    	<li><a id="log1" href="
+												<sec:authorize access="hasRole('EMPLOYEE')">
+													perfilusuario
+												</sec:authorize>
+												<sec:authorize access="hasRole('BUSSINES')">
+													perfilempresa
+												</sec:authorize>
+							">${user.name}</a>
+                    	<!-- FORMULARIO DE LOGOUT: evita que cierren sesión por ti -->
+                    		<form id="logout_form" action= "<c:url value='logout'/>"  method = "POST">
+                    		<input class="button" type="submit"  value="Cerrar sesión"/>
+   							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>	  
+                    		</form>
+                    	<!----------------------------------------------------------->
+                        </li>
+                       <li><a id="log" href="perfilusuario"><img src="/user/photo/${user.id}" id ="logo3"/></a>
+                        </li>
+                     </ul>
+
+                </div>
+             </div>
+          </div>
+        </nav>
+      </header>
+</sec:authorize>

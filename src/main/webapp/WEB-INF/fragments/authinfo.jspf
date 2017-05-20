@@ -1,0 +1,41 @@
+<%@ page pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+
+<sec:authorize access="isAnonymous()">
+<div>
+	No estás registrado.
+</div>
+</sec:authorize>
+<sec:authorize access="isAuthenticated()">
+<div>
+<br></br>
+<br></br>
+	<p>Tu usuario es : <sec:authentication property="principal.username" />    
+	<p>Roles detectados: 
+	<sec:authorize access="hasRole('USER')">
+		hasRole('USER')
+	</sec:authorize>
+	<sec:authorize access="hasRole('EMPLOYEE')">
+		hasRole('EMPLOYEE')
+	</sec:authorize>
+	<sec:authorize access="hasRole('BUSSINES')">
+		hasRole('BUSSINES')
+	</sec:authorize>
+</div> 
+
+<h1>Upload</h1>
+	<p class="lead">Prueba de subida de ficheros</p>
+
+	<form action="user/photo/${user.id}"
+		enctype="multipart/form-data" method="post">
+		<p>
+			Please specify a file, or a set of files:<br> 
+			<input type="file" name="photo" size="40">
+		</p>
+		 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
+		<div>
+			<input type="submit" value="Send">
+		</div>
+	</form>  
+</sec:authorize>
