@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="${s}css/template-style.css">
 <link rel="stylesheet" type="text/css" href="${s}css/style.css" />
 
- <script src="${s}tools/ckeditor/ckeditor.js"></script>
+<script src="${s}tools/ckeditor/ckeditor.js"></script>
 
 <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 

@@ -1,5 +1,6 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://ckeditor.com" prefix="ckeditor"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 
@@ -15,7 +16,7 @@
      <link rel="stylesheet" type="text/css"  href="${s}css/responsee.css">
      <link rel="stylesheet" type="text/css"  href="${s}css/template-style.css">
      <link rel="stylesheet" type="text/css"  href="${s}css/style.css" />
-
+ 	 <script src="${s}tools/ckeditor/ckeditor.js"></script>
      <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
      	
 </head>
@@ -109,15 +110,20 @@
             </div>
             <div class="box">
               <h3>Carta de Presentacion</h3>
- 			  <textarea name="cv" id="cv" rows="10" cols="80">
-	                ${user.card}
-              </textarea>
-	          <script>
-                // Replace the <textarea id="editor1"> with a CKEditor
-                // instance, using default configuration.
-                CKEDITOR.replace( 'cv' );
-	          </script>
-              <a href="#" class="button special small" style="float:right;">Descargar PDF</a>
+		        <form id="pdf_form" action="/download/showpdf" method="post">
+		            <textarea name="vitae" id="vitae" rows="10" cols="80">
+		                ${user.card}
+		            </textarea>
+		            <input type="text" name="ckeditor_data" id="ckeditor_data" style="visibility:hidden;"> </input>
+		            <input name="${_csrf.parameterName}" type="hidden"
+							value="${_csrf.token}" />
+					<input type="button" onclick="downloadpdf()" value="Descargar PDF"></input>
+		            <script>
+		                // Replace the <textarea id="editor1"> with a CKEditor
+		                // instance, using default configuration.
+		                CKEDITOR.replace( 'vitae' );
+		            </script>
+		        </form>
             </div>
 			<div class="box">
 				<section>
@@ -196,7 +202,13 @@
 
 
     <!-- Scripts -->
-    
+      <script>
+      function downloadpdf(){
+    	  var data = CKEDITOR.instances.vitae.getData();
+    	  document.getElementById("ckeditor_data").value = data;
+    	  document.getElementById("pdf_form").submit();
+      }
+      </script>
       <script src="${s}js/jquery.min.js"></script>
       <script src="${s}js/jquery.dropotron.min.js"></script>
       <script src="${s}js/login.js"></script>
