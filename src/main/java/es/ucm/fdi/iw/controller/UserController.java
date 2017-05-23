@@ -52,7 +52,7 @@ public class UserController {
 	@RequestMapping(value="/photo/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
 	public void userPhoto(@PathVariable("id") String id, 
 			HttpServletResponse response) {
-	    File f = localData.getFile("user", id);
+	    File f = localData.getFile("user/"+id, "avatar");
 	    InputStream in = null;
 	    try {
 		    if (f.exists()) {
@@ -81,7 +81,7 @@ public class UserController {
                 byte[] bytes = photo.getBytes();
                 BufferedOutputStream stream =
                         new BufferedOutputStream(
-                        		new FileOutputStream(localData.getFile("user", id)));
+                        		new FileOutputStream(localData.getFile("user/"+id, "avatar")));
                 stream.write(bytes);
                 stream.close();
                 return new RedirectView("/perfilusuario?avatar=actualizado+con+exito");
@@ -93,10 +93,12 @@ public class UserController {
         }
 	}
 	/**
-	 * Uploads a photo for a user
-	 * @param id of user 
-	 * @param photo to upload
-	 * @return
+	 * Update the info of a user
+	 * @param dni-form dni of a user
+	 * @param name-form the name
+	 * @param lastName-form the last name
+	 * @param birthday-form the birthday
+	 * @return redirect to perfilusuario with or without error
 	 */
 	@RequestMapping(value="/updateInfoUser", method=RequestMethod.POST)
 	@ResponseBody

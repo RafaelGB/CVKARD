@@ -110,7 +110,7 @@
             </div>
             <div class="box">
               <h3>Carta de Presentacion</h3>
-		        <form id="pdf_form" action="/download/showpdf" method="post">
+		        <form id="pdf_form" action="/download/showpdf/${user.id}" method="post">
 		            <textarea name="vitae" id="vitae" rows="10" cols="80">
 		                ${user.card}
 		            </textarea>
@@ -207,6 +207,7 @@
     	  var data = CKEDITOR.instances.vitae.getData();
     	  document.getElementById("ckeditor_data").value = data;
     	  document.getElementById("pdf_form").submit();
+    	  
       }
       </script>
       <script src="${s}js/jquery.min.js"></script>
