@@ -61,11 +61,9 @@
 			<h2>CVKARD<img src="${s}images/logo1.png" id ="logo"/></h2>
 			<p>Una carta de presentación para desarrolladores y empresas</p>
 			<ul class="actions">
-				<li><a href="${s}registro" class="button special">Registrate</a></li><br><br>
-				<li><form method="post" action="#">
-					<li><input type="text" name="query" id="query" value="" placeholder="Buscar usuario..." /></li>
-					<li><input href="buscador" type="submit" value="Buscar" class="fit" /></li>
-				</form></li>
+				<li><a href="/registro" class="button special">Registrate</a></li><br></br>
+				<li><input type="text" name="nick" id="nick"  placeholder="escribe un nick..." /></li>
+				<li><a href="#" onclick='searchingCV(this)' class="button special" id="search_button">Buscar CV</a></li>
 			</ul>
 		</section>
 
@@ -108,7 +106,11 @@
        <%@ include file="../fragments/footer.jspf" %>
 
     <!-- Scripts -->
-    
+    <script>
+    function searchingCV(myLink){
+    	myLink.href = "/curriculum/"+document.getElementById("nick").value;
+    }
+    </script>
       <script src="${s}resources/js/jquery.min.js"></script>
       <script src="${s}resources/js/jquery.dropotron.min.js"></script>
       <script src="${s}resources/js/jquery.scrollgress.min.js"></script>

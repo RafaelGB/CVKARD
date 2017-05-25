@@ -96,12 +96,11 @@ public class FileDownloadController {
 			log.error("Delete operation is failed.\n");
 		}
 
-		//step 7 
+		//step 7 -- proceso de descarga del PDF
 		f1 = localData.getFile("user/"+id, "CV.pdf");
 		HttpHeaders respHeaders = new HttpHeaders();
 
 	    respHeaders.setContentType(MediaType.parseMediaType("application/pdf"));
-	    respHeaders.setContentLength(12345678);
 	    respHeaders.setContentDispositionFormData("attachment", "CV.pdf");
 	    InputStreamResource isr = new InputStreamResource(new FileInputStream(f1));
 	    return new ResponseEntity<InputStreamResource>(isr, respHeaders, HttpStatus.OK);

@@ -39,15 +39,15 @@
                 <div class="row">
 	                <div class="u">
 	                    <div class="colum1">
-	                      <img src="${s}images/user.png" alt="" width="200" height="150/">
+	                      <img src="/user/photo/${user.id}" alt="" width="200"	height="150/">
 	                    </div>
 	                </div>
 	                <div class="u">
 	                    <div class="colum1">
-	                    	<h3>NOMBRE Y APELLIDOS</h3>
+	                    	<h3>${user.name} ${user.lastName}</h3>
 	                     	<ul style="list-style:none;">		              
-			                    <li>DNI</li>
-			                    <li>Fecha de nacimiento</li>
+			                    <li>${user.DNI}</li>
+			                    <li>${user.birthday}</li>
 			                    <li>Domicilio</li>		               
 		                   </ul>
 	                    </div>
@@ -111,7 +111,7 @@
             <div class="box">
               <h3>Carta de Presentacion</h3>
 		        <form id="pdf_form" action="/download/showpdf/${user.id}" method="post">
-		            <textarea name="vitae" id="vitae" rows="10" cols="80">
+		            <textarea name="vitae" id="vitae" rows="10" cols="80" disabled="disabled">
 		                ${user.card}
 		            </textarea>
 		            <input type="text" name="ckeditor_data" id="ckeditor_data" style="visibility:hidden;"> </input>
@@ -121,10 +121,13 @@
 		            <script>
 		                // Replace the <textarea id="editor1"> with a CKEditor
 		                // instance, using default configuration.
-		                CKEDITOR.replace( 'vitae' );
+				        CKEDITOR.replace( 'vitae');
 		            </script>
 		        </form>
+		    <div id="download_div" style="background:url(static/images/animal.gif) no-repeat center center;width:80px;height:80px;visibility:hidden;">
+    	  	</div>
             </div>
+
 			<div class="box">
 				<section>
 					<h3>Contacta Conmigo</h3>
@@ -204,10 +207,14 @@
     <!-- Scripts -->
       <script>
       function downloadpdf(){
+    	  var $mygif = document.getElementById ("download_div");
+    	  $mygif.style.visibility = "visible";
     	  var data = CKEDITOR.instances.vitae.getData();
     	  document.getElementById("ckeditor_data").value = data;
     	  document.getElementById("pdf_form").submit();
-    	  
+    	  setTimeout(function() {
+    		  $mygif.style.visibility = "hidden";
+    		}, 5000);
       }
       </script>
       <script src="${s}js/jquery.min.js"></script>

@@ -120,7 +120,7 @@
 					</div>
 					<div class="box">
 						<h3>Carta de Presentacion</h3>
-				        <form id="ckeditor_form" action="/user/updateCard/${user.nick}" method="post">
+				        <form id="ckeditor_form" action="/user/updateCard" method="post">
 				            <textarea name="editor1" id="editor1" rows="10" cols="80">
 				                ${user.card}
 				            </textarea>
@@ -159,7 +159,7 @@
 	    	  var $avatar = document.getElementById ("formAvatar");
 	    	  if($update.style.visibility == 'hidden'){
 	    		  $div.attr('disabled',false);
-	    		  $update.style.visibility = "visible";
+	    		  $update.style.visibility = 'visible';
 	    		  $avatar.style.visibility = "visible";
 	    		  button.innerHTML = "Desactivar edición";
 	    	  }

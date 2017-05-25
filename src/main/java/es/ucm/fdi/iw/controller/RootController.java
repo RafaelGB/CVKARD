@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import es.ucm.fdi.iw.model.User;
 
 @Controller	
@@ -56,13 +56,24 @@ public class RootController {
 		}
 		return "home";
 	}
-
 	/**
 	 * curriculum - Vista de portfolio del usuario "Empleado" 
 	 */
-	@GetMapping("/curriculum")
-	public String curriculum() {
-		return "curriculum";
+	@GetMapping("/curriculum/{nick}")
+	public String curriculum(@PathVariable("nick") String nick,HttpSession session) {
+		String url = "welcome";
+		log.info("Buscando usuario con nick: '"+nick+"'\n");
+		try {
+			User u = entityManager.createQuery("from User where nick = :nick", User.class)
+	                            .setParameter("nick", nick)
+	                            .getSingleResult();
+			session.setAttribute("user", u);
+			url = "curriculum";
+		} catch (Exception e) {
+			// TODO: handle exception
+			log.error(e);
+		}
+		return url;
 	}
 
 	/**  ????????????????????????

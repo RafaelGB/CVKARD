@@ -118,7 +118,6 @@ public class UserController {
 			u.setDNI(DNI);
 			u.setBirthday(birthday);
 			entityManager.merge(u);
-			session.removeAttribute("user");
 			session.setAttribute("user", u);
 			response.setStatus(HttpServletResponse.SC_OK);
 			return new RedirectView("/perfilusuario?update=tus+datos+se+actualizaron+correctamente");
@@ -163,7 +162,7 @@ public class UserController {
 	    		@RequestParam("html_data") String html_data,
 				HttpServletRequest request, HttpServletResponse response, 
 				Model model, HttpSession session){
-			String card = "error+no+se+ha+conseguido+actuaizar+la+presentacion"; 
+			String card = "error+no+se+ha+conseguido+actualizar+la+presentacion"; 
 			try {
 				User u = (User) session.getAttribute("user");
 				u.setCard(html_data);
