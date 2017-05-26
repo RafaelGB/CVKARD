@@ -17,13 +17,7 @@
 </head>
 
 <body class="landing" style="background: url(${s}images/banner.jpg);background-repeat: no-repeat;background-attachment: fixed;background-size: 100%;">
-     <%
-	 if(null == session.getAttribute("user")){ 
-	   response.sendRedirect("welcome?error=noLogin");  
-	}
-	%>
     <div id="page-wrapper">
-    
     <%@ include file="../fragments/header.jspf" %>
   </div>
     <section>
@@ -50,52 +44,26 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td id="selec">
-                          <input type="checkbox" id="copy" name="copy">
-                          <label for="copy">Asunto del correo</label></th></td>
-                        <td>Ante turpis integer aliquet porttitor.</td>
-                        <td><img src="${s}images/star2.png" id ="star"/></td>
-                      </tr>
-                      <tr>
-                        <td id="selec">
-                          <input type="checkbox" id="copy1" name="copy1">
-                          <label for="copy1">Asunto del correo</label></th></td>
-                        <td>Vis ac commodo adipiscing arcu aliquet.</td>
-                        <td><img src="${s}images/star2.png" id ="star"/></td>
-                      </tr>
-                      <tr>
-                        <td id="selec">
-                          <input type="checkbox" id="copy2" name="copy2">
-                          <label for="copy2">Asunto del correo</label></th></td>
-                        <td> Morbi faucibus arcu accumsan lorem.</td>
-                        <td><img src="${s}images/star.png" id ="star"/></td>
-                      </tr>
-                      <tr>
-                        <td id="selec">
-                          <input type="checkbox" id="copy3" name="copy3">
-                          <label for="copy3">Asunto del correo</label></th></td>
-                        <td>Vitae integer tempus condimentum.</td>
-                        <td><img src="${s}images/star2.png" id ="star"/></td>
-                      </tr>
-                      <tr>
-                        <td id="selec">
-                          <input type="checkbox" id="copy4" name="copy4">
-                          <label for="copy4">Asunto del correo</label></th></td>
-                        <td>Ante turpis integer aliquet porttitor.</td>
-                        <td><img src="${s}images/star.png" id ="star"/></td>
-                      </tr>
+                     <c:forEach items="${user.receivedMessages}" var="m" begin="${(pag-1)*9}" end="${9*pag}"> 
+                      	<tr> 
+	                      	<td class="selec">
+	                          <input type="checkbox" id="copy${m.id}" name="copy${m.id}">
+	                          <label for="copy${m.id}">${m.subject}</label>
+	                        </td>
+                            <td>${m.description}</td>  
+                      	</tr> 
+                     </c:forEach>
                     </tbody>
 
                   </table>
                   <div class="w3-bar w3-border w3-round">
                     <div class="w3-bar">
-                      <a href="#" class="w3-bar-item w3-button"> &laquo; </a>
-                      <a href="#" class="w3-button"> 1 </a>
-                      <a href="#" class="w3-button"> 2 </a>
-                      <a href="#" class="w3-button"> 3 </a>
-                      <a href="#" class="w3-button"> 4 </a>
-                      <a href="#" class="w3-button"> &raquo; </a>
+                      <a href="/buzon/${pag>=5 ? pag-4 : 1}" class="w3-bar-item w3-button"> &laquo; </a>
+                      <a href="/buzon/${pag}" class="w3-button"> ${pag} </a>
+                      <a href="/buzon/${pag+1}" class="w3-button"> ${pag+1} </a>
+                      <a href="/buzon/${pag+2}" class="w3-button">${pag+2} </a>
+                      <a href="/buzon/${pag+3}" class="w3-button"> ${pag+3} </a>
+                      <a href="/buzon/${pag+4}" class="w3-button"> &raquo; </a>
                     </div>
                   </div>
                 </div>  

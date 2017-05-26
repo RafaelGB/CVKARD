@@ -1,17 +1,25 @@
 package es.ucm.fdi.iw.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import es.ucm.fdi.iw.model.Message;
 import es.ucm.fdi.iw.model.User;
 
 @Controller	
@@ -43,7 +51,7 @@ public class RootController {
 	@GetMapping("/home")
 	public String home(HttpSession session, Principal principal) {
 		
-		if (principal != null && principal.getName() != null) {
+		if (principal != null && principal.getName() != null && session.getAttribute("user")== null) {
 			try {
 				User u = entityManager.createQuery("from User where email = :email", User.class)
 		                            .setParameter("email", principal.getName())
@@ -127,8 +135,36 @@ public class RootController {
 	/**
 	 * Buzon - vista del correo de entrada/salida de un usuario registrado
 	 */
-	@GetMapping("/buzon")
-	public String buzon() {
+	@GetMapping("/buzon/{pag}")
+	@Transactional
+	public String buzon(HttpSession session,HttpServletResponse response,
+			@PathVariable("pag") String pag,Model model) {
+		try {
+			log.info("pagina de buzon : "+pag);
+				if(pag.equals("1")){
+					User u = (User) session.getAttribute("user");
+					log.info("carga el usuario : "+u.getName());
+					u = entityManager.find(User.class, u.getId());//refresh de la base de datos
+					log.info("refresh de la base de datos lanzado.");
+					//Hibernate.initialize(u.getReceivedMessages());
+					/*for(int i = 1;i< 50;i++){
+					Message m = new Message();
+					m.setBody("cuerpo del mensaje para el id = "+i);
+					m.setSubject("asunto para id = "+i);
+					m.setDescription("mi descripcion para id = "+i);
+					m.setReceiver(u);
+					u.getReceivedMessages().add(m);
+					entityManager.persist(m);
+					}*/
+					log.info("tamaño de los mensajes recibidos actualizado: "+u.getReceivedMessages().size()+"\n");
+					session.setAttribute("user", u);	
+					model.addAttribute("pag",pag);
+				}
+			} catch (NoResultException nre) {
+				log.error("fallo al encontrar el usuario para actualizar\n");
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+				
+			}			
 		return "buzon";
 	}
 

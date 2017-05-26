@@ -1,0 +1,3 @@
+./hsqldb.sh start para iniciar el server
+./hsqldb.sh stop para parar el server
+./hsqldb.sh gui para abrir la interfaz grafica

@@ -16,6 +16,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 @Entity
@@ -121,8 +124,9 @@ public class User {
 	public void setEnabled(byte enabled) {
 		this.enabled = enabled;
 	}
-	@OneToMany(targetEntity=Message.class)
-	@JoinColumn(name="receiver") // <-- this avoids creating an extra User_ScoreOffer table
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "receiver", orphanRemoval = true)
+	@Cascade(CascadeType.ALL)
+    @Fetch(value = FetchMode.SUBSELECT)
 	public List<Message> getReceivedMessages() {
 		return receivedMessages;
 	}
@@ -131,7 +135,7 @@ public class User {
 	}
 	
 
-	@OneToMany(targetEntity=Message.class)
+	@OneToMany(targetEntity=Message.class,fetch = FetchType.LAZY)
 	@JoinColumn(name="sender") // <-- this avoids creating an extra User_ScoreOffer table
 	public List<Message> getSentMessages() {
 		return sentMessages;
@@ -140,8 +144,7 @@ public class User {
 		this.sentMessages = sentMessages;
 	}	
 	
-	@ManyToMany(targetEntity=Language.class, fetch=FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
+	@ManyToMany(targetEntity=Language.class)
 	public List<Proyect> getProyects() {
 		return proyects;
 	}

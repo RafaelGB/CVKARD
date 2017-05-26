@@ -124,7 +124,7 @@
 				        CKEDITOR.replace( 'vitae');
 		            </script>
 		        </form>
-		    <div id="download_div" style="background:url(static/images/animal.gif) no-repeat center center;width:80px;height:80px;visibility:hidden;">
+		    <div id="download_div" style="background:url(${s}images/animal.gif) no-repeat center center;width:80px;height:80px;visibility:hidden;">
     	  	</div>
             </div>
 

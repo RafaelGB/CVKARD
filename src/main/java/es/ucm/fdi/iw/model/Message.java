@@ -1,24 +1,16 @@
 package es.ucm.fdi.iw.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Message {
 	private long id;
 	private String subject;
 	private String body;
-	private boolean favourite;
+	private String description;
 	private boolean read;
 	private User sender;
 	private User receiver;
@@ -46,11 +38,11 @@ public class Message {
 		this.body = body;
 	}
 	
-	public Boolean getFavourite(){
-		return favourite;
+	public String getDescription() {
+		return description;
 	}
-	public void setFavourite(Boolean favourite){
-		this.favourite = favourite;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	public boolean getRead() {
