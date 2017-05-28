@@ -17,6 +17,7 @@
      <link rel="stylesheet" type="text/css"  href="${s}css/template-style.css">
      <link rel="stylesheet" type="text/css"  href="${s}css/style.css" />
  	 <script src="${s}tools/ckeditor/ckeditor.js"></script>
+ 	 <script src='https://www.google.com/recaptcha/api.js'></script>
      <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
      	
 </head>
@@ -158,11 +159,7 @@
 						                          <option value="1">Contract</option>
 						                          <option value="1">Other</option>
 						                        </select>
-                      						</div> </br>
-                      					</li>
-                      					<li>
-		                    				<input type="checkbox" id="human" name="human" checked="">
-                      						<label for="human">I am a human and not a robot</label>
+                      						</div> <br></br>
                       					</li>
 		                    		</ul>
 		                    	</div>
@@ -193,7 +190,8 @@
 		                    		<input type="reset" value="Clear" >
 		                    	</div>
 		                    </div>
-		                </div>
+		                </div><br></br>
+		                <div class="g-recaptcha" data-sitekey="6Lf1NyMUAAAAAALwub84xp42yPQpKAo8CXSeJX9W"></div>
 					 </form>				
 				</section>
 			</div>

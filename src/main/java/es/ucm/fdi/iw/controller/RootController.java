@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -68,15 +69,18 @@ public class RootController {
 	 * curriculum - Vista de portfolio del usuario "Empleado" 
 	 */
 	@GetMapping("/curriculum/{nick}")
-	public String curriculum(@PathVariable("nick") String nick,HttpSession session) {
+	public String curriculum(@PathVariable("nick") String nick,HttpSession session,
+			Model model) {
 		String url = "welcome";
 		log.info("Buscando usuario con nick: '"+nick+"'\n");
 		try {
+			if(session.getAttribute("user")==null){
 			User u = entityManager.createQuery("from User where nick = :nick", User.class)
 	                            .setParameter("nick", nick)
 	                            .getSingleResult();
-			session.setAttribute("user", u);
+			model.addAttribute("user", u);
 			url = "curriculum";
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			log.error(e);
@@ -135,10 +139,16 @@ public class RootController {
 	/**
 	 * Buzon - vista del correo de entrada/salida de un usuario registrado
 	 */
-	@GetMapping("/buzon/{pag}")
+	@GetMapping("/buzon/{type}/{pag}")
 	@Transactional
 	public String buzon(HttpSession session,HttpServletResponse response,
-			@PathVariable("pag") String pag,Model model) {
+			@PathVariable("pag") String pag,@PathVariable("type") String type,
+			Model model) {
+		String exit = "home";
+		if(type.equals("N")){
+			model.addAttribute("type", type);
+			exit = "buzon";
+		}else{
 		try {
 			log.info("pagina de buzon : "+pag);
 				if(pag.equals("1")){
@@ -146,7 +156,6 @@ public class RootController {
 					log.info("carga el usuario : "+u.getName());
 					u = entityManager.find(User.class, u.getId());//refresh de la base de datos
 					log.info("refresh de la base de datos lanzado.");
-					//Hibernate.initialize(u.getReceivedMessages());
 					/*for(int i = 1;i< 50;i++){
 					Message m = new Message();
 					m.setBody("cuerpo del mensaje para el id = "+i);
@@ -156,16 +165,28 @@ public class RootController {
 					u.getReceivedMessages().add(m);
 					entityManager.persist(m);
 					}*/
-					log.info("tamaño de los mensajes recibidos actualizado: "+u.getReceivedMessages().size()+"\n");
+					if(type.equals("R")){
+						model.addAttribute("size",u.getReceivedMessages().size());
+					}else if(type.equals("E")){
+						model.addAttribute("size",u.getSentMessages().size());
+					}else{
+						throw new EntityNotFoundException("opcion no contemplada");
+					}
 					session.setAttribute("user", u);	
 					model.addAttribute("pag",pag);
+					model.addAttribute("type", type);
+					exit = "buzon";
 				}
 			} catch (NoResultException nre) {
-				log.error("fallo al encontrar el usuario para actualizar\n");
+				log.error("fallo al encontrar el usuario para actualizar");
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 				
-			}			
-		return "buzon";
+			}catch (EntityNotFoundException nre) {
+				log.error(nre+": "+type);
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);		
+			}
+		}
+		return exit;
 	}
 
 	/**
