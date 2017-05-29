@@ -71,7 +71,7 @@ public class RootController {
 	@GetMapping("/curriculum/{nick}")
 	public String curriculum(@PathVariable("nick") String nick,HttpSession session,
 			Model model) {
-		String url = "welcome";
+		String url = "index";
 		log.info("Buscando usuario con nick: '"+nick+"'\n");
 		try {
 			if(session.getAttribute("user")==null){
@@ -79,8 +79,8 @@ public class RootController {
 	                            .setParameter("nick", nick)
 	                            .getSingleResult();
 			model.addAttribute("user", u);
-			url = "curriculum";
 			}
+			url = "curriculum";
 		} catch (Exception e) {
 			// TODO: handle exception
 			log.error(e);
@@ -167,8 +167,13 @@ public class RootController {
 					}*/
 					if(type.equals("R")){
 						model.addAttribute("size",u.getReceivedMessages().size());
+						log.info("numero de mensajes recibidos: "+u.getReceivedMessages().size());
 					}else if(type.equals("E")){
 						model.addAttribute("size",u.getSentMessages().size());
+						log.info("numero de mensajes enviados: "+u.getSentMessages().size());
+						for(int i =0;i < u.getSentMessages().size();i++){
+							System.out.println(u.getSentMessages().get(i).getSubject());
+						}
 					}else{
 						throw new EntityNotFoundException("opcion no contemplada");
 					}

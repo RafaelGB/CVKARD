@@ -10,7 +10,7 @@ public class Message {
 	private long id;
 	private String subject;
 	private String body;
-	private String description;
+	private String category;
 	private boolean read;
 	private User sender;
 	private User receiver;
@@ -38,11 +38,11 @@ public class Message {
 		this.body = body;
 	}
 	
-	public String getDescription() {
-		return description;
+	public String getCategory() {
+		return category;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 	public boolean getRead() {

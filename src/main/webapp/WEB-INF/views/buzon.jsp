@@ -38,32 +38,27 @@
               	<c:choose>
 				    <c:when test="${type=='N'}">
 						<h3>Componer</h3>
-							 <form method="post" action="#">
+							 <form method="post" action="/message/createMessage">
 							 	<div class="row">
 				                    <div class="u">
 				                    	<div class="column1">
 				                    		<ul style="list-style:none;">
-				                    			<li><input type="text" name="name" id="name" value="" placeholder="Name"></li></br>
-				                    			<li><input type="text" name="asunto" id="asunto" value="" placeholder="Asunto"></li></br>
-				                    			<li>
-							                    	<input type="checkbox" id="copy" name="copy">
-							                    	<label for="copy">Email me a copy of this message</label>
-							                    </li>
+				                    			<li><input type="text" name="asunto" id="asunto" value="" placeholder="Asunto"></li><br></br>
 				                    		</ul>
 				                    	</div>
 				                    </div>
 				                    <div class="u">
 				                    	<div class="column1">
 				                    		<ul style="list-style:none;">
-				                    			<li><input type="email" name="email" id="email" value="" placeholder="Email"></li></br>
+				                    			<li><input type="email" name="email" id="email" value="" placeholder="Destinatario@ejemplo.sufijo"></li></br>
 				                    			 <li>
 							                    	<div class="select-wrapper">
 								                        <select name="category" id="category">
-								                          <option value="">- Category -</option>
-								                          <option value="1">Questions</option>
-								                          <option value="1">Interview</option>
-								                          <option value="1">Contract</option>
-								                          <option value="1">Other</option>
+								                          <option value="Category">- Category -</option>
+								                          <option value="Questions">Questions</option>
+								                          <option value="Interview">Interview</option>
+								                          <option value="Contract">Contract</option>
+								                          <option value="Other">Other</option>
 								                        </select>
 		                      						</div> <br></br>
 		                      					</li>
@@ -73,7 +68,7 @@
 				                    <div class="u2">
 				                    	<div class="column1">
 				                    		<ul style="list-style:none;">
-				                    			<li><textarea name="message" id="message" placeholder="Escribe tu mensaje aqui..." rows="7"></textarea></li>
+				                    			<li><textarea name="message" id="message" placeholder="Escribe tu mensaje aqui..." rows="9"></textarea></li>
 				                    			
 				                    		</ul>		                    		     
 				                    	</div>
@@ -83,26 +78,39 @@
 				                <div class="row">
 				                    <input type="submit" value="Enviar">
 				                </div>
+				                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 							 </form>
 				    </c:when>    
 				    <c:otherwise>
 						<div class="table-wrapper">
 		                  <table>
 		                    <thead>
-		                      <tr>                   
-		                        <th id="selec">Asunto del correo</th>
-		                        <th>Description</th>
-		                        <th>Fav</th>
+		                      <tr>
+								<th id="selec">Marcados</th>                  
+		                        <th >Asunto del correo</th>
+		                        <th>Categoría</th>
+		                        <th>Leido</th>
 		                      </tr>
 		                    </thead>
 		                    <tbody>
-		                     <c:forEach items="${type == R ? user.receivedMessages : type == S ? user.sentMessages : destacados}" var="m" begin="${(pag-1)*10}" end="${((pag-1)*10)+9}"> 
+		                     <c:forEach items="${type=='R' ? user.receivedMessages : user.sentMessages}" var="m" begin="${(pag-1)*10}" end="${((pag-1)*10)+9}"> 
 		                      	<tr> 
 			                      	<td class="selec">
-			                          <input type="checkbox" id="copy${m.id}" name="copy${m.id}">
-			                          <label for="copy${m.id}">${m.subject}</label>
-			                        </td>
-		                            <td>${m.description}</td>  
+			                          <input type="checkbox" id="copy${m.id}" name="copy${m.id}"></input>
+			                          <label for="copy${m.id}"></label>
+   			                        </td>
+			                        <td><a href="/message/${type}/${m.id}">${m.subject}</a></td>
+		                            <td>${m.category}</td> 
+		                            <td>
+			                            <c:choose>
+						    				<c:when test="${m.read}">
+						    					<td>Si</td> 
+						    				 </c:when>    
+						    				<c:otherwise>
+						    					<td>No</td>
+						    				</c:otherwise>
+					    				</c:choose>
+				    				</td> 
 		                      	</tr> 
 		                     </c:forEach>
 		                    </tbody>
