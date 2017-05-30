@@ -135,7 +135,42 @@ public class RootController {
 	public String proyecto() {
 		return "proyecto";
 	}
-
+	/**
+	 * Proyecto - vista sobre los detalles y referencias de un proyecto concreto
+	 */
+	@GetMapping("/showmessage/{type}/{id}")
+	@Transactional
+	public String showmessage(HttpSession session,Model model,
+			@PathVariable("type") String type,
+			@PathVariable("id") long id) {
+		String url = "home";
+		boolean correct=false;
+		Message m = entityManager.find(Message.class, id);//refresh de la base de datos
+		User u = (User) session.getAttribute("user");
+		if(type.equals("R")){//comprobamos si está en recibidos
+			model.addAttribute("entry",true);
+			if(m.getReceiver().getId() == u.getId()){//si existe dentro de los recibidos lo habilitamos
+				correct = true;
+				model.addAttribute("correo",m.getSender().getEmail());
+				if(!m.getRead()){
+					log.info("Mensaje "+id+ " actualizado como 'leido'");
+					m.setRead(true);
+				}
+			}
+		}else{//sino lo asignamos a enviados por lo que leido no nos incumbe
+			model.addAttribute("entry",false);
+			if(m.getSender().getId() == u.getId()){//si existe dentro de los enviados lo habilitamos
+				correct = true;
+				model.addAttribute("correo",m.getReceiver().getEmail());
+			}
+		}
+		if(correct){//si está habilitado asignamos al modelo el mensaje
+			model.addAttribute("mensaje", m);
+			url = "showmessage";
+		}
+		
+		return url;
+	}
 	/**
 	 * Buzon - vista del correo de entrada/salida de un usuario registrado
 	 */
@@ -156,24 +191,12 @@ public class RootController {
 					log.info("carga el usuario : "+u.getName());
 					u = entityManager.find(User.class, u.getId());//refresh de la base de datos
 					log.info("refresh de la base de datos lanzado.");
-					/*for(int i = 1;i< 50;i++){
-					Message m = new Message();
-					m.setBody("cuerpo del mensaje para el id = "+i);
-					m.setSubject("asunto para id = "+i);
-					m.setDescription("mi descripcion para id = "+i);
-					m.setReceiver(u);
-					u.getReceivedMessages().add(m);
-					entityManager.persist(m);
-					}*/
 					if(type.equals("R")){
 						model.addAttribute("size",u.getReceivedMessages().size());
 						log.info("numero de mensajes recibidos: "+u.getReceivedMessages().size());
 					}else if(type.equals("E")){
 						model.addAttribute("size",u.getSentMessages().size());
 						log.info("numero de mensajes enviados: "+u.getSentMessages().size());
-						for(int i =0;i < u.getSentMessages().size();i++){
-							System.out.println(u.getSentMessages().get(i).getSubject());
-						}
 					}else{
 						throw new EntityNotFoundException("opcion no contemplada");
 					}

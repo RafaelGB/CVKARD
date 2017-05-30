@@ -1,5 +1,6 @@
 package es.ucm.fdi.iw.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -31,6 +32,7 @@ public class Message {
 		this.subject = subject;
 	}
 	
+	@Column(columnDefinition="VARCHAR(3000)")
 	public String getBody(){
 		return body;
 	}

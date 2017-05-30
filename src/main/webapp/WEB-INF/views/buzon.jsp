@@ -34,7 +34,8 @@
             <div class="box">
 
               <div class="row"> 
-              <!-- Si se trata de destacados muestra un formulario, sino muestra los mensajes -->
+              
+              <!-- Si se trata de componer un mensaje muestra un formulario, sino muestra los mensajes -->
               	<c:choose>
 				    <c:when test="${type=='N'}">
 						<h3>Componer</h3>
@@ -43,16 +44,16 @@
 				                    <div class="u">
 				                    	<div class="column1">
 				                    		<ul style="list-style:none;">
-				                    			<li><input type="text" name="asunto" id="asunto" value="" placeholder="Asunto"></li><br></br>
-				                    		</ul>
-				                    	</div>
-				                    </div>
-				                    <div class="u">
-				                    	<div class="column1">
-				                    		<ul style="list-style:none;">
-				                    			<li><input type="email" name="email" id="email" value="" placeholder="Destinatario@ejemplo.sufijo"></li></br>
+				                    			<li>
+				                    				<input type="text" name="asunto" id="asunto"  placeholder="Asunto" style="width:250px;max-width:250px">
+				                    				<br></br>
+				                    			</li>
+				                    			<li>
+				                    				<input type="email" name="email" id="email" value="${pag =='0' ? '' : pag}" placeholder="destino@ejemplo.sufijo" style="width:200px;max-width:200px">
+				                    				<br></br>
+				                    			</li>
 				                    			 <li>
-							                    	<div class="select-wrapper">
+							                    	<div class="select-wrapper" style="width:150px;max-width:150px">
 								                        <select name="category" id="category">
 								                          <option value="Category">- Category -</option>
 								                          <option value="Questions">Questions</option>
@@ -64,15 +65,11 @@
 		                      					</li>
 				                    		</ul>
 				                    	</div>
-				                    </div>
-				                    <div class="u2">
-				                    	<div class="column1">
-				                    		<ul style="list-style:none;">
-				                    			<li><textarea name="message" id="message" placeholder="Escribe tu mensaje aqui..." rows="9"></textarea></li>
-				                    			
-				                    		</ul>		                    		     
-				                    	</div>
-				                    </div>
+				                    </div>				                    
+			                 			                   
+			                    	<textarea name="message" id="message" placeholder="Escribe tu mensaje aqui..." rows="10" cols="40"></textarea>			                    				                    		     
+			                    
+				                  
 				                    
 				                </div>
 				                <div class="row">
@@ -94,12 +91,12 @@
 		                    </thead>
 		                    <tbody>
 		                     <c:forEach items="${type=='R' ? user.receivedMessages : user.sentMessages}" var="m" begin="${(pag-1)*10}" end="${((pag-1)*10)+9}"> 
-		                      	<tr> 
+		                      	<tr>
 			                      	<td class="selec">
 			                          <input type="checkbox" id="copy${m.id}" name="copy${m.id}"></input>
 			                          <label for="copy${m.id}"></label>
    			                        </td>
-			                        <td><a href="/message/${type}/${m.id}">${m.subject}</a></td>
+			                        <td><a href="/showmessage/${type}/${m.id}">${m.subject}</a></td>
 		                            <td>${m.category}</td> 
 		                            <td>
 			                            <c:choose>
@@ -111,7 +108,7 @@
 						    				</c:otherwise>
 					    				</c:choose>
 				    				</td> 
-		                      	</tr> 
+		                      	</tr>
 		                     </c:forEach>
 		                    </tbody>
 		

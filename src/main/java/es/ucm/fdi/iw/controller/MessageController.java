@@ -54,9 +54,10 @@ private static Logger log = Logger.getLogger(UserController.class);
 		m.setReceiver(u2);
 		u.getSentMessages().add(m);
 		u2.getReceivedMessages().add(m);
+		entityManager.persist(m);//si se crea un objeto nuevo
 		session.setAttribute("user", u);
 		response.setStatus(HttpServletResponse.SC_OK);
-		url = "buzon/E/1";
+		url = "/buzon/E/1";
 		}catch(NoResultException nre){
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			log.error("No existe ningun usuario con ese email\n");
