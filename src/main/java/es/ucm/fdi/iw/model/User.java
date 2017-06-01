@@ -135,8 +135,9 @@ public class User {
 	}
 	
 
-	@OneToMany(targetEntity=Message.class,fetch = FetchType.LAZY)
-	@JoinColumn(name="sender") // <-- this avoids creating an extra User_ScoreOffer table
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "sender", orphanRemoval = true)
+	@Cascade(CascadeType.ALL)
+    @Fetch(value = FetchMode.SUBSELECT)
 	public List<Message> getSentMessages() {
 		return sentMessages;
 	}

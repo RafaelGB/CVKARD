@@ -190,7 +190,7 @@ public class RootController {
 					User u = (User) session.getAttribute("user");
 					log.info("carga el usuario : "+u.getName());
 					u = entityManager.find(User.class, u.getId());//refresh de la base de datos
-					log.info("refresh de la base de datos lanzado.");
+					log.info("refresh de usuario lanzado.");
 					if(type.equals("R")){
 						model.addAttribute("size",u.getReceivedMessages().size());
 						log.info("numero de mensajes recibidos: "+u.getReceivedMessages().size());

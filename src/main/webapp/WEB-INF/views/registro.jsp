@@ -13,17 +13,14 @@
     <script src="${s}resources/js/mail.js"></script>
     <script src="${s}resources/js/reqUsuario.js"></script>
     <script src="${s}js/registro.js"></script>
-    
-
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js?ver=1.4.2"></script>
-    <script src="${s}js/login.js"></script>
 </head>
 
 <body class="landing" onload="javascript:cambiarPestanna(pestanas,pestana1);" style="background: url(${s}images/banner.jpg);background-repeat: no-repeat;background-attachment: fixed; background-size: 100%;" >
     <div id="page-wrapper">
      <%@ include file="../fragments/header.jspf" %>
     </div>
-
+	<h3 style="color:blue;">${feedback}</h3>
     <section>
       <div id="head">
         
@@ -34,78 +31,70 @@
         <div class="line">
  
           <section id="main" class="container"> 
-
-    
-                                              <div class="tab">
-   <input class="tablinks" onclick="openCity(event, 'Usuario')"  id="defaultOpen" type="submit" value="USUARIO"></input>                                            
-  <input class="tablinks" onclick="openCity(event, 'Empresa')" type="submit" value="EMPRESA"></input>
- 
-</div>
-                <div id="Usuario" class="tabcontent">
-                 <div class="box">
-  				<form method="post" action="#">
-				 	<div class="row">
-	                    <div class="u2">
-	                    	<div class="column1">
-	                    		<ul style="list-style:none;">
-	                    			<li><input type="text" name="name" id="name" value="" placeholder="Name"></li></br>
-	                    			<li><input type="text" class="form-control" name="username" id="username" onclick="reqUsuario()" placeholder="Indique su usuario"/></li></br>
-	                    			<li><input type="password" class="form-control" name="password" id="id_password"  placeholder="Password"/></li></br>                 		                    		
-	                    					<li>
-	                    				<input type="checkbox" id="human" name="human" checked="">
-	                    						<label for="human">I am a human and not a robot</label>
-	                    					</li>
-	                    		</ul>
-	                    	</div>
-	                    </div>
-	                    <div class="u2">
-	                    	<div class="column1">
-	                    		<ul style="list-style:none;">
-	                    			<li><input type="email" name="user" id="user" value="" placeholder="Last Name"></li></br>
-	                    			<li><input type="text" class="form-control" name="email" id="id_email"  placeholder="Indique su email" onchange="javascript:validateMail('id_email')"/></li></br>		                    		
-			                    	<li><input type="password" class="form-control" name="password2" id="id_password2"  placeholder="Confirm your password"/></li></br>
-									<li>
-	                    				<input type="submit" value="CONFIRMAR">
-	                    					</li>
-	                    		</ul>
-	                    	</div>
-	                    </div>		                   		                    
-	                </div>		               
-			 	</form>		               
+         <div class="tab">
+   			<button  style="font-size: 20px;" class="tablinks" onclick="changeForm('Usuario')">USUARIO</button>                                            
+  			<button  style="font-size: 20px;" class="tablinks" onclick="changeForm('Empresa')">EMPRESA</button>
+		</div>
+              <div id="employee" class="tabcontent">
+              	<div class="box">
+	  				<form id="employee-form" action="/user/newUserEmployee" method="POST">
+					 	<div class="row">
+		                    <div class="u2">
+		                    	<div class="column1">
+		                    		<ul style="list-style:none;">
+		                    			<li><input type="text" name="nameE" id="nameE"  placeholder="Nombre"></li></br>
+		                    			<li><input type="text" class="form-control" name="nickE" id="nickE" placeholder="Indique su nick"/></li></br>
+		                    			<li><input type="password" class="form-control" name="passE" id="passE"  placeholder="Password"/></li></br>                 		                    		
+		                    		</ul>
+		                    	</div>
+		                    </div>
+		                    <div class="u2">
+		                    	<div class="column1">
+		                    		<ul style="list-style:none;">
+		                    			<li><input type="text" name="lastNameE" id="lastNameE" placeholder="Last Name"></li></br>
+		                    			<li><input type="email" class="form-control" name="emailE" id="emailE"  placeholder="Indique su email"/></li></br><!--  onchange="javascript:validateMail('id_email')"?¿? -->		                    		
+				                    	<li><input type="password" class="form-control" name="passConfirmE" id="passConfirmE"  placeholder="Confirm your password"/></li></br>
+										<li>
+		                    				<input type="button" onclick="checkAndCreateE()" value="Verificar">
+		                    				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		                    			</li>
+		                    		</ul>
+		                    	</div>
+		                    </div>		                   		                    
+		                </div>	
+		                <div id="RecaptchaField1"></div>	   
+                    </form>		               
+              	</div>
               </div>
-                </div>
-                <div id="Empresa" class="tabcontent">
-                          
-              <div class="box">
-  				<form method="post" action="#">
-				 	<div class="row">
-	                    <div class="u2">
-	                    	<div class="column1">
-	                    		<ul style="list-style:none;">
-	                    			<li><input type="text" name="name" id="name" value="" placeholder="Business Name"></li></br>
-	                    			<li><input type="password" class="form-control" name="password" id="id_password"  placeholder="Password"/></li></br>                 		                    		
-	                    					<li>
-	                    				<input type="checkbox" id="human" name="human" checked="">
-	                    						<label for="human">I am a human and not a robot</label>
+              <div id="bussines" class="tabcontent" style="display:none;">            
+	              <div class="box">
+		 				<form method="post" action="/user/newUserBussines">
+						 	<div class="row">
+			                    <div class="u2">
+			                    	<div class="column1">
+			                    		<ul style="list-style:none;">
+			                    			<li><input type="text" name="name" id="name" value="" placeholder="Business Name"></li></br>
+			                    			<li><input type="password" class="form-control" name="password" id="id_password"  placeholder="Password"/></li></br>
+			                    		</ul>
+			                    	</div>
+			                    </div>
+			                    <div class="u2">
+			                    	<div class="column1">
+			                    		<ul style="list-style:none;">
+			                    			<li><input type="text" name="email" id="email" value="" placeholder="Email"></li></br>
+					                    	<li><input type="password" class="form-control" name="password2" id="id_password2"  placeholder="Confirm your password"/></li></br>
+											<li>
+			                    				<input type="submit" value="CONFIRMAR">
+			                    				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	                    					</li>
-	                    		</ul>
-	                    	</div>
-	                    </div>
-	                    <div class="u2">
-	                    	<div class="column1">
-	                    		<ul style="list-style:none;">
-	                    			<li><input type="text" name="email" id="email" value="" placeholder="Email"></li></br>
-			                    	<li><input type="password" class="form-control" name="password2" id="id_password2"  placeholder="Confirm your password"/></li></br>
-									<li>
-	                    				<input type="submit" value="CONFIRMAR">
-	                    					</li>
-	                    		</ul>
-	                    	</div>
-	                    </div>		                   		                    
-	                </div>		               
-			 	</form>		               
+			                    		</ul>
+			                    	</div>
+			                    </div>		                   		                    
+			                </div>	
+			                <div id="RecaptchaField2"></div>
+			            </form>		               
+	              </div>
               </div>
-                </div>
             
              
             </section>
@@ -119,6 +108,26 @@
     <!-- FOOTER -->   
       
 	 <%@ include file="../fragments/footer.jspf" %>
+	 
+	 <!-- Scripts -->
+	 <script>
+		 function checkAndCreateE(){
+			 if (grecaptcha.getResponse() == ""){
+				    alert("hmmm... ¡verificate como humano!");
+				} else {
+					var $pass1 = document.getElementById("passE");
+					var $pass2 = document.getElementById("passConfirmE");
+					if($pass1.value.length < 6){
+						alert("contraseña poco segura");
+					}else if($pass1.value != $pass2.value){
+						alert("contraseña mal verificada,prueba de nuevo");
+					}else{
+						document.getElementById("employee-form").submit();
+					}	
+				}
+	     }
+	 </script>
+	  <script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
    </body>
 </html>
 

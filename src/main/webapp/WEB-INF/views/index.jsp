@@ -59,6 +59,7 @@
 	<!-- Banner -->
 		<section id="banner">
 			<h2>CVKARD<img src="${s}images/logo1.png" id ="logo"/></h2>
+			<h3 style="color:blue;">${feedback}</h3>
 			<p>Una carta de presentación para desarrolladores y empresas</p>
 			<ul class="actions">
 				<li><a href="/registro" class="button special">Registrate</a></li><br></br>

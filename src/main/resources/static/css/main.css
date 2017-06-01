@@ -2666,6 +2666,9 @@ fieldset#body {
     font-size:12px;
 }
 
+.tablinks {
+    si
+}
 .tablinks:focus {
     outline:none;
    	background-color: #e89980;

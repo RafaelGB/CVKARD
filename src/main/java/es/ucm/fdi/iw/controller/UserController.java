@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -44,6 +46,52 @@ public class UserController {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	/**
+	 * Create a new user type employee
+	 * @return
+	 */
+	@RequestMapping(value="/newUserEmployee", method=RequestMethod.POST)
+	@ResponseBody
+	@Transactional // needed to allow DB change
+    public RedirectView newUser(
+    		@RequestParam("emailE") String email,
+    		@RequestParam("passE") String pass,
+			@RequestParam("nameE") String name,
+			@RequestParam("lastNameE") String lastName,
+			@RequestParam("nickE") String nick,
+			HttpServletRequest request, HttpServletResponse response, 
+			Model model, HttpSession session){
+		String feedback = "";
+		String url = "/registro";
+		if((boolean) entityManager.createQuery(
+				"select count(u)>0 from User u where email = :email or nick = :nick")
+				.setParameter("email", email)
+				.setParameter("nick", nick).getSingleResult()){
+			feedback = "email o nick ya en uso";
+		}else{
+			User u = new User();
+			try {
+					u.setName(name);
+					u.setEmail(email);
+					u.setLastName(lastName);
+					u.setNick(nick);
+					u.setPassword(passwordEncoder.encode(pass));
+					u.setRoles("USER,EMPLOYEE");
+					entityManager.persist(u);
+					log.info("Usuario creado satisfactoriamente");
+					feedback ="usuario creado correctamente";
+					url="/welcome";
+				} catch (NoResultException nre) {
+					feedback = "ups, algo salio mal, intentelo de nuevo más tarde";
+					log.error("Algo salio mal creando el usuario "+email);
+					response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			}
+		}	
+		model.addAttribute("feedback",feedback);
+		return new RedirectView(url);
+	}
 	/**
 	 * Returns a users' photo
 	 * @param id of user to get photo from
