@@ -55,7 +55,7 @@ public class UserController {
 	@RequestMapping(value="/newUserEmployee", method=RequestMethod.POST)
 	@ResponseBody
 	@Transactional // needed to allow DB change
-    public RedirectView newUser(
+    public RedirectView newUserEmployee(
     		@RequestParam("emailE") String email,
     		@RequestParam("passE") String pass,
 			@RequestParam("nameE") String name,
@@ -80,8 +80,49 @@ public class UserController {
 					u.setPassword(passwordEncoder.encode(pass));
 					u.setRoles("USER,EMPLOYEE");
 					entityManager.persist(u);
-					log.info("Usuario creado satisfactoriamente");
-					feedback ="usuario creado correctamente";
+					log.info("Usuario empleado creado satisfactoriamente");
+					feedback ="usuario empleado creado correctamente";
+					url="/welcome";
+				} catch (NoResultException nre) {
+					feedback = "ups, algo salio mal, intentelo de nuevo más tarde";
+					log.error("Algo salio mal creando el usuario "+email);
+					response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			}
+		}	
+		model.addAttribute("feedback",feedback);
+		return new RedirectView(url);
+	}
+	/**
+	 * Create a new user type bussines
+	 * @return
+	 */
+	@RequestMapping(value="/newUserBussines", method=RequestMethod.POST)
+	@ResponseBody
+	@Transactional // needed to allow DB change
+    public RedirectView newUserBussines(
+    		@RequestParam("emailB") String email,
+    		@RequestParam("passB") String pass,
+			@RequestParam("nameB") String name,
+			HttpServletRequest request, HttpServletResponse response, 
+			Model model, HttpSession session){
+		String feedback = "";
+		String url = "/registro";
+		if((boolean) entityManager.createQuery(
+				"select count(u)>0 from User u where email = :email")
+				.setParameter("email", email)
+				.getSingleResult()){
+			log.info("Email ya en uso");
+			feedback = "email ya en uso";
+		}else{
+			User u = new User();
+			try {
+					u.setName(name);
+					u.setEmail(email);
+					u.setPassword(passwordEncoder.encode(pass));
+					u.setRoles("USER,BUSSINES");
+					entityManager.persist(u);
+					log.info("Usuario negocio creado satisfactoriamente");
+					feedback ="usuario negocio creado correctamente";
 					url="/welcome";
 				} catch (NoResultException nre) {
 					feedback = "ups, algo salio mal, intentelo de nuevo más tarde";
@@ -180,8 +221,8 @@ public class UserController {
 	@ResponseBody
 	@Transactional // needed to allow DB change
 	 public RedirectView updateBusiness(
-	    		@RequestParam("email-form") String email,
-				@RequestParam("name-form") String name,
+	    		@RequestParam("emailB") String email,
+				@RequestParam("nameB") String name,
 				HttpServletRequest request, HttpServletResponse response, 
 				Model model, HttpSession session){
 			log.info("dentro del update\n email = "+email+"\n name = "+name+"\n");

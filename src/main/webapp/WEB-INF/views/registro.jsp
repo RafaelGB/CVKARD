@@ -68,23 +68,23 @@
               </div>
               <div id="bussines" class="tabcontent" style="display:none;">            
 	              <div class="box">
-		 				<form method="post" action="/user/newUserBussines">
+		 				<form id="bussines-form" method="post" action="/user/newUserBussines">
 						 	<div class="row">
 			                    <div class="u2">
 			                    	<div class="column1">
 			                    		<ul style="list-style:none;">
-			                    			<li><input type="text" name="name" id="name" value="" placeholder="Business Name"></li></br>
-			                    			<li><input type="password" class="form-control" name="password" id="id_password"  placeholder="Password"/></li></br>
+			                    			<li><input type="text" name="nameB" id="nameB"  placeholder="Business Name"></li></br>
+			                    			<li><input type="password" class="form-control" name="passB" id="passB"  placeholder="Password"/></li></br>
 			                    		</ul>
 			                    	</div>
 			                    </div>
 			                    <div class="u2">
 			                    	<div class="column1">
 			                    		<ul style="list-style:none;">
-			                    			<li><input type="text" name="email" id="email" value="" placeholder="Email"></li></br>
-					                    	<li><input type="password" class="form-control" name="password2" id="id_password2"  placeholder="Confirm your password"/></li></br>
+			                    			<li><input type="email" name="emailB" id="emailB" value="" placeholder="Email"></li></br>
+					                    	<li><input type="password" class="form-control" name="passConfirmB" id="passConfirmB"  placeholder="Confirm your password"/></li></br>
 											<li>
-			                    				<input type="submit" value="CONFIRMAR">
+			                    				<input type="button" onclick="checkAndCreateB()" value="Verificar">
 			                    				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	                    					</li>
 			                    		</ul>
@@ -110,23 +110,6 @@
 	 <%@ include file="../fragments/footer.jspf" %>
 	 
 	 <!-- Scripts -->
-	 <script>
-		 function checkAndCreateE(){
-			 if (grecaptcha.getResponse() == ""){
-				    alert("hmmm... ¡verificate como humano!");
-				} else {
-					var $pass1 = document.getElementById("passE");
-					var $pass2 = document.getElementById("passConfirmE");
-					if($pass1.value.length < 6){
-						alert("contraseña poco segura");
-					}else if($pass1.value != $pass2.value){
-						alert("contraseña mal verificada,prueba de nuevo");
-					}else{
-						document.getElementById("employee-form").submit();
-					}	
-				}
-	     }
-	 </script>
 	  <script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
    </body>
 </html>
