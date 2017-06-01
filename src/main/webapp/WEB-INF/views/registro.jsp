@@ -20,7 +20,11 @@
     <div id="page-wrapper">
      <%@ include file="../fragments/header.jspf" %>
     </div>
-	<h3 style="color:blue;">${feedback}</h3>
+	<h3><%
+    if (request.getParameter("feedback") == "") {
+        out.println(request.getParameter("feedback"));
+    }
+	%></h3>
     <section>
       <div id="head">
         

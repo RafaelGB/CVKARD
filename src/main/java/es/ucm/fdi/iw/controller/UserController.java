@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -17,8 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.authentication.encoding.PasswordEncoder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -47,7 +47,7 @@ public class UserController {
 	private EntityManager entityManager;
 	
 	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
+	private PasswordEncoder passwordEncoder;
 	/**
 	 * Create a new user type employee
 	 * @return
@@ -69,7 +69,7 @@ public class UserController {
 				"select count(u)>0 from User u where email = :email or nick = :nick")
 				.setParameter("email", email)
 				.setParameter("nick", nick).getSingleResult()){
-			feedback = "email o nick ya en uso";
+			feedback = "email+o+nick+ya+en+uso";
 		}else{
 			User u = new User();
 			try {
@@ -81,7 +81,7 @@ public class UserController {
 					u.setRoles("USER,EMPLOYEE");
 					entityManager.persist(u);
 					log.info("Usuario empleado creado satisfactoriamente");
-					feedback ="usuario empleado creado correctamente";
+					feedback ="usuario+empleado+creado+correctamente";
 					url="/welcome";
 				} catch (NoResultException nre) {
 					feedback = "ups, algo salio mal, intentelo de nuevo más tarde";
@@ -112,7 +112,7 @@ public class UserController {
 				.setParameter("email", email)
 				.getSingleResult()){
 			log.info("Email ya en uso");
-			feedback = "email ya en uso";
+			feedback = "email+ya+en+uso";
 		}else{
 			User u = new User();
 			try {
@@ -122,16 +122,16 @@ public class UserController {
 					u.setRoles("USER,BUSSINES");
 					entityManager.persist(u);
 					log.info("Usuario negocio creado satisfactoriamente");
-					feedback ="usuario negocio creado correctamente";
+					feedback ="usuario+negocio+creado+correctamente";
 					url="/welcome";
 				} catch (NoResultException nre) {
-					feedback = "ups, algo salio mal, intentelo de nuevo más tarde";
+					feedback = "ups,+algo+salio+mal,+intentelo+de+nuevo+más+tarde";
 					log.error("Algo salio mal creando el usuario "+email);
 					response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			}
 		}	
-		model.addAttribute("feedback",feedback);
-		return new RedirectView(url);
+		//model.addAttribute("feedback",feedback);
+		return new RedirectView(url+"?feedback="+feedback);
 	}
 	/**
 	 * Returns a users' photo

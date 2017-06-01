@@ -80,10 +80,11 @@
 				    </c:when>    
 				    <c:otherwise>
 						<div class="table-wrapper">
+						<form action="buzon/withChecked" action="post">
 		                  <table>
 		                    <thead>
 		                      <tr>
-								<th id="selec">Marcados</th>                  
+								<th id="selec">Marcados<button type="submit">send</button></th>                  
 		                        <th >Asunto del correo</th>
 		                        <th>Categoría</th>
 		                        <th>Leido</th>
@@ -93,7 +94,7 @@
 		                     <c:forEach items="${type=='R' ? user.receivedMessages : user.sentMessages}" var="m" begin="${(pag-1)*10}" end="${((pag-1)*10)+9}"> 
 		                      	<tr>
 			                      	<td class="selec">
-			                          <input type="checkbox" id="copy${m.id}" name="copy${m.id}"></input>
+			                          <input type="checkbox" id="copy${m.id}" name="checked" value="${m.id}"></input>
 			                          <label for="copy${m.id}"></label>
    			                        </td>
 			                        <td><a href="/showmessage/${type}/${m.id}">${m.subject}</a></td>
@@ -113,6 +114,7 @@
 		                    </tbody>
 		
 		                  </table>
+		                  </form>
 		                  <div class="w3-bar w3-border w3-round">
 		                    <div class="w3-bar">
 		                      <a href="/buzon/${type}/${pag>=5 ? pag-4 : 1}" class="w3-bar-item w3-button"> &laquo; </a>
