@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import es.ucm.fdi.iw.model.Message;
+import es.ucm.fdi.iw.model.Proyect;
 import es.ucm.fdi.iw.model.User;
 
 @Controller	
@@ -131,10 +132,46 @@ public class RootController {
 	/**
 	 * Proyecto - vista sobre los detalles y referencias de un proyecto concreto
 	 */
-	@GetMapping("/proyecto")
-	public String proyecto() {
+	@GetMapping("/proyecto/{id}")
+	public String proyecto(Model model,@PathVariable("id") long id, HttpSession session) {
+		User u = (User) session.getAttribute("user");
+		u= entityManager.find(User.class, u.getId());
+		Proyect p = entityManager.find(Proyect.class, id);
+		
+		log.info("refresh de proyecto."+ p.getId());
+		
+		session.setAttribute("user", u);
+		model.addAttribute("proyect", p);
+		model.addAttribute("participante", p.getMembers());
+		
+		
+		
 		return "proyecto";
+		
 	}
+	
+	/**
+	 * editProyect -  vista de edición de un proyecto
+	 */
+	@GetMapping("/editProyect/{id}")
+	@Transactional
+	public String editProyect(Model model,@PathVariable("id") long id, HttpSession session) {
+		String exit="home";
+		User u = (User) session.getAttribute("user");
+		u= entityManager.find(User.class, u.getId());
+		Proyect p = entityManager.find(Proyect.class, id);
+		
+		log.info("refresh de proyecto."+ p.getId());
+		
+		session.setAttribute("user", u);
+		model.addAttribute("proyect", p);
+		exit="editProyect";
+		
+		
+		return exit;
+	}
+	
+	
 	/**
 	 * Proyecto - vista sobre los detalles y referencias de un proyecto concreto
 	 */
@@ -260,9 +297,30 @@ public class RootController {
 	/**
 	 * TablaProyectos -  vista sobre los proyectos de un trabajador en concreto bajo su log y sus opciones de edición
 	 */
-	@GetMapping("/tablaproyectos")
-	public String tablaproyectos() {
-		return "tablaproyectos";
+	@GetMapping("/tablaproyectos/{type}/{pag}")
+	@Transactional
+	public String tablaproyectos(Model model,@PathVariable("pag") String pag,@PathVariable("type") String type, HttpSession session) {
+		String exit="home";
+		if(type.equals("N")){
+			model.addAttribute("type",type);
+			exit="tablaproyectos";
+		}
+		else{
+		
+		User u = (User) session.getAttribute("user");
+		u= entityManager.find(User.class, u.getId());
+		log.info("refresh de usuario."+ u.getId());
+		
+		model.addAttribute("size",u.getProyects().size());
+		model.addAttribute("pag",pag);
+		
+		session.setAttribute("user", u);
+		model.addAttribute("proyects", u.getProyects());
+		exit="tablaproyectos";
+		
+		}
+		
+		return exit;
 	}
 
 }
