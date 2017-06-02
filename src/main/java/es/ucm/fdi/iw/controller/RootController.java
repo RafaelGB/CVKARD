@@ -203,8 +203,8 @@ public class RootController {
 					session.setAttribute("user", u);	
 					model.addAttribute("pag",pag);
 					model.addAttribute("type", type);
-					exit = "buzon";
 				}
+				exit = "buzon";
 			} catch (NoResultException nre) {
 				log.error("fallo al encontrar el usuario para actualizar");
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);

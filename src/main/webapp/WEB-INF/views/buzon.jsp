@@ -27,10 +27,9 @@
       <div id="content">
         <div class="line">
           <section id="main" class="container">
-            <a href="/buzon/N/0" id ="new" class="button alt fit small">Nuevo</a>
+            <a href="/buzon/N/0" id ="new" class="button alt fit small">Nuevo${size}</a>
             <a href="/buzon/R/1" class="button alt fit small">Recibidos</a>
             <a href="/buzon/E/1" class="button alt fit small">Enviados</a>
-            <a href="/buzon/D/1" class="button alt fit small">Destacados</a>
             <div class="box">
 
               <div class="row"> 
@@ -118,11 +117,11 @@
 		                  <div class="w3-bar w3-border w3-round">
 		                    <div class="w3-bar">
 		                      <a href="/buzon/${type}/${pag>=5 ? pag-4 : 1}" class="w3-bar-item w3-button"> &laquo; </a>
-		                      <a href="/buzon/${type}/${(pag)*10 <= size ? pag : pag}" class="w3-button"> ${(pag)*10 <= size ? pag : pag} </a>
-		                      <a href="/buzon/${type}/${(pag+1)*10 <= size ? pag+1 : pag}" class="w3-button"> ${(pag+1)*10 <= size ? pag+1 : pag} </a>
-		                      <a href="/buzon/${type}/${(pag+2)*10 <= size ? pag+2 : pag}" class="w3-button">${(pag+2)*10 <= size ? pag+2 : pag} </a>
-		                      <a href="/buzon/${type}/${(pag+3)*10 <= size ? pag+3 : pag}" class="w3-button">${(pag+3)*10 <= size ? pag+3 : pag} </a>
-		                      <a href="/buzon/${type}/${(pag+4)*10 <= size ? pag+4 : pag}" class="w3-button"> &raquo; </a>
+		                      <a href="/buzon/${type}/${pag}" class="w3-button"> ${pag} </a>
+		                      <a href="/buzon/${type}/${(((pag)*10)+1) <= size ? pag+1 : pag}" class="w3-button"> ${(((pag)*10)+1) <= size ? pag+1 : '-'} </a>
+		                      <a href="/buzon/${type}/${(((pag+1)*10)+1) <= size ? pag+2 : pag}#" class="w3-button">${(((pag+1)*10)+1) <= size ? pag+2 : '-'} </a>
+		                      <a href="/buzon/${type}/${(((pag+2)*10)+1)<= size ? pag+3 : pag}#" class="w3-button">${(((pag+2)*10)+1) <= size ? pag+3 : '-'} </a>
+		                      <a href="/buzon/${type}/${(((pag+3)*10)+1) <= size ? pag+4 : pag}#" class="w3-button"> &raquo; </a>
 		                    </div>
 		                  </div>
 		                </div> 
