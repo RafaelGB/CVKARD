@@ -21,6 +21,8 @@ public class Proyect {
 	private long id;
 	private String description;
 	private String img;
+	private String title;
+	private String date;
 	private List <User> members;
 	private List<Language> languages;
 	private List<Tag> tags;
@@ -48,6 +50,19 @@ public class Proyect {
 	public void setImg(String img) {
 		this.img = img;
 	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
 	
 	@ManyToMany(targetEntity=User.class, mappedBy="proyects")
 	public List<User> getMembers() {
@@ -74,4 +89,6 @@ public class Proyect {
 	public void setTags(List<Tag> tags){
 		this.tags = tags;
 	}
+
+
 }
