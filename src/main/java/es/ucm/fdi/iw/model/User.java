@@ -144,7 +144,7 @@ public class User {
 		this.sentMessages = sentMessages;
 	}	
 	
-	@ManyToMany(targetEntity=Language.class)
+	@ManyToMany(targetEntity=Proyect.class)
 	public List<Proyect> getProyects() {
 		return proyects;
 	}
