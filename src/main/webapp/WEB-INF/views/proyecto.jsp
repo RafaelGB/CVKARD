@@ -6,7 +6,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>CVKard - Empresas</title>
+  <title>${proyect.title}</title>
     <link rel="stylesheet" type="text/css"  href="${s}css/main.css">
     <link rel="stylesheet" type="text/css"  href="${s}css/components.css">  
 
@@ -28,23 +28,23 @@
 		              	<div class="row">
 			              	<div class="u">
 			                    <div class="colum1">
-			                      <img src="${s}images/logo.png" alt="" width="200" height="150/">
+			                      <img src="/proyect/photo/${proyect.id}" alt="" width="200" height="150/">
 			                    </div>
 		                	</div>
 		                	<div class="u">		             
 			                    <div class="colum1">
 			                   		<ul style="list-style:none;">
-			                      		<li><h2>CVKARD</h2></li>
-			                      		<li>Participante 1</li>
-			                      		<li>Participante 2</li>
-			                      		<li>Participante 3</li>			                      	
+			                      		<li><h2>${proyect.title}</h2></li>
+			                      		<c:forEach items="${participante}" var="p" >
+			                      		<li>${p.name}</li>
+			                      		</c:forEach>		                      	
 			                      	</ul>
 			                    </div>
 		                	</div>
 		                	<div class="u2">		             
 			                    <div class="colum1">
 			                    	<ul style="list-style:none;">
-				                   		<li><h4> Puntuacion: 
+				                   		<li><h4> Puntuacion: </h4>
 										<div class="ec-stars-wrapper">
 											<a href="#" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
 											<a href="#" data-value="2" title="Votar con 2 estrellas">&#9733;</a>
@@ -52,9 +52,9 @@
 											<a href="#" data-value="4" title="Votar con 4 estrellas">&#9733;</a>
 											<a href="#" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
 										</div>
-										</h4>
+										
 										</li>
-										<li></br>
+										<li>
 										<h4>Tags</h4>
 											<a href="" class="w3-button">Diseno Web</a> ;
 											<a href="" class="w3-button">Pagina web</a> ;
@@ -69,7 +69,7 @@
 		             <div class="box">
 						
 						<h3>Explicacion Proyecto</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales porta venenatis. Aliquam tristique, purus id lacinia egestas, risus turpis iaculis eros, eget venenatis dolor magna eu ex. Nunc interdum varius urna sed lobortis. Sed feugiat, nulla sed imperdiet semper, metus risus aliquam odio, quis ullamcorper odio lorem at ante. Sed at dignissim leo. Morbi varius iaculis augue a consequat. Maecenas eget luctus purus. Sed venenatis efficitur lectus, ac posuere arcu tincidunt et. Vestibulum auctor nulla nec molestie tincidunt. Curabitur congue massa in dignissim fermentum. Mauris vel dapibus lacus, eget volutpat leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+						<p>${proyect.description}</p>
 								
 						<div class="row">
 							<img src="${s}images/logo.png" alt="" WIDTH=140 HEIGHT=100/>

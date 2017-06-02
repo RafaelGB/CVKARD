@@ -6,7 +6,7 @@
 
 <html>
 <head>
-<title>CVKARD - Curriculum</title>
+<title>CVKARD - Proyecto</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
@@ -32,9 +32,11 @@
 	<section>
 		<div id="head">
 			<div class="line">
-				<h1>EDITAR INFORMACION</h1>
+				<h1>EDITAR PROYECTO</h1>
 			</div>
 		</div>
+		<!--Cambiar las ids o los names de los inputs para pillarlos en un proyectController , y crear el metodo para que lo actualice bien -->
+		<!--Crear un metodo que pille la foto del proyecto como la del user/photo-->
 		<div id="content">
 			<div class="line">
 				<section id="main" class="container">
@@ -42,9 +44,9 @@
 						<div class="row">
 							<div class="u">
 								<div class="colum1">
-									<img src="/user/photo/${user.id}" alt="" width="200"
+								<img src="/proyect/photo/${proyect.id}" alt="" width="200"
 										height="150/">
-									<form id="formAvatar" action="user/photo/${user.id}"
+									<form id="formImage" action="/proyect/photo/${proyect.id}"
 										style="visibility: hidden;" enctype="multipart/form-data"
 										method="post">
 										<input type="file" name="photo" size="40"> <input
@@ -55,13 +57,13 @@
 										</div>
 									</form>
 									<span style="color: blue;"> <%
-								    if (request.getParameter("avatar") != null)
-								        out.println(request.getParameter("avatar"));
+								    if (request.getParameter("image") != null)
+								        out.println(request.getParameter("image"));
 								%>
 									</span>
 								</div>
 							</div>
-							<form id="confirmUpdate" action="/user/updateInfoUser"
+							<form id="confirmUpdate" action="/proyect/updateInfoProyect/${proyect.id}"
 								style="visibility: hidden;" method="post">
 								<input name="${_csrf.parameterName}" type="hidden"
 									value="${_csrf.token}" /> <input type="submit"
@@ -73,34 +75,25 @@
 										<li style="font-size: 24px; margin-top: 0.5em;"><input
 											class="changingClass" disabled="disabled" type="text"
 											id="name-form" name="name-form" form="confirmUpdate"
-											value="${user.name}" /></li>
-										<li class="changingClass"
-											style="font-size: 21px; margin-bottom: 1em;"><input
-											class="changingClass" disabled="disabled" type="text"
-											id="lastName-form" name="lastName-form" form="confirmUpdate"
-											value="${user.lastName}" /></li>
+											value="${proyect.title}" /></li>
+										
 
 
-										<li>
-											<input disabled="disabled" class="changingClass"
-											type="text" id="dni-form" name="dni-form"
-											form="confirmUpdate" value="${!empty user.DNI ? user.DNI : 'pon tu DNI aqui'}" />
-										</li>
-										<li>fecha de nacimiento: 
+										
+										<li>fecha del proyecto: 
 										
 											<input class="changingClass"
 											disabled="disabled" type="date" id="birthday-form"
-											name="birthday-form" form="confirmUpdate"
-											value="${!empty user.birthday ? user.birthday : ''}">
+											name="date-form" form="confirmUpdate"
+											value="${!empty proyect.date ? proyect.date : ''}">
 
 										</li>
-										<li>domicilio</li>
+										
 									</ul>
 								</div>
 							</div>
 
-							<a href="tablaproyectos/V/1" class="button special small"
-								style="float: right; margin-left: 0.4em;">Editar Proyectos</a>  
+							  
 								<label for="submit-form" id="update_button"
 									class="button special small"
 									style="float: right; visibility: hidden;">
@@ -119,10 +112,10 @@
 						</div>
 					</div>
 					<div class="box">
-						<h3>Carta de Presentacion</h3>
-				        <form id="ckeditor_form" action="/user/updateCard" method="post">
+						<h3>Descripción del proyecto</h3>
+				        <form id="ckeditor_form" action="/proyect/updateDescript/${proyect.id}" method="post">
 				            <textarea name="editor1" id="editor1" rows="10" cols="80">
-				                ${user.card}
+				                ${proyect.description}
 				            </textarea>
 				            <input type="text" name="html_data" id="html_data" style="visibility:hidden;"> </input>
 				            <input name="${_csrf.parameterName}" type="hidden"
@@ -156,17 +149,17 @@
 	      function updateState(button){
 	    	  var $div=$('.changingClass');
 	    	  var $update = document.getElementById ("update_button");
-	    	  var $avatar = document.getElementById ("formAvatar");
+	    	  var $image = document.getElementById ("formImage");
 	    	  if($update.style.visibility == 'hidden'){
 	    		  $div.attr('disabled',false);
 	    		  $update.style.visibility = 'visible';
-	    		  $avatar.style.visibility = "visible";
+	    		  $image.style.visibility = "visible";
 	    		  button.innerHTML = "Desactivar edición";
 	    	  }
 	    	  else{
 	    		  $div.attr('disabled',true);
 	    		  $update.style.visibility = "hidden";
-	    		  $avatar.style.visibility = "hidden";
+	    		  $image.style.visibility = "hidden";
 	    		  button.innerHTML = "Activar edición";
 	    	  }
 	      }
