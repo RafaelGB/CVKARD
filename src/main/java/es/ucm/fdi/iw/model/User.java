@@ -3,6 +3,7 @@ package es.ucm.fdi.iw.model;
 //import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,8 +18,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 @Entity
@@ -124,8 +123,8 @@ public class User {
 	public void setEnabled(byte enabled) {
 		this.enabled = enabled;
 	}
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "receiver", orphanRemoval = true)
-	@Cascade(CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "receiver",targetEntity=Message.class,cascade = CascadeType.REMOVE, orphanRemoval = true)
+	//@Cascade(CascadeType.ALL)
     @Fetch(value = FetchMode.SUBSELECT)
 	public List<Message> getReceivedMessages() {
 		return receivedMessages;
@@ -135,8 +134,8 @@ public class User {
 	}
 	
 
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "sender", orphanRemoval = true)
-	@Cascade(CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "sender",targetEntity=Message.class,cascade = CascadeType.REMOVE, orphanRemoval = true)
+	//@Cascade(CascadeType.ALL)
     @Fetch(value = FetchMode.SUBSELECT)
 	public List<Message> getSentMessages() {
 		return sentMessages;

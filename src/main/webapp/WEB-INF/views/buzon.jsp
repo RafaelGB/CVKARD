@@ -27,7 +27,7 @@
       <div id="content">
         <div class="line">
           <section id="main" class="container">
-            <a href="/buzon/N/0" id ="new" class="button alt fit small">Nuevo${size}</a>
+            <a href="/buzon/N/0" id ="new" class="button alt fit small">Nuevo</a>
             <a href="/buzon/R/1" class="button alt fit small">Recibidos</a>
             <a href="/buzon/E/1" class="button alt fit small">Enviados</a>
             <div class="box">
@@ -79,11 +79,19 @@
 				    </c:when>    
 				    <c:otherwise>
 						<div class="table-wrapper">
-						<form action="buzon/withChecked" action="post">
+						<form action="/message/actionOnMarks/${type}" method="POST">
 		                  <table>
 		                    <thead>
 		                      <tr>
-								<th id="selec">Marcados<button type="submit">send</button></th>                  
+								<th id="selec">
+									Marcados
+									<select onChange="checkMarcados(this)" name="markOptions" id="markOptions">
+			                          <option value="opciones">- Opciones -</option>
+			                          <option value="leido">Ya leídos</option>
+			                          <option value="borrar">Borrar</option>
+			                        </select>
+									<button id="buttonM" style ="display:none;" type="submit">Aplicar</button>
+								</th>                  
 		                        <th >Asunto del correo</th>
 		                        <th>Categoría</th>
 		                        <th>Leido</th>
@@ -113,6 +121,7 @@
 		                    </tbody>
 		
 		                  </table>
+		                  	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 					
 		                  </form>
 		                  <div class="w3-bar w3-border w3-round">
 		                    <div class="w3-bar">
@@ -139,7 +148,16 @@
 
 
     <!-- Scripts -->
-    
+      <script>
+      function checkMarcados(marks){
+    	  var $b = document.getElementById("buttonM");
+    		 if(marks.value =='opciones'){
+    			 $b.style.display = "none";
+    		 }else{
+    			 $b.style.display = "block";
+    		 }
+    	}
+      </script>
       <script src="${s}js/jquery.min.js"></script>
       <script src="${s}js/jquery.dropotron.min.js"></script>
       <script src="${s}js/login.js"></script>

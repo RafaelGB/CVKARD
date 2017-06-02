@@ -1,5 +1,8 @@
 package es.ucm.fdi.iw.controller;
 
+import java.util.Iterator;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -10,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,7 +58,7 @@ private static Logger log = Logger.getLogger(UserController.class);
 		m.setReceiver(u2);
 		u.getSentMessages().add(m);
 		u2.getReceivedMessages().add(m);
-		entityManager.persist(m);//si se crea un objeto nuevo
+		entityManager.persist(m);//se crea un objeto nuevo
 		session.setAttribute("user", u);
 		response.setStatus(HttpServletResponse.SC_OK);
 		url = "/buzon/E/1";
@@ -63,6 +67,41 @@ private static Logger log = Logger.getLogger(UserController.class);
 			log.error("No existe ningun usuario con ese email\n");
 		}
 		return new RedirectView(url);
+	}
+	@RequestMapping(value="/actionOnMarks/{type}", method=RequestMethod.POST)
+	@ResponseBody
+	@Transactional // needed to allow DB change
+    public String changeMarks(HttpSession session,HttpServletResponse response,Model model,
+    		@PathVariable("type") String type,
+    		@RequestParam("markOptions") String markOptions,
+    		@RequestParam("checked") List<Long> checked){
+		try{
+		User u = (User) session.getAttribute("user");
+		//u = entityManager.find(User.class, u.getId());//refresh de la base de datos
+		Iterator<Long> it = checked.iterator();
+		Message m;
+		while(it.hasNext()) {
+			m = entityManager.find(Message.class, it.next());
+			if(markOptions.equals("leido")){
+				m.setRead(true);
+			}else if(markOptions.equals("borrar")){
+				entityManager.remove(m);
+				log.info("mensaje "+m.getId()+ "eliminado");
+				if (m.getSender().getId() == u.getId()) {
+					u.getSentMessages().remove(m);
+				} else {
+					u.getReceivedMessages().remove(m);
+				}
+			}
+		}
+		session.setAttribute("user", u);
+		log.info("opcion "+markOptions+" aplicada");
+		
+		}catch(NoResultException nre){
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			log.error("Algo salio mal aplicando la opcion "+markOptions);
+		}
+		return "redirect:buzon/"+type+"/1";
 	}
 	
 }
