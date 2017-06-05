@@ -71,7 +71,7 @@ private static Logger log = Logger.getLogger(UserController.class);
 	@RequestMapping(value="/actionOnMarks/{type}", method=RequestMethod.POST)
 	@ResponseBody
 	@Transactional // needed to allow DB change
-    public String changeMarks(HttpSession session,HttpServletResponse response,Model model,
+    public RedirectView changeMarks(HttpSession session,HttpServletResponse response,Model model,
     		@PathVariable("type") String type,
     		@RequestParam("markOptions") String markOptions,
     		@RequestParam("checked") List<Long> checked){
@@ -86,12 +86,7 @@ private static Logger log = Logger.getLogger(UserController.class);
 				m.setRead(true);
 			}else if(markOptions.equals("borrar")){
 				entityManager.remove(m);
-				log.info("mensaje "+m.getId()+ "eliminado");
-				if (m.getSender().getId() == u.getId()) {
-					u.getSentMessages().remove(m);
-				} else {
-					u.getReceivedMessages().remove(m);
-				}
+				log.info("mensaje con la key "+m.getId()+ " eliminado");
 			}
 		}
 		session.setAttribute("user", u);
@@ -101,7 +96,7 @@ private static Logger log = Logger.getLogger(UserController.class);
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			log.error("Algo salio mal aplicando la opcion "+markOptions);
 		}
-		return "redirect:buzon/"+type+"/1";
+		return new RedirectView("/buzon/"+type+"/1");
 	}
 	
 }

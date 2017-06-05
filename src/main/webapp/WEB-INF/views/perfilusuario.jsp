@@ -73,18 +73,20 @@
 										<li style="font-size: 24px; margin-top: 0.5em;"><input
 											class="changingClass" disabled="disabled" type="text"
 											id="name-form" name="name-form" form="confirmUpdate"
-											value="${user.name}" /></li>
+											value="${user.name}" pattern="^[A-Za-z -]+$"
+											title="Sólo letras y espacios"/></li>
 										<li class="changingClass"
 											style="font-size: 21px; margin-bottom: 1em;"><input
 											class="changingClass" disabled="disabled" type="text"
 											id="lastName-form" name="lastName-form" form="confirmUpdate"
-											value="${user.lastName}" /></li>
+											value="${user.lastName}" pattern="^[A-Za-z -]+$"
+											title="Sólo letras y espacios"/></li>
 
 
 										<li>
-											<input disabled="disabled" class="changingClass"
-											type="text" id="dni-form" name="dni-form"
-											form="confirmUpdate" value="${!empty user.DNI ? user.DNI : 'pon tu DNI aqui'}" />
+											<input disabled="disabled" class="changingClass" pattern="^(\d){8}[a-zA-Z]$"
+											title="8 digitos + letra" type="text" id="dni-form" name="dni-form"
+											form="confirmUpdate" value="${!empty user.DNI ? user.DNI : '00000000A'}" />
 										</li>
 										<li>fecha de nacimiento: 
 										

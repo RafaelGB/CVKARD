@@ -126,7 +126,7 @@ public class ProyectController {
 		} catch (NoResultException nre) {
 			log.error("fallo al encontrar el proyecto para actualizar\n");
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-			return new RedirectView("/editProyect/"+id"?update=false");
+			return new RedirectView("/editProyect/"+id+"?update=false");
 		}	
 	}
 	

@@ -85,9 +85,11 @@
 		                      <tr>
 								<th id="selec">
 									Marcados
-									<select onChange="checkMarcados(this)" name="markOptions" id="markOptions">
+									<select onChange="checkMarcados(this)" name="markOptions" id="markOptions" style=" height: 20px;line-height: 1.5;font-size: 12px;padding: 1px 5px;border-radius: 3px;">
 			                          <option value="opciones">- Opciones -</option>
-			                          <option value="leido">Ya leídos</option>
+			                          <c:if test="${type=='R'}">
+			                          	<option value="leido">Ya leídos</option>
+			                          </c:if>
 			                          <option value="borrar">Borrar</option>
 			                        </select>
 									<button id="buttonM" style ="display:none;" type="submit">Aplicar</button>

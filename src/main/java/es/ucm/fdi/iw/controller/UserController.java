@@ -64,7 +64,6 @@ public class UserController {
 			HttpServletRequest request, HttpServletResponse response, 
 			Model model, HttpSession session){
 		String feedback = "";
-		String url = "/registro";
 		if((boolean) entityManager.createQuery(
 				"select count(u)>0 from User u where email = :email or nick = :nick")
 				.setParameter("email", email)
@@ -82,15 +81,14 @@ public class UserController {
 					entityManager.persist(u);
 					log.info("Usuario empleado creado satisfactoriamente");
 					feedback ="usuario+empleado+creado+correctamente";
-					url="/welcome";
 				} catch (NoResultException nre) {
-					feedback = "ups, algo salio mal, intentelo de nuevo más tarde";
+					feedback = "ups,+algo+salio+mal,+intentelo+de+nuevo+mas+tarde";
 					log.error("Algo salio mal creando el usuario "+email);
 					response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			}
 		}	
 		model.addAttribute("feedback",feedback);
-		return new RedirectView(url);
+		return new RedirectView("/registro?result="+feedback);
 	}
 	/**
 	 * Create a new user type bussines
@@ -106,7 +104,6 @@ public class UserController {
 			HttpServletRequest request, HttpServletResponse response, 
 			Model model, HttpSession session){
 		String feedback = "";
-		String url = "/registro";
 		if((boolean) entityManager.createQuery(
 				"select count(u)>0 from User u where email = :email")
 				.setParameter("email", email)
@@ -122,16 +119,15 @@ public class UserController {
 					u.setRoles("USER,BUSSINES");
 					entityManager.persist(u);
 					log.info("Usuario negocio creado satisfactoriamente");
-					feedback ="usuario+negocio+creado+correctamente";
-					url="/welcome";
+					feedback ="Usuario+negocio+creado+correctamente";
 				} catch (NoResultException nre) {
-					feedback = "ups,+algo+salio+mal,+intentelo+de+nuevo+más+tarde";
+					feedback = "Ups,algo+salio+mal,intentelo+de+nuevo+mas+tarde";
 					log.error("Algo salio mal creando el usuario "+email);
 					response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			}
 		}	
-		//model.addAttribute("feedback",feedback);
-		return new RedirectView(url+"?feedback="+feedback);
+		model.addAttribute("feedback",feedback);
+		return new RedirectView("/registro?result="+feedback);
 	}
 	/**
 	 * Returns a users' photo

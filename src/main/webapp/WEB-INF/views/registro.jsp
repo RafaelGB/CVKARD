@@ -21,8 +21,8 @@
      <%@ include file="../fragments/header.jspf" %>
     </div>
 	<h3><%
-    if (request.getParameter("feedback") == "") {
-        out.println(request.getParameter("feedback"));
+    if (request.getParameter("result") != null) {
+        out.println(request.getParameter("result"));
     }
 	%></h3>
     <section>

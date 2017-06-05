@@ -110,7 +110,7 @@ public class User {
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
-	@Column(columnDefinition="VARCHAR(11)")
+	@Column(columnDefinition="VARCHAR(9)")
 	public String getDNI() {
 		return DNI;
 	}
