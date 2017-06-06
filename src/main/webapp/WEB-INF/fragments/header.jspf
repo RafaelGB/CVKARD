@@ -2,7 +2,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <sec:authorize access="isAnonymous()">
 <div>
-	<a href="/registro">¡Registrate aqui!</a>
+	<a href="/registro">Â¡Registrate aqui!</a>
 </div>
 </sec:authorize>
 <sec:authorize access="isAuthenticated()">
@@ -38,7 +38,7 @@
                 </div>
                 <div class="top-nav s-12 l-4">
                     <ul class="right top-ul chevron">
-                   		<!-- según el rol tendran acceso al tipo de perfil de acorde -->
+                   		<!-- segÃºn el rol tendran acceso al tipo de perfil de acorde -->
                     	<li><a id="log1" href="
 												<sec:authorize access="hasRole('EMPLOYEE')">
 													/perfilusuario
@@ -47,11 +47,11 @@
 													/perfilempresa
 												</sec:authorize>
 							">${user.name}</a>
-                    	<!-- FORMULARIO DE LOGOUT: evita que cierren sesión por ti -->
-                    		<form id="logout_form" action= "/logout"  method = "POST">
-                    		<input class="button" type="submit"  value="Cerrar sesión"/>
+                    	<!-- FORMULARIO DE LOGOUT: evita que cierren sesiÃ³n por ti -->
+                    		<li><form id="logout_form" action= "/logout"  method = "POST">
+                    		<input class="button" id="logout" type="submit"  value="Cerrar sesiÃ³n"/>
    							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>	  
-                    		</form>
+                    		</form></li>
                     	<!----------------------------------------------------------->
                         </li>
                        <li><a id="log" href="/perfilusuario"><img src="/user/photo/${user.id}" id ="logo3"/></a>
