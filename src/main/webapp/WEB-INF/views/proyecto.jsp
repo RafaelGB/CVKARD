@@ -34,9 +34,9 @@
 		                	<div class="u">		             
 			                    <div class="colum1">
 			                   		<ul style="list-style:none;">
-			                      		<li><h2>${proyect.title}</h2></li>
+			                      		<li><h2><c:out value="${proyect.title}"></c:out></h2></li>
 			                      		<c:forEach items="${participante}" var="p" >
-			                      		<li>${p.name}</li>
+			                      		<li><c:out value="${p.name}"></c:out></li>
 			                      		</c:forEach>		                      	
 			                      	</ul>
 			                    </div>
@@ -69,7 +69,7 @@
 		             <div class="box">
 						
 						<h3>Explicacion Proyecto</h3>
-						<p>${proyect.description}</p>
+						<p><c:out value="${proyect.description}"></c:out></p>
 								
 						<div class="row">
 							<img src="${s}images/logo.png" alt="" WIDTH=140 HEIGHT=100/>
