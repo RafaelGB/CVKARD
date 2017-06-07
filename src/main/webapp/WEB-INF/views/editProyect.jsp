@@ -117,7 +117,7 @@
 				            <textarea name="editor1" id="editor1" rows="10" cols="80">
 				                ${proyect.description}
 				            </textarea>
-				            <input type="text" name="html_data" id="html_data" style="visibility:hidden;"> </input>
+				            <input type="text" name="html_data" id="html_data" style="visibility:hidden;"> 
 				            <input name="${_csrf.parameterName}" type="hidden"
 									value="${_csrf.token}" />
 							 <input type="button" onclick="updateCkeditor()" value="Actualizar">
