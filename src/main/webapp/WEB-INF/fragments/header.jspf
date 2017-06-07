@@ -51,15 +51,16 @@
 													/perfilempresa
 												</sec:authorize>
 							">${user.name}</a>
-                    	<!-- FORMULARIO DE LOGOUT: evita que cierren sesión por ti -->
+							<li><a id="log" href="/perfilusuario"><img src="/user/photo/${user.id}" id ="logo3"/></a>
+                        </li>
+                    	<!-- FORMULARIO DE LOGOUT: evita que cierren sesiÃ³n por ti -->
                     		<li><form id="logout_form" action= "/logout"  method = "POST">
-                    		<input class="button" id="logout" type="submit"  value="Cerrar sesión"/>
+                    		<input class="button" id="logout" type="submit"  value="Cerrar sesiÃ³n"/>
    							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>	  
                     		</form></li>
                     	<!----------------------------------------------------------->
                         </li>
-                       <li><a id="log" href="/perfilusuario"><img src="/user/photo/${user.id}" id ="logo3"/></a>
-                        </li>
+                       
                      </ul>
 
                 </div>
