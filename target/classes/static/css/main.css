@@ -65,10 +65,10 @@
 	/* Espacio entre los inline-block (los hijos, los `a`) 
 	   http://ksesocss.blogspot.com/2012/03/display-inline-block-y-sus-empeno-en.html */
 	font-size: 0;
-	/* Podr√≠amos quitarlo, 
+	/* PodrÌamos quitarlo, 
 		pero de esta manera (siempre que no le demos padding), 
-		s√≥lo aplicar√° la regla .ec-stars-wrapper:hover a cuando
-		tambi√©n se est√© haciendo hover a alguna estrella */
+		sÛlo aplicar· la regla .ec-stars-wrapper:hover a cuando
+		tambiÈn se estÈ haciendo hover a alguna estrella */
 		
 	display: inline-block;
 	
@@ -76,7 +76,7 @@
 .ec-stars-wrapper a {
 	text-decoration: none;
 	display: inline-block;
-	/* Volver a dar tama√±o al texto */
+	/* Volver a dar tamaÒo al texto */
 	font-size: 32px;
 	font-size: 1.8rem;
 	
@@ -722,7 +722,7 @@
 	#logout_form{/*formulario de logout para ajustarse al header*/
 	min-height: 1em;
 	height: 1.5em;
-	margin-top: 8%;
+	margin-top: 20%;
 	margin-left: 4%;
 	
 	}
@@ -2001,9 +2001,10 @@ a, a:link, a:visited, a:hover, a:active {
 	font-size:16px;
 	background: none;
 	padding: 10px 0 0 0;
+	margin-top:20%;
 }
 #logout{
-	font-size:10px;
+	font-size:15px;
 	background: none;
 	padding: 0 0 0 0;
 	margin-top: -6px;	
@@ -2536,6 +2537,7 @@ width: 50%;
     padding-right: 1em;
 }
 
+
 /* Login Button Text */
 #loginButton span {
     color:white; 
@@ -2666,9 +2668,6 @@ fieldset#body {
     font-size:12px;
 }
 
-.tablinks {
-    si
-}
 .tablinks:focus {
     outline:none;
    	background-color: #e89980;

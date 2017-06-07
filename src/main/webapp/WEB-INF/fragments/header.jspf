@@ -2,7 +2,10 @@
 	uri="http://www.springframework.org/security/tags"%>
 <sec:authorize access="isAnonymous()">
 <div>
-	<a href="/registro">Â¡Registrate aqui!</a>
+	<ul class="actions">
+		<li><a href="/welcome" class="button special">Volver al inicio</a></li>
+		<li><a href="/registro" class="button special">¡Registrate aqui!</a></li>
+	</ul>
 </div>
 </sec:authorize>
 <sec:authorize access="isAuthenticated()">
