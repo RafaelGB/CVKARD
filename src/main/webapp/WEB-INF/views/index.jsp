@@ -18,7 +18,6 @@
 		
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js?ver=1.4.2"></script>
 		<script src="${s}js/login.js"></script>
-		
 	</head>
 	<body class="landing" style="background-image: url(${s}images/banner.jpg);background-repeat: no-repeat;background-attachment: fixed;">  <div id="page-wrapper">
 <!-- Header -->

@@ -2,6 +2,8 @@ package es.ucm.fdi.iw;
 
 import java.io.File;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,13 +14,21 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	@Autowired
+	DataSource dataSource;
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		 http
+		
+		http
 		 .authorizeRequests()
 		 	.antMatchers("/static/**","/registro","/download/showpdf/*","/user/photo/*","/curriculum/*","/user/newUserEmployee","/user/newUserBussines").permitAll()
 		 	.antMatchers("/perfilusuario","/tablaproyectos").hasRole("EMPLOYEE")
@@ -26,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        .anyRequest().authenticated()
 	        .and()
 	     .formLogin()
+	     	.successHandler(savedRequestAwareAuthenticationSuccessHandler())
 	 		.loginProcessingUrl("/login")
 	     	.loginPage("/welcome")
 	     	.defaultSuccessUrl("/home",true)
@@ -35,9 +46,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	     .logout()
 	     	.logoutUrl("/logout")
 	     	.logoutSuccessUrl("/welcome")
-	     	.permitAll();
+	     	.permitAll()
+	     	.and()
+	     .rememberMe()
+	     	.tokenRepository(persistentTokenRepository())
+	     	.tokenValiditySeconds(1209600);
+	     	
 	}
+	/**
+	 * Necesarios para que la sesión persista on cookies*/
+	@Bean
+	public PersistentTokenRepository persistentTokenRepository() {
+		JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
+		db.setDataSource(dataSource);
+		return db;
+	}
+	@Bean
+	public SavedRequestAwareAuthenticationSuccessHandler
+                savedRequestAwareAuthenticationSuccessHandler() {
 
+               SavedRequestAwareAuthenticationSuccessHandler auth
+                    = new SavedRequestAwareAuthenticationSuccessHandler();
+		auth.setTargetUrlParameter("/home");
+		return auth;
+	}
+	
 	@Bean
 	public IwUserDetailsService springDataUserDetailsService() {
 		return new IwUserDetailsService();

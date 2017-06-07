@@ -65,10 +65,10 @@
 	/* Espacio entre los inline-block (los hijos, los `a`) 
 	   http://ksesocss.blogspot.com/2012/03/display-inline-block-y-sus-empeno-en.html */
 	font-size: 0;
-	/* Podríamos quitarlo, 
+	/* Podrï¿½amos quitarlo, 
 		pero de esta manera (siempre que no le demos padding), 
-		sólo aplicará la regla .ec-stars-wrapper:hover a cuando
-		también se esté haciendo hover a alguna estrella */
+		sï¿½lo aplicarï¿½ la regla .ec-stars-wrapper:hover a cuando
+		tambiï¿½n se estï¿½ haciendo hover a alguna estrella */
 		
 	display: inline-block;
 	
@@ -76,7 +76,7 @@
 .ec-stars-wrapper a {
 	text-decoration: none;
 	display: inline-block;
-	/* Volver a dar tamaño al texto */
+	/* Volver a dar tamaï¿½o al texto */
 	font-size: 32px;
 	font-size: 1.8rem;
 	
@@ -2516,6 +2516,19 @@ width: 50%;
     max-height: 11em;
     border-radius: 50%;
 	
+}
+/*-------Adds para la web----------*/
+#myAdds{
+	property: initial;
+	margin-top: 200px;
+    right: 0px;
+    min-width: 180px;
+    position:fixed;
+}
+@media (max-width: 750px) {
+  #myAdds {
+    display: none;
+  }
 }
 /*-------LOGIN STARTS HERE -------*/
 

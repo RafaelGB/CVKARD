@@ -1,10 +1,11 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <sec:authorize access="isAnonymous()">
 <div>
 	<ul class="actions">
 		<li><a href="/welcome" class="button special">Volver al inicio</a></li>
-		<li><a href="/registro" class="button special">�Registrate aqui!</a></li>
+		<li><a href="/registro" class="button special">¡Registrate aqui!</a></li>
 	</ul>
 </div>
 </sec:authorize>
@@ -41,7 +42,7 @@
                 </div>
                 <div class="top-nav s-12 l-4">
                     <ul class="right top-ul chevron">
-                   		<!-- según el rol tendran acceso al tipo de perfil de acorde -->
+                   		<!-- segÃºn el rol tendran acceso al tipo de perfil de acorde -->
                     	<li><a id="log1" href="
 												<sec:authorize access="hasRole('EMPLOYEE')">
 													/perfilusuario

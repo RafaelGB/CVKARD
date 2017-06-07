@@ -21,7 +21,7 @@
     <div id="page-wrapper">
      <%@ include file="../fragments/header.jspf" %>
     </div>
-
+    <%@ include file="../fragments/adds.jspf" %>
     <section>
     	<div id="head">
 	        <div class="line">
