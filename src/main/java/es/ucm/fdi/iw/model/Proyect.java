@@ -81,7 +81,7 @@ public class Proyect {
 		this.languages = languages;
 	}
 	
-	@ManyToMany(targetEntity=Tag.class, fetch=FetchType.EAGER)
+	@ManyToMany(targetEntity=Tag.class,cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
 	public List<Tag> getTags() {
 		return tags;
