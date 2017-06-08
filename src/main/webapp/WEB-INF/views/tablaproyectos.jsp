@@ -52,9 +52,7 @@
 				                    				<input type="text" name="title" id="title"  placeholder="Título del proyecto" style="width:250px;max-width:250px">
 				                    				<br></br>
 				                    			</li>
-				                    			<li><input type="date" name="date" id="date"
-															 placeholder="Fecha"
-															style="width: 200px; max-width: 200px"> <br></br>
+				                    			<li><input type="date" name="newDate" id="newDate" style="width: 200px; max-width: 200px"> <br></br>
 												
 				                    		</ul>
 				                    	</div>
@@ -132,14 +130,16 @@
 
 
     <!-- Scripts -->
-    
-      <script src="${s}js/jquery.min.js"></script>
-      <script src="${s}js/jquery.dropotron.min.js"></script>
-      <script src="${s}js/login.js"></script>
-      <script src="${s}js/jquery.scrollgress.min.js"></script>
-      <script src="${s}js/skel.min.js"></script>
-      <script src="${s}js/util.js"></script>
-      <script src="${s}js/main.js"></script>
+    <script>
+    document.getElementById('newDate').valueAsDate = new Date();
+    </script>
+    <script src="${s}js/jquery.min.js"></script>
+    <script src="${s}js/jquery.dropotron.min.js"></script>
+    <script src="${s}js/login.js"></script>
+    <script src="${s}js/jquery.scrollgress.min.js"></script>
+    <script src="${s}js/skel.min.js"></script>
+    <script src="${s}js/util.js"></script>
+    <script src="${s}js/main.js"></script>
    </body>
 </html>
 

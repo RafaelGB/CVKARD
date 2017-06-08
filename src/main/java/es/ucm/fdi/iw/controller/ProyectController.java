@@ -167,7 +167,7 @@ public class ProyectController {
     public RedirectView createProyect(HttpSession session,HttpServletResponse response,Model model,
     		@RequestParam("title") String title,
 			@RequestParam("description") String description,
-			@RequestParam("date") String date
+			@RequestParam("newDate") String date
 			){
 		
 		String url = "/tablaproyectos/V/1";
