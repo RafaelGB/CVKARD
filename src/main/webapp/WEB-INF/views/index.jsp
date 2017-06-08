@@ -1,4 +1,4 @@
-<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
@@ -19,7 +19,7 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js?ver=1.4.2"></script>
 		<script src="${s}js/login.js"></script>
 	</head>
-	<body class="landing" style="background-image: url(${s}images/banner.jpg);background-repeat: no-repeat;background-attachment: fixed;">  <div id="page-wrapper">
+	<body class="landing" style="background-image: url(${s}images/banner.jpg);background-repeat: no-repeat;background-attachment: fixed;">
 <!-- Header -->
 		<header id="header" class="alt">
 			<nav id="nav">
@@ -39,7 +39,7 @@
 	                            </fieldset>
 		                            <input class="button special" type="submit" id="login" value="Sign in" style="
    									padding-top: 0px;"/>
-		                            <br><input type="checkbox" id="rememberMe" value="first_checkbox"><label for="rememberMe">Recuerdame</label><br>	
+		                            <br><input type="checkbox" name="remember-me" id="rememberMe"/><label for="rememberMe">Recuerdame</label><br>	
 		                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>	                            
 							</fieldset>
 							<span style="color: red;">

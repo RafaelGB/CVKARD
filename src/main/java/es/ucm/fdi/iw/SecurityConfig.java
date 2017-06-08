@@ -21,55 +21,30 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	@Autowired
-	DataSource dataSource;
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http
 		 .authorizeRequests()
-		 	.antMatchers("/static/**","/registro","/download/showpdf/*","/user/photo/*","/curriculum/*","/user/newUserEmployee","/user/newUserBussines").permitAll()
+		 	.antMatchers("/","/welcome","/static/**","/registro","/download/showpdf/*","/user/photo/*","/curriculum/*","/user/newUserEmployee","/user/newUserBussines").permitAll()
 		 	.antMatchers("/perfilusuario","/tablaproyectos").hasRole("EMPLOYEE")
 		 	.antMatchers("/perfilempresa","/tablaofertas").hasRole("BUSSINES")
 	        .anyRequest().authenticated()
 	        .and()
 	     .formLogin()
-	     	.successHandler(savedRequestAwareAuthenticationSuccessHandler())
 	 		.loginProcessingUrl("/login")
 	     	.loginPage("/welcome")
 	     	.defaultSuccessUrl("/home",true)
 	     	.failureUrl("/welcome?error=usuario+o+password+incorrecto")
-	 		.permitAll()
 	     	.and()
 	     .logout()
 	     	.logoutUrl("/logout")
-	     	.logoutSuccessUrl("/welcome")
-	     	.permitAll()
-	     	.and()
-	     .rememberMe()
-	     	.tokenRepository(persistentTokenRepository())
-	     	.tokenValiditySeconds(1209600);
+	     	.logoutSuccessUrl("/welcome");
 	     	
 	}
 	/**
-	 * Necesarios para que la sesión persista on cookies*/
-	@Bean
-	public PersistentTokenRepository persistentTokenRepository() {
-		JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
-		db.setDataSource(dataSource);
-		return db;
-	}
-	@Bean
-	public SavedRequestAwareAuthenticationSuccessHandler
-                savedRequestAwareAuthenticationSuccessHandler() {
-
-               SavedRequestAwareAuthenticationSuccessHandler auth
-                    = new SavedRequestAwareAuthenticationSuccessHandler();
-		auth.setTargetUrlParameter("/home");
-		return auth;
-	}
+	 * Necesarios para que la sesión persista con cookies*/
 	
 	@Bean
 	public IwUserDetailsService springDataUserDetailsService() {

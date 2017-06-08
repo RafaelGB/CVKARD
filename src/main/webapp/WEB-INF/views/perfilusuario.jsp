@@ -96,7 +96,6 @@
 											value="${!empty user.birthday ? user.birthday : ''}">
 
 										</li>
-										<li>domicilio</li>
 									</ul>
 								</div>
 							</div>

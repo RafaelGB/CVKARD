@@ -274,7 +274,11 @@ public class RootController {
 	 * PerfilEmpresa - vista sobre el perfil de un negocio en concreto con sus configuraciones
 	 */
 	@GetMapping("/perfilempresa")
-	public String perfilempresa() {
+	public String perfilempresa(HttpSession session) {
+		User u = (User) session.getAttribute("user");
+		u = entityManager.find(User.class, u.getId());//refresh de la base de datos
+		log.info(" cargamos la direccion  don id: "+u.getAddress().getId());
+		session.setAttribute("user", u);
 		return "perfilempresa";
 	}
 

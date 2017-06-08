@@ -52,30 +52,48 @@
 					</form>
 		                	<div class="u">		             
 			                    <div class="colum1">
-			                          	<ul style="list-style:none;">	
-	                     		<li   style="font-size:24px;margin-top:0.5em;">
-									<input class="changingClass" type="text" disabled="disabled" id="name-form" name="name-form" form="confirmUpdate" value="${user.name}"/>
-	                     		</li>      
-	     
-								
-								        
-			                    <li>
-									<c:choose>
-									    <c:when test="${!empty user.email}">
-									           <input class="changingClass" type="text" disabled="disabled" id="email-form" name="email-form" form="confirmUpdate" value="${user.email}"/>  
-									        <br />
-									    </c:when>    
-									    <c:otherwise>
-									           <input class="changingClass" type="text" disabled="disabled" id="email-form" name="email-form" form="confirmUpdate" value="email!"/> 
-									        <br />
-									    </c:otherwise>
-									</c:choose>
-			                    </li>
-			          
-			                    <li class="changingClass">
-			                    ${not empty user.address ? user.address : 'domicilio'}
-								</li>              
-		                   </ul>
+			                    	<ul style="list-style:none;">	
+			                     		<li   style="font-size:24px;margin-top:0.5em;">
+											<input class="changingClass" type="text" disabled="disabled" id="name-form" name="name-form" form="confirmUpdate" value="${user.name}"/>
+			                     		</li>      
+			     
+										
+										        
+					                    <li>
+											<c:choose>
+											    <c:when test="${!empty user.email}">
+											           <input class="changingClass" type="text" disabled="disabled" id="email-form" name="email-form" form="confirmUpdate" value="${user.email}"/>  
+											        <br />
+											    </c:when>    
+											    <c:otherwise>
+											           <input class="changingClass" type="text" disabled="disabled" id="email-form" name="email-form" form="confirmUpdate" placeholder="ejemplo@ej.ej"/> 
+											        <br />
+											    </c:otherwise>
+											</c:choose>
+					                    </li>
+					          			
+					                    <li>
+					                    	<h3>DIRECCION</h3>
+					                    	pais:<br></br>
+					                    	<input class="changingClass" type="text" disabled="disabled" id="country-form" name="country-form" form="confirmUpdate" value="${user.address.country}"/>  
+										</li>    
+										<li>
+											municipio:<br></br>
+					                    	<input class="changingClass" type="text" disabled="disabled" id="municipality-form" name="municipality-form" form="confirmUpdate" value="${user.address.municipality}"/>  
+										</li> 
+										</ul>
+										<ul style="display:inline;">
+										<li>
+											calle y numero:<br></br>
+					                    	<input class="changingClass" type="text" disabled="disabled" id="street-form" name="street-form" form="confirmUpdate" value="${user.address.street}"/>  
+											<span style="display:inline-block; width: 10px;"></span>
+
+										</li> 
+										<li>
+											<input class="changingClass" type="text" disabled="disabled" id="number-form" name="number-form" form="confirmUpdate" value="${user.address.number}"/>  
+										</li>
+										</ul>           
+		                   			
 			                    </div>
 		                	</div>	                	
 		                </div>

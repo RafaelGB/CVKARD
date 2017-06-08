@@ -32,6 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
 import es.ucm.fdi.iw.LocalData;
+import es.ucm.fdi.iw.model.Direction;
 import es.ucm.fdi.iw.model.User;
 
 @Controller	
@@ -217,8 +218,13 @@ public class UserController {
 	@ResponseBody
 	@Transactional // needed to allow DB change
 	 public RedirectView updateBusiness(
-	    		@RequestParam("emailB") String email,
-				@RequestParam("nameB") String name,
+	    		@RequestParam("email-form") String email,
+				@RequestParam("name-form") String name,
+				@RequestParam("country-form") String country,
+				@RequestParam("municipality-form") String municipality,
+				@RequestParam("street-form") String street,
+				@RequestParam("number-form") int number,
+				
 				HttpServletRequest request, HttpServletResponse response, 
 				Model model, HttpSession session){
 			log.info("dentro del update\n email = "+email+"\n name = "+name+"\n");
@@ -227,6 +233,15 @@ public class UserController {
 				User u = (User) session.getAttribute("user");
 				u.setName(name);
 				u.setEmail(email);
+				if(country != null && municipality != null && street != null && number != 0){
+					Direction d = new Direction();
+					d.setCountry(country);
+					d.setMunicipality(municipality);
+					d.setStreet(street);
+					d.setNumber(number);
+					entityManager.persist(d);//se crea un objeto nuevo
+					u.setAddress(d);
+				}
 				session.setAttribute("user", u);
 				entityManager.merge(u);
 				response.setStatus(HttpServletResponse.SC_OK);
