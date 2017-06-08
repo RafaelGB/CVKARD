@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import es.ucm.fdi.iw.model.Message;
 import es.ucm.fdi.iw.model.Offer;
 import es.ucm.fdi.iw.model.Proyect;
+import es.ucm.fdi.iw.model.Tag;
 import es.ucm.fdi.iw.model.User;
 
 @Controller	
