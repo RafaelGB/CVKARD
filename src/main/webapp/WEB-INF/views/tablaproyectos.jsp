@@ -54,7 +54,11 @@
 				                    			</li>
 				                    			<li><input type="date" name="date" id="date"
 															 placeholder="Fecha"
-															style="width: 200px; max-width: 200px"> <br></br>
+															style="width: 200px; max-width: 200px"> <br></br></li>
+												<li>Tags:<input type="checkbox" id="desWeb" name="checked" value="Desarrollo web" ></input>
+												<label for="desWeb">Desarrollo web</label>
+												<input type="checkbox" id="progJava" name="checked" value="Programacion java" ></input>
+												<label for="progJava">Programacion java</label>
 												
 				                    		</ul>
 				                    	</div>
@@ -132,6 +136,17 @@
 
 
     <!-- Scripts -->
+      <script>
+      function checkMarcados(marks){
+    	  var $b = document.getElementById("buttonM");
+    		 if(marks.value =='opciones'){
+    			 $b.style.display = "none";
+    		 }else{
+    			 $b.style.display = "block";
+    		 }
+    	}
+      </script>
+    
     
       <script src="${s}js/jquery.min.js"></script>
       <script src="${s}js/jquery.dropotron.min.js"></script>

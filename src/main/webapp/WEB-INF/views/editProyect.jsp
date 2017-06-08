@@ -80,7 +80,7 @@
 
 
 										
-										<li>fecha del proyecto: 
+										<li>Fecha del proyecto: 
 										
 											<input class="changingClass"
 											disabled="disabled" type="date" id="birthday-form"
@@ -88,6 +88,19 @@
 											value="${!empty proyect.date ? proyect.date : ''}">
 
 										</li>
+										<li id="selector" style="visibility: hidden;">Tags:
+										<!--<select multiple id="selector" style="visibility: hidden;">-->
+										<input type="checkbox" id="desWeb" name="checked" value="Desarrollo web" form="confirmUpdate"></input>
+										<label for="desWeb">Desarrollo web</label>
+										<input type="checkbox" id="progJava" name="checked" value="Programacion java" form="confirmUpdate"></input>
+										<label for="progJava">Programacion java</label>
+										<!--  <option value="Desarrollo web">Desarrollo web</option>
+										<option value="Programacion java">Programacion java</option>
+
+										</select>-->
+										
+											</li>
+											
 										
 									</ul>
 								</div>
@@ -148,16 +161,19 @@
 	<script> 
 	      function updateState(button){
 	    	  var $div=$('.changingClass');
+	    	  var $select = document.getElementById ("selector");
 	    	  var $update = document.getElementById ("update_button");
 	    	  var $image = document.getElementById ("formImage");
 	    	  if($update.style.visibility == 'hidden'){
 	    		  $div.attr('disabled',false);
+	    		  $select.style.visibility = 'visible';
 	    		  $update.style.visibility = 'visible';
 	    		  $image.style.visibility = "visible";
 	    		  button.innerHTML = "Desactivar edición";
 	    	  }
 	    	  else{
 	    		  $div.attr('disabled',true);
+	    		  $select.style.visibility = 'hidden';
 	    		  $update.style.visibility = "hidden";
 	    		  $image.style.visibility = "hidden";
 	    		  button.innerHTML = "Activar edición";
