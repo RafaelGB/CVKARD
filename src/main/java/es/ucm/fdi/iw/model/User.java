@@ -162,7 +162,7 @@ public class User {
 		this.myScoreOffers = myScoreOffers;
 	}
 	@OneToMany(targetEntity=Offer.class)
-	@JoinColumn(name="offerer") // <-- this avoids creating an extra Offer_ScoreOffer table
+	@JoinColumn(name="offerer_id") // <-- this avoids creating an extra Offer_ScoreOffer table
 	public List<Offer> getOffers() {
 		return offers;
 	}

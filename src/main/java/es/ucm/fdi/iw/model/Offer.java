@@ -20,6 +20,7 @@ public class Offer {
 	private User offerer;
 	private List<ScoreOffer> assessment;
 	private List<Tag> tags;
+	private String date;
 	
 	@Id
 	@GeneratedValue
@@ -75,6 +76,12 @@ public class Offer {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
 	}
 	
 	

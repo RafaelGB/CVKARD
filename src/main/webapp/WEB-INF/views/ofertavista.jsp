@@ -25,7 +25,7 @@
     <section>
     	<div id="head">
 	        <div class="line">
-	        	<h1>NOMBRE DE LA OFERTA</h1>
+	        	<h1>${offer.title}</h1>
 	        </div>
       	</div>
       	<div id="content">
@@ -35,16 +35,15 @@
 		              	<div class="row">
 			              	<div class="u">
 			                    <div class="colum1">
-			                      <img src="${s}images/nr.png" alt="" width="200" height="150/">
-			                    </div>
+<img src="/offer/photo/${offer.id}" alt="" width="200"
+										height="150"/>			                    </div>
 		                	</div>
 		                	<div class="u">		             
 			                    <div class="colum1">
 			                   		<ul style="list-style:none;">
-			                      		<li><h2>NetherRealm Studios</h2></li>
-			                      		<li>Dirección</li>
-			                      		<li>Telefono</li>
-			                      		<li>Correo</li>			                      	
+			                      		<li><h2>${user.name}</h2></li>
+
+			                      		<li>${user.email}</li>			                      	
 			                      	</ul>
 			                    </div>
 		                	</div>
@@ -75,21 +74,13 @@
 		             </div>
 		             <div class="box">
 		             	<div class="row">
-		             		<div class="u2">		             
+		             		<div class="u3">		             
 			                    <div class="colum1">
 			                    	<h3>Descripción Oferta</h3>
-			                    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales porta venenatis. Aliquam tristique, purus id lacinia egestas, risus turpis iaculis eros, eget venenatis dolor magna eu ex. Nunc interdum varius urna sed lobortis. Sed feugiat, nulla sed imperdiet semper, metus risus aliquam odio, quis ullamcorper odio lorem at ante. Sed at dignissim leo. Morbi varius iaculis augue a consequat. Maecenas eget luctus purus. Sed venenatis efficitur lectus, ac posuere arcu tincidunt et. Vestibulum auctor nulla nec molestie tincidunt. Curabitur congue massa in dignissim fermentum. Mauris vel dapibus lacus, eget volutpat leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>			                    	
+			  						<p>${offer.description}</p>                 
 			                    </div>
 			                </div>
-			                <div class="u2">		             
-			                    <div class="colum1">
-			                    	<h3>¿Qué Buscamos?</h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>	
-			                    </div>
-			                </div>
+			              
 			           </div>
 			           <div class="row">			        
 							<img src="${s}images/oficina.jpg" alt="" WIDTH=200 HEIGHT=140/>

@@ -263,4 +263,48 @@ public class UserController {
 			return new RedirectView("/perfilusuario?card="+ card);
 				
 	}
+	
+	@RequestMapping(value="/Bphoto/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+	public void userBPhoto(@PathVariable("id") String id, 
+			HttpServletResponse response) {
+	    File f = localData.getFile("user/"+id, "avatar");
+	    InputStream in = null;
+	    try {
+		    if (f.exists()) {
+		    	in = new BufferedInputStream(new FileInputStream(f));
+		    } else {
+		    	in = new BufferedInputStream(
+		    			this.getClass().getClassLoader().getResourceAsStream("unknown-user.jpg"));
+		    }
+	    	FileCopyUtils.copy(in, response.getOutputStream());
+	    } catch (IOException ioe) {
+	    	log.info("Error retrieving file: " + f + " -- " + ioe.getMessage());
+	    }
+	}
+	
+	/**
+	 * Uploads a photo for a user
+	 * @param id of user 
+	 * @param photo to upload
+	 * @return
+	 */
+	@RequestMapping(value="/Bphoto/{id}", method=RequestMethod.POST)
+    public @ResponseBody RedirectView handleFileUploadB(@RequestParam("Bphoto") MultipartFile photo,
+    		@PathVariable("id") String id){
+        if (!photo.isEmpty()) {
+            try {
+                byte[] bytes = photo.getBytes();
+                BufferedOutputStream stream =
+                        new BufferedOutputStream(
+                        		new FileOutputStream(localData.getFile("user/"+id, "avatar")));
+                stream.write(bytes);
+                stream.close();
+                return new RedirectView("/perfilempresa?avatar=actualizado+con+exito");
+            } catch (Exception e) {
+                return new RedirectView("/perfilempresa?avatar=fallo+al+actualizar+el+avatar");
+            }
+        } else {
+        	return new RedirectView("/perfilempresa?avatar=archivo+vacio");
+        }
+	}
 }

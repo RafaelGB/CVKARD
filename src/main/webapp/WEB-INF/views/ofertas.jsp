@@ -32,63 +32,48 @@
         <div class="line">
           <section id="main" class="container"> 
           <div class="box" id="site">
-              <a href="../IW/index.html"> Home > </a> <a id="actual">Ofertas </a>
+              <a href="/home"> Home > </a> <a id="actual">Ofertas </a>
 
           </div>
 
             <div class="box">
               <div class="row">
-                  <div class="u">
+              
+                     <c:forEach items="${user.offers}" var="f" begin="${(pag-1)*4}" end="${((pag-1)*4)+3}"> 
+		                      	
+		                      	<div class="u">
                     <div class="colum1">
-                      <img src="${s}images/oferta.png" alt="" WIDTH=150 HEIGHT=150/>
+                      <img src="/offer/photo/${f.id}" alt="" WIDTH=150 HEIGHT=150/>
                     </div>
                     <ul style="list-style:none;">
-                    <li>Oferta</li>
-                    <li>Breve Descripcion del proyecto</li>
-                    <li>Empresa</li></br>
-                  <li><a href="ofertavista" class="button special small">Oferta</a></li>
+                    <li>${f.title}</li>
+                    <li>${f.description}</li>
+                    <li>${user.name}</li></br>
+                  <li><a href="ofertavista/${f.id}" class="button special small">Oferta</a></li>
                   </div>
-                  <div class="u">
-                  <div class="colum1">
-                    <img src="${s}images/oferta1.png" alt="" WIDTH=150 HEIGHT=150/>
-                  </div>
-                  <ul style="list-style:none;">
-                    <li>Oferta</li>
-                    <li>Breve Descripcion del proyecto</li>
-                    <li>Empresa</li></br>
-                  <li><a href="ofertavista" class="button special small">Oferta</a></li>
-                </div>
-                <div class="u">
-                  <div class="colum1">
-                    <img src="${s}images/oferta2.png" alt="" WIDTH=150 HEIGHT=150/>
-                  </div>
-                  <ul style="list-style:none;">
-                    <li>Oferta</li>
-                    <li>Breve Descripcion del proyecto</li>
-                    <li>Empresa</li></br>
-                  <li><a href="ofertavista" class="button special small">Oferta</a></li>
-                </div>
-                <div class="u">
-                  <div class="colum1">
-                    <img src="${s}images/oferta3.png" alt="" WIDTH=150 HEIGHT=150/>
-                  </div>
-                  <ul style="list-style:none;">
-                    <li>Oferta</li>
-                    <li>Breve Descripcion del proyecto</li>
-                    <li>Empresa</li></br>
-                    <li><a href="ofertavista" class="button special small">Oferta</a></li>
-                </div>
+		                     </c:forEach>
+
             </div>
-             <div class="w3-bar w3-border w3-round">
-                <div class="w3-bar">
-                  <a href="#" class="w3-bar-item w3-button"> &laquo; </a>
-                  <a href="#" class="w3-button"> 1 </a>
-                  <a href="#" class="w3-button"> 2 </a>
-                  <a href="#" class="w3-button"> 3 </a>
-                  <a href="#" class="w3-button"> 4 </a>
-                  <a href="#" class="w3-button"> &raquo; </a>
-                </div>
-              </div>
+               	<div class="w3-bar w3-border w3-round">
+											<div class="w3-bar">
+												<a href="/ofertas/${pag>=5 ? pag-4 : 1}"
+													class="w3-bar-item w3-button"> &laquo; </a> <a
+													href="/ofertas/${pag}" class="w3-button">
+													${pag} </a> <a
+													href="/ofertas/${(((pag)*10)+1) <= size ? pag+1 : pag}"
+													class="w3-button"> ${(((pag)*10)+1) <= size ? pag+1 : '-'}
+												</a> <a
+													href="/ofertas/${(((pag+1)*10)+1) <= size ? pag+2 : pag}#"
+													class="w3-button">${(((pag+1)*10)+1) <= size ? pag+2 : '-'}
+												</a> <a
+													href="/ofertas/${(((pag+2)*10)+1)<= size ? pag+3 : pag}#"
+													class="w3-button">${(((pag+2)*10)+1) <= size ? pag+3 : '-'}
+												</a> <a
+													href="/ofertas/${(((pag+3)*10)+1) <= size ? pag+4 : pag}#"
+													class="w3-button"> &raquo; </a>
+											</div>
+										</div>
+										</div>
           </section>
         </div>
       </div>

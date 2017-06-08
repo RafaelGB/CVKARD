@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
@@ -8,7 +9,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>CVKard - Ofertas</title>
+	<title>CVKard - Buzon</title>
     <link rel="stylesheet" type="text/css"  href="${s}css/main.css">
     <link rel="stylesheet" type="text/css"  href="${s}css/components.css">  
 
@@ -18,7 +19,6 @@
 
 <body class="landing" style="background: url(${s}images/banner.jpg);background-repeat: no-repeat;background-attachment: fixed;background-size: 100%;">
     <div id="page-wrapper">
-    
     <%@ include file="../fragments/header.jspf" %>
   </div>
     <section>
@@ -27,73 +27,110 @@
       </div>
       <div id="content">
         <div class="line">
-          <section id="main" class="container">
-            <a href="#" id ="new" class="button alt fit small">Nuevo</a>
-            <a href="#" class="button alt fit small">Modificar</a>
-            <a href="#" class="button alt fit small">Eliminar</a>
-			<a href="#" class="button alt fit small">Buscar</a>
-            <div class="box">
+          				<section id="main" class="container">
+					<a href="/tablaofertas/N" id="new" class="button alt fit small">Nuevo</a>
+					 <a href="#"
+						class="button alt fit small">Buscar</a>
+					<div class="box">
 
-              <div class="row">                
-                <div class="table-wrapper">
-                  <table>
-                    <thead>
-                      <tr>                   
-                        <th id="selec">Ofertas</th>
-                        <th>Description</th>
-                        <th>Fecha</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td id="selec">
-                          <input type="checkbox" id="copy" name="copy">
-                          <label for="copy">Nombre Oferta</label></th></td>
-                        <td>Ante turpis integer aliquet porttitor.</td>
-                        <td>27/04/2017</td>
-                      </tr>
-                      <tr>
-                        <td id="selec">
-                          <input type="checkbox" id="copy1" name="copy1">
-                          <label for="copy1">Nombre Oferta</label></th></td>
-                        <td>Vis ac commodo adipiscing arcu aliquet.</td>
-                           <td>27/04/2017</td>
-                      </tr>
-                      <tr>
-                        <td id="selec">
-                          <input type="checkbox" id="copy2" name="copy2">
-                          <label for="copy2">Nombre Oferta</label></th></td>
-                        <td> Morbi faucibus arcu accumsan lorem.</td>
-                           <td>27/04/2017</td>
-                      </tr>
-                      <tr>
-                        <td id="selec">
-                          <input type="checkbox" id="copy3" name="copy3">
-                          <label for="copy3">Nombre Oferta</label></th></td>
-                        <td>Vitae integer tempus condimentum.</td>
-                           <td>27/04/2017</td>
-                      </tr>
-                      <tr>
-                        <td id="selec">
-                          <input type="checkbox" id="copy4" name="copy4">
-                          <label for="copy4">Nombre Oferta</label></th></td>
-                        <td>Ante turpis integer aliquet porttitor.</td>
-                           <td>27/04/2017</td>
-                      </tr>
-                    </tbody>
+						<div class="row">
 
-                  </table>
-                  <div class="w3-bar w3-border w3-round">
-                    <div class="w3-bar">
-                      <a href="#" class="w3-bar-item w3-button"> &laquo; </a>
-                      <a href="#" class="w3-button"> 1 </a>
-                      <a href="#" class="w3-button"> 2 </a>
-                      <a href="#" class="w3-button"> 3 </a>
-                      <a href="#" class="w3-button"> 4 </a>
-                      <a href="#" class="w3-button"> &raquo; </a>
-                    </div>
-                  </div>
-                </div>  
+
+							<!-- Si se trata de componer un mensaje muestra un formulario, sino muestra los mensajes -->
+							<c:choose>
+								<c:when test="${pag=='N'}">
+									<h3>Componer </h3>
+									<form method="post" action="/offer/createOffer">
+										<div class="row">
+											<div class="u">
+												<div class="column1">
+													<ul style="list-style: none;">
+														<li><input type="text" name="title" id="title"
+															placeholder="Title"
+															style="width: 250px; max-width: 250px"> <br></br>
+														</li>
+														<li><input type="date" name="date" id="date"
+															value="${pag =='0' ? '' : pag}" placeholder="Fecha"
+															style="width: 200px; max-width: 200px"> <br></br>
+														</li>
+														<li></li>
+													</ul>
+												</div>
+											</div>
+
+											<textarea name="description" id="description"
+												placeholder="Escribe tu descripción aqui..." rows="10"
+												cols="40"></textarea>
+
+				                  
+				                    
+				                </div>
+				                <div class="row">
+				                    <input type="submit" value="Enviar">
+				                </div>
+				                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+							 </form>
+				    </c:when>    
+				    <c:otherwise>
+						<div class="table-wrapper">
+						<form action="/offer/actionOnMarks" method="POST">
+		                  <table>
+		                    <thead>
+		                      <tr>
+								<th id="selec">
+									Marcados
+									<select onChange="checkMarcados(this)" name="markOptions" id="markOptions" style=" height: 20px;line-height: 1.5;font-size: 12px;padding: 1px 5px;border-radius: 3px;">
+			                          <option value="opciones">- Opciones -</option>
+			                          <option value="borrar">Borrar</option>
+			                        </select>
+									<button id="buttonM" style ="display:none;" type="submit">Aplicar</button>
+								</th>                  
+		                      		
+									<th id="selec">Ofertas</th>
+									<th>Description</th>
+									<th>Fecha</th>
+													
+		                      </tr>
+		                    </thead>
+				           <tbody>
+		                     <c:forEach items="${user.offers}" var="f" begin="${(pag-1)*10}" end="${((pag-1)*10)+9}"> 
+		                      	<tr>
+			                      	<td class="selec">
+			                          <input type="checkbox" id="copy${f.id}" name="checked" value="${f.id}"></input>
+			                          <label for="copy${f.id}"></label>
+   			                        </td>
+   			                        <td><a href="/editOffer/${f.id}">${f.title}</a></td>
+			                        <td><a href="/editOffer/${f.id}">${f.description}</a></td>
+		                            <td>${f.date}</td> 
+		                      	</tr>
+		                     </c:forEach>
+		                    </tbody>
+		
+		                  </table>
+		                  	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 					
+		                  </form>
+		            	<div class="w3-bar w3-border w3-round">
+											<div class="w3-bar">
+												<a href="/tablaofertas/${pag>=5 ? pag-4 : 1}"
+													class="w3-bar-item w3-button"> &laquo; </a> <a
+													href="/tablaofertas/${pag}" class="w3-button">
+													${pag} </a> <a
+													href="/tablaofertas/${(((pag)*10)+1) <= size ? pag+1 : pag}"
+													class="w3-button"> ${(((pag)*10)+1) <= size ? pag+1 : '-'}
+												</a> <a
+													href="/tablaofertas/${(((pag+1)*10)+1) <= size ? pag+2 : pag}#"
+													class="w3-button">${(((pag+1)*10)+1) <= size ? pag+2 : '-'}
+												</a> <a
+													href="/tablaofertas/${(((pag+2)*10)+1)<= size ? pag+3 : pag}#"
+													class="w3-button">${(((pag+2)*10)+1) <= size ? pag+3 : '-'}
+												</a> <a
+													href="/tablaofertas/${(((pag+3)*10)+1) <= size ? pag+4 : pag}#"
+													class="w3-button"> &raquo; </a>
+											</div>
+										</div>
+		                </div> 
+				    </c:otherwise>
+				</c:choose>                
               </div>
             </div>
           </section>
@@ -106,7 +143,19 @@
 
 
     <!-- Scripts -->
-    
+      <script>
+      function checkMarcados(marks){
+    	  var $b = document.getElementById("buttonM");
+    		 if(marks.value =='opciones'){
+    			 $b.style.display = "none";
+    			
+    			 }
+    		 else{
+
+    			 $b.style.display = "block";
+    		 }
+    	}
+      </script>
       <script src="${s}js/jquery.min.js"></script>
       <script src="${s}js/jquery.dropotron.min.js"></script>
       <script src="${s}js/login.js"></script>
@@ -116,5 +165,4 @@
       <script src="${s}js/main.js"></script>
    </body>
 </html>
-
 
