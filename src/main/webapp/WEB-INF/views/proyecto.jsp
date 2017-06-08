@@ -35,6 +35,7 @@
 			                    <div class="colum1">
 			                   		<ul style="list-style:none;">
 			                      		<li><h2><c:out value="${proyect.title}"></c:out></h2></li>
+			                      		<li><h4> Miembros: </h4></li>
 			                      		<c:forEach items="${participante}" var="p" >
 			                      		<li><c:out value="${p.name}"></c:out></li>
 			                      		</c:forEach>		                      	
@@ -56,10 +57,15 @@
 										</li>
 										<li>
 										<h4>Tags</h4>
-											<a href="" class="w3-button">Diseno Web</a> ;
-											<a href="" class="w3-button">Pagina web</a> ;
-											<a href="" class="w3-button">Ingenieria Web</a> ;
-											<a href="" class="w3-button">Universidad Complutense</a> 
+										<c:forEach items="${tags}" var="t" >
+			                      		<a href="/tag/${t.id}/1"><c:out value="${t.name}"></c:out></a>
+			                      		</c:forEach>
+										</li>
+										<li>
+										<h4>Lenguajes</h4>
+										<c:forEach items="${languages}" var="l" >
+			                      		<c:out value="${l.name}"></c:out>
+			                      		</c:forEach>
 										</li>
 									</ul>						
 			                    </div>

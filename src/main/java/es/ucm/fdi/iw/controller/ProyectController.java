@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -36,6 +37,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import es.ucm.fdi.iw.LocalData;
 import es.ucm.fdi.iw.model.Proyect;
+import es.ucm.fdi.iw.model.Tag;
 import es.ucm.fdi.iw.model.User;
 
 @Controller	
@@ -117,13 +119,26 @@ public class ProyectController {
 			@RequestParam("name-form") String title,
 			@RequestParam("date-form") String date,
 			@PathVariable("id") long id,
+    		@RequestParam("checked") List<String> checked,
 			HttpServletRequest request, HttpServletResponse response, 
 			Model model, HttpSession session){
 		log.info("dentro del update\n name = "+title+"\n date = "+date+"\n");
 		try {
 			Proyect p = entityManager.find(Proyect.class, id);
+			Iterator<String> it = checked.iterator();
 			p.setTitle(title);
 			p.setDate(date);
+			List<Tag> listTags = new ArrayList<Tag>();
+			int i=0;
+			while(it.hasNext()) {
+				Tag t = entityManager.createQuery("from Tag where name = :name", Tag.class)
+                        .setParameter("name", it.next())
+                        .getSingleResult();
+				
+				listTags.add(i,t);
+				i++;
+				}
+			p.setTags(listTags);
 			entityManager.merge(p);
 			response.setStatus(HttpServletResponse.SC_OK);
 			return new RedirectView("/editProyect/"+id+"?update=tus+datos+se+actualizaron+correctamente");
@@ -167,7 +182,12 @@ public class ProyectController {
     public RedirectView createProyect(HttpSession session,HttpServletResponse response,Model model,
     		@RequestParam("title") String title,
 			@RequestParam("description") String description,
+<<<<<<< HEAD
 			@RequestParam("newDate") String date
+=======
+			@RequestParam("date") String date,
+    		@RequestParam("checked") List<String> checked
+>>>>>>> 91b843dcf738b4e73e584b47d8d91bac19c88ea6
 			){
 		
 		String url = "/tablaproyectos/V/1";
@@ -175,10 +195,22 @@ public class ProyectController {
 		User u = (User) session.getAttribute("user");
 		u = entityManager.find(User.class, u.getId());//refresh de la base de datos
 		log.info("Proyecto creado por "+u.getName());
+		Iterator<String> it = checked.iterator();
 		Proyect p = new Proyect();
 		p.setTitle(title);
 		p.setDescription(description);
 		p.setDate(date);
+		List<Tag> listTags = new ArrayList<Tag>();
+		int i=0;
+		while(it.hasNext()) {
+			Tag t = entityManager.createQuery("from Tag where name = :name", Tag.class)
+                    .setParameter("name", it.next())
+                    .getSingleResult();
+			
+			listTags.add(i,t);
+			i++;
+			}
+		p.setTags(listTags);
 		//f.setImg(img);
 		List<User> users= Arrays.asList(u);
 		p.setMembers(users);

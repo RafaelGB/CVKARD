@@ -1,6 +1,7 @@
 package es.ucm.fdi.iw.model;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -81,7 +82,7 @@ public class Proyect {
 		this.languages = languages;
 	}
 	
-	@ManyToMany(targetEntity=Tag.class, fetch=FetchType.EAGER)
+	@ManyToMany(targetEntity=Tag.class,cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
 	public List<Tag> getTags() {
 		return tags;
