@@ -140,6 +140,8 @@ public class RootController {
 		session.setAttribute("user", u);
 		model.addAttribute("proyect", p);
 		model.addAttribute("participante", p.getMembers());
+		model.addAttribute("tags",p.getTags());
+		model.addAttribute("languages",p.getLanguages());
 		
 		
 		
@@ -162,6 +164,7 @@ public class RootController {
 		
 		session.setAttribute("user", u);
 		model.addAttribute("proyect", p);
+		model.addAttribute("tags",p.getTags());
 		exit="editProyect";
 		
 		
@@ -414,6 +417,29 @@ public class RootController {
 				
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);		
 			}
+		
+		return exit;
+	}
+	@GetMapping("/tag/{id}/{pag}")
+	@Transactional
+	public String tag(Model model,@PathVariable("id") Long id,@PathVariable("pag") String pag, HttpSession session) {
+		String exit="home";
+		
+		
+		User u = (User) session.getAttribute("user");
+		u= entityManager.find(User.class, u.getId());
+		log.info("refresh de usuario."+ u.getId());
+		Tag t= entityManager.find(Tag.class, id);
+		//Solo proyectos por ahora
+		model.addAttribute("size",t.getProyects().size());
+		model.addAttribute("pag",pag);
+		model.addAttribute("tag",t);
+		
+		session.setAttribute("user", u);
+		model.addAttribute("proyects", t.getProyects());
+		exit="tag";
+		
+		
 		
 		return exit;
 	}
