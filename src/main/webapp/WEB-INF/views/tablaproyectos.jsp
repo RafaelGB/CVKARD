@@ -43,52 +43,48 @@
 				    <c:when test="${type=='N'}">
 						<h3>Componer</h3>
 						
-							 <form method="post" action="/proyect/createProyect">
-							 	<div class="row">
+						<form method="post" action="/proyect/createProyect/">
+						 <div class="row">
 				                    <div class="u">
 				                    	<div class="column1">
 				                    		<ul style="list-style:none;">
 				                    			<li>
-				                    				<input type="text" name="asunto" id="asunto"  placeholder="Asunto" style="width:250px;max-width:250px">
+				                    				<input type="text" name="title" id="title"  placeholder="Título del proyecto" style="width:250px;max-width:250px">
 				                    				<br></br>
 				                    			</li>
-				                    			<li>
-				                    				<input type="email" name="email" id="email" value="${pag =='0' ? '' : pag}" placeholder="destino@ejemplo.sufijo" style="width:200px;max-width:200px">
-				                    				<br></br>
-				                    			</li>
-				                    			 <li>
-							                    	<div class="select-wrapper" style="width:150px;max-width:150px">
-								                        <select name="category" id="category">
-								                          <option value="Category">- Category -</option>
-								                          <option value="Questions">Questions</option>
-								                          <option value="Interview">Interview</option>
-								                          <option value="Contract">Contract</option>
-								                          <option value="Other">Other</option>
-								                        </select>
-		                      						</div> <br></br>
-		                      					</li>
+				                    			<li><input type="date" name="date" id="date"
+															 placeholder="Fecha"
+															style="width: 200px; max-width: 200px"> <br></br>
+												
 				                    		</ul>
 				                    	</div>
 				                    </div>				                    
 			                 			                   
-			                    	<textarea name="message" id="message" placeholder="Escribe tu mensaje aqui..." rows="10" cols="40"></textarea>			                    				                    		     
+			                    	<textarea name="description" id="description" placeholder="Escribe una descripción del proyecto..." rows="10" cols="40"></textarea>			                    				                    		     
 			                    
 				                  
 				                    
 				                </div>
 				                <div class="row">
-				                    <input type="submit" value="Enviar">
+				                    <input type="submit" value="Crear">
 				                </div>
 				                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-							 </form>
+					</form>
 				    </c:when>
 				    
-				    <c:otherwise>       
+			<c:otherwise>       
 		                <div class="table-wrapper">
+		                <form action="/proyect/actionOnMarks" method="POST">
 		                  <table>
 		                    <thead>
 		                      <tr>                   
-		                        <th id="selec">Proyectos</th>
+		                        <th id="selec">Proyectos
+		                        <select onChange="checkMarcados(this)" name="markOptions" id="markOptions" style=" height: 20px;line-height: 1.5;font-size: 12px;padding: 1px 5px;border-radius: 3px;">
+		                        <option value="opciones">- Opciones -</option>
+		                        <option value="borrar">Borrar</option>
+			                    </select>
+			                    <button id="buttonM" style ="display:none;" type="submit">Aplicar</button>
+		                        </th>
 		                        <th>Nombre</th>
 		                        <th>Fecha</th>
 		                      </tr>
@@ -96,11 +92,11 @@
 		                    <tbody>
 		                    <c:forEach items="${user.proyects}" var="p" begin="${(pag-1)*5}" end="${((pag-1)*5)+4}"> 
 		                      <tr>
-		                        <td id="selec">
-		                          <input type="checkbox" id="copy${p.id} " name="copy${p.id}"></input>
-		                          <label for="copy${p.id}">${p.title}</label>
+		                        <td class="selec">
+		                          <input type="checkbox" id="copy${p.id}" name="checked" value="${p.id}"></input>
+		                          <label for="copy${p.id}"></label>
 		                          </td>
-		                        <td><a href="/editProyect/${p.id}">${p.title}</a></td>  
+		                        <td><a href="/editProyect/${p.id}"><c:out value="${p.title}"></c:out></a></td>  
 		                        <td>${p.date}</td>
 		                      </tr>
 		                     </c:forEach>
@@ -108,6 +104,8 @@
 		                    </tbody>
 		
 		                  </table>
+		                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 	
+		                  </form>
 		                  <div class="w3-bar w3-border w3-round">
 		                    <div class="w3-bar">
 		                      <a href="/tablaproyectos/${type}/${pag>=5 ? pag-4 : 1}" class="w3-bar-item w3-button"> &laquo; </a>
@@ -121,7 +119,7 @@
 		                </div>  
 	                </c:otherwise>
 				    
-		 		</c:choose> 
+		 	</c:choose> 
               </div>
             </div>
           </section>

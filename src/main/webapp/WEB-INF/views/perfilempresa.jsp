@@ -35,10 +35,10 @@
 		              	<div class="row">
 			              	<div class="u">
 			                    <div class="colum1">
-			                      <img src="/user/photo/${user.id}" alt="" width="200" height="150/">
-            	            <form id="formAvatar" action="user/photo/${user.id}" style ="visibility: hidden;"
+			                      <img src="/user/Bphoto/${user.id}" alt="" width="200" height="150/">
+            	            <form id="formAvatar" action="user/Bphoto/${user.id}" style ="visibility: hidden;"
 								enctype="multipart/form-data" method="post">
-								<input type="file" name="photo" size="40">
+								<input type="file" name="Bphoto" size="40">
 								<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
 								<div>
 									<input type="submit" value="Send">
@@ -97,7 +97,7 @@
 			                    </div>
 		                	</div>	                	
 		                </div>
-		                <a href="tablaofertas" class="button special small" style="float:right;">Editar Ofertas</a> 
+		                <a href="tablaofertas/1" class="button special small" style="float:right;">Editar Ofertas</a> 
 		               <label for="submit-form" id="update_button" class="button special small" style="float:right;visibility: hidden;">Guardar Cambios</label>
 	                <button onclick="updateState(this);"  style="float:right; margin-top:0.5em;">Activar edición</button>
 		                  <span style="color: blue;">

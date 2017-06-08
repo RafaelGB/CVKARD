@@ -7,12 +7,16 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,5 +159,68 @@ public class ProyectController {
 			}
 			return new RedirectView("/editProyect/"+id+"?desc="+ desc);
 				
+	}
+	
+	@RequestMapping(value="/createProyect", method=RequestMethod.POST)
+	@ResponseBody
+	@Transactional // needed to allow DB change
+    public RedirectView createProyect(HttpSession session,HttpServletResponse response,Model model,
+    		@RequestParam("title") String title,
+			@RequestParam("description") String description,
+			@RequestParam("date") String date
+			){
+		
+		String url = "/tablaproyectos/V/1";
+		try{
+		User u = (User) session.getAttribute("user");
+		u = entityManager.find(User.class, u.getId());//refresh de la base de datos
+		log.info("Proyecto creado por "+u.getName());
+		Proyect p = new Proyect();
+		p.setTitle(title);
+		p.setDescription(description);
+		p.setDate(date);
+		//f.setImg(img);
+		List<User> users= Arrays.asList(u);
+		p.setMembers(users);
+		u.getProyects().add(p);
+		entityManager.persist(p);//si se crea un objeto nuevo
+		session.setAttribute("user", u);
+		response.setStatus(HttpServletResponse.SC_OK);
+		}catch(NoResultException nre){
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			log.error("No existe ningun usuario con ese email\n");
+		}
+		return new RedirectView(url);
+	}
+	
+	@RequestMapping(value="/actionOnMarks", method=RequestMethod.POST)
+	@ResponseBody
+	@Transactional // needed to allow DB change
+    public RedirectView changeMarks(HttpSession session,HttpServletResponse response,Model model,
+    		@RequestParam("markOptions") String markOptions,
+    		@RequestParam("checked") List<Long> checked){
+		try{
+		User u = (User) session.getAttribute("user");
+		//u = entityManager.find(User.class, u.getId());//refresh de la base de datos
+		Iterator<Long> it = checked.iterator();
+		Proyect p;
+		while(it.hasNext()) {
+			p = entityManager.find(Proyect.class, it.next());
+			 if(markOptions.equals("borrar")){
+				entityManager.remove(p);
+				for (User user : p.getMembers()) {
+				     user.getProyects().remove(p);
+				}
+				log.info("mensaje con la key "+p.getId()+ " eliminado");
+			}
+		}
+		session.setAttribute("user", u);
+		log.info("opcion "+markOptions+" aplicada");
+		
+		}catch(NoResultException nre){
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			log.error("Algo salio mal aplicando la opcion "+markOptions);
+		}
+		return new RedirectView("/tablaproyectos/V/1");
 	}
 }

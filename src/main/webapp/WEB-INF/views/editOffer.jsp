@@ -6,7 +6,7 @@
 
 <html>
 <head>
-<title>CVKARD - Proyecto</title>
+<title>CVKARD - Oferta</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
@@ -32,7 +32,7 @@
 	<section>
 		<div id="head">
 			<div class="line">
-				<h1>EDITAR PROYECTO</h1>
+				<h1>EDITAR OFERTA</h1>
 			</div>
 		</div>
 		<!--Cambiar las ids o los names de los inputs para pillarlos en un proyectController , y crear el metodo para que lo actualice bien -->
@@ -44,9 +44,9 @@
 						<div class="row">
 							<div class="u">
 								<div class="colum1">
-								<img src="/proyect/photo/${proyect.id}" alt="" width="200"
-										height="150/">
-									<form id="formImage" action="/proyect/photo/${proyect.id}"
+								<img src="/offer/photo/${offer.id}" alt="" width="200"
+										height="150"/>
+									<form id="formImage" action="/offer/photo/${offer.id}"
 										style="visibility: hidden;" enctype="multipart/form-data"
 										method="post">
 										<input type="file" name="photo" size="40"> <input
@@ -63,7 +63,7 @@
 									</span>
 								</div>
 							</div>
-							<form id="confirmUpdate" action="/proyect/updateInfoProyect/${proyect.id}"
+							<form id="confirmUpdate" action="/offer/updateInfoOffer/${offer.id}"
 								style="visibility: hidden;" method="post">
 								<input name="${_csrf.parameterName}" type="hidden"
 									value="${_csrf.token}" /> <input type="submit"
@@ -75,17 +75,17 @@
 										<li style="font-size: 24px; margin-top: 0.5em;"><input
 											class="changingClass" disabled="disabled" type="text"
 											id="name-form" name="name-form" form="confirmUpdate"
-											value="${proyect.title}" /></li>
+											value="${offer.title}"/></li>
 										
 
 
 										
-										<li>fecha del proyecto: 
+										<li>fecha de la oferta: 
 										
 											<input class="changingClass"
 											disabled="disabled" type="date" id="birthday-form"
 											name="date-form" form="confirmUpdate"
-											value="${!empty proyect.date ? proyect.date : ''}">
+											value="${offer.date}">
 
 										</li>
 										
@@ -112,12 +112,12 @@
 						</div>
 					</div>
 					<div class="box">
-						<h3>Descripción del proyecto</h3>
-				        <form id="ckeditor_form" action="/proyect/updateDescript/${proyect.id}" method="post">
+						<h3>Descripción de la oferta</h3>
+				        <form id="ckeditor_form" action="/offer/updateDescript/${offer.id}" method="post">
 				            <textarea name="editor1" id="editor1" rows="10" cols="80">
-				                ${proyect.description}
+				                ${offer.description}
 				            </textarea>
-				            <input type="text" name="html_data" id="html_data" style="visibility:hidden;"> 
+				            <input type="text" name="html_data" id="html_data" style="visibility:hidden;"> </input>
 				            <input name="${_csrf.parameterName}" type="hidden"
 									value="${_csrf.token}" />
 							 <input type="button" onclick="updateCkeditor()" value="Actualizar">

@@ -1,9 +1,6 @@
 package es.ucm.fdi.iw.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
@@ -11,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import es.ucm.fdi.iw.model.Message;
+import es.ucm.fdi.iw.model.Offer;
 import es.ucm.fdi.iw.model.Proyect;
 import es.ucm.fdi.iw.model.User;
 
@@ -262,13 +259,7 @@ public class RootController {
 		return "empresavista";
 	}
 
-	/**
-	 * OfertaVista - vista sobre la información de una oferta en concreto y sus referencias
-	 */
-	@GetMapping("/ofertavista")
-	public String ofertavista() {
-		return "ofertavista";
-	}
+
 
 	/**
 	 * PerfilEmpresa - vista sobre el perfil de un negocio en concreto con sus configuraciones
@@ -290,13 +281,7 @@ public class RootController {
 		return "perfilusuario";
 	}
 
-	/**
-	 * TablaOfertas - vista sobre las ofertas de un negocio en concreto bajo su log y sus opciones de edición
-	 */
-	@GetMapping("/tablaofertas")
-	public String tablaofertas() {
-		return "tablaofertas";
-	}
+
 
 	/**
 	 * TablaProyectos -  vista sobre los proyectos de un trabajador en concreto bajo su log y sus opciones de edición
@@ -326,5 +311,111 @@ public class RootController {
 		
 		return exit;
 	}
+	
+	@GetMapping("/editOffer/{id}")
+	@Transactional
+	public String editOffer(HttpSession session,Model model,
+			@PathVariable("id") long id) {
+		
+		Offer f = entityManager.find(Offer.class, id);//refresh de la base de datos
+		User u = (User) session.getAttribute("user");
+		//si está habilitado asignamos al modelo el mensaje
+			model.addAttribute("offer", f);
+			String url = "editOffer";
+		
+		return url;
+	}
+	
+	/**
+	 * TablaOfertas - vista sobre las ofertas de un negocio en concreto bajo su log y sus opciones de edición
+	 */
+	@GetMapping("/tablaofertas/{pag}")
+	@Transactional
+	public String tablaofertas(HttpSession session,HttpServletResponse response,
+			@PathVariable("pag") String pag,
+			Model model) {
+		String exit = "home";
+		
+		try {
+			log.info("pagina de ofertas : "+pag);
+				if(pag.equals("1")){
+					User u = (User) session.getAttribute("user");
+					log.info("carga el usuario : "+u.getName());
+					u = entityManager.find(User.class, u.getId());//refresh de la base de datos
+					log.info("refresh de usuario lanzado.");
+					model.addAttribute("size",u.getOffers().size());
+					log.info("Tamaño."+u.getOffers().size());
+					session.setAttribute("user", u);	
+					model.addAttribute("pag",pag);
+					model.addAttribute("offers", u.getOffers());
+					
+				}
+				exit = "tablaofertas";
+			} catch (NoResultException nre) {
+				log.error("fallo al encontrar el usuario para actualizar");
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+				
+			}catch (EntityNotFoundException nre) {
+				
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);		
+			}
+		
+		return exit;
+	}
+	
+	/**
+	 * OfertaVista - vista sobre la información de una oferta en concreto y sus referencias
+	 */
 
+	@GetMapping("/ofertas/ofertavista/{id}")
+	@Transactional
+	public String ofertavista(HttpSession session,Model model,
+			@PathVariable("id") long id) {
+		String url = "home";
+		
+		Offer f = entityManager.find(Offer.class, id);//refresh de la base de datos
+		User u = (User) session.getAttribute("user");
+		//si está habilitado asignamos al modelo el mensaje
+			model.addAttribute("offer", f);
+			url = "ofertavista";
+		
+		
+		return url;
+	}
+
+	
+	@GetMapping("/ofertas/{pag}")
+	@Transactional
+	public String ofertas(HttpSession session,HttpServletResponse response,
+			@PathVariable("pag") String pag,
+			Model model) {
+		String exit = "home";
+		
+		try {
+			log.info("pagina de ofertas : "+pag);
+				if(pag.equals("1")){
+					User u = (User) session.getAttribute("user");
+					log.info("carga el usuario : "+u.getName());
+					u = entityManager.find(User.class, u.getId());//refresh de la base de datos
+					log.info("refresh de usuario lanzado.");
+					model.addAttribute("size",u.getOffers().size());
+					log.info("Tamaño."+u.getOffers().size());
+					session.setAttribute("user", u);	
+					model.addAttribute("pag",pag);
+					model.addAttribute("offers", u.getOffers());
+					
+				}
+				exit = "ofertas";
+			} catch (NoResultException nre) {
+				log.error("fallo al encontrar el usuario para actualizar");
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+				
+			}catch (EntityNotFoundException nre) {
+				
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);		
+			}
+		
+		return exit;
+	}
+	
 }

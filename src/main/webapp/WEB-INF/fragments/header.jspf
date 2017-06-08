@@ -32,8 +32,12 @@
                 </ul>
                 <div class="top-nav s-12 l-3">
                    <ul class="left top-ul chevron">
+<<<<<<< HEAD
                       <li>
                       	<a href="/ofertas">Ofertas</a>
+=======
+                      <li><a href="/ofertas/1">Ofertas</a>
+>>>>>>> 550c1ed83addfc2c3a5a3325cb0204968c5ef0bf
                       </li>
                       <li>
                       	<a href="/empresas">Empresas</a>
