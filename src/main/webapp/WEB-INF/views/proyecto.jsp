@@ -47,11 +47,12 @@
 			                    	<ul style="list-style:none;">
 				                   		<li><h4> Puntuacion: </h4>
 										<div class="ec-stars-wrapper">
-											<a href="#" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
-											<a href="#" data-value="2" title="Votar con 2 estrellas">&#9733;</a>
-											<a href="#" data-value="3" title="Votar con 3 estrellas">&#9733;</a>
-											<a href="#" data-value="4" title="Votar con 4 estrellas">&#9733;</a>
-											<a href="#" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
+										<!-- En el security poner en usuario /puntuaProyect/** -->
+											<a href="/proyect/puntuaProyect/${proyect.id}/1" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
+											<a href="/proyect/puntuaProyect/${proyect.id}/2" data-value="2" title="Votar con 2 estrellas">&#9733;</a>
+											<a href="/proyect/puntuaProyect/${proyect.id}/3" data-value="3" title="Votar con 3 estrellas">&#9733;</a>
+											<a href="/proyect/puntuaProyect/${proyect.id}/4" data-value="4" title="Votar con 4 estrellas">&#9733;</a>
+											<a href="/proyect/puntuaProyect/${proyect.id}/5" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
 										</div>
 										
 										</li>

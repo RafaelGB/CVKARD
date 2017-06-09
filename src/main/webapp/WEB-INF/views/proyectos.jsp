@@ -6,7 +6,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>CVKard - Tag</title>
+  <title>CVKard - Proyectos</title>
     <link rel="stylesheet" type="text/css"  href="${s}css/main.css">
     <link rel="stylesheet" type="text/css"  href="${s}css/components.css">  
     <link rel="stylesheet" type="text/css"  href="${s}css/responsee.css"> 
@@ -25,19 +25,18 @@
     <section>
       <div id="head">
         <div class="line">
-           <h1>${tag.name}</h1>
+           <h1>Proyectos</h1>
         </div>
       </div>
       <div id="content">
         <div class="line">
           <section id="main" class="container"> 
           <div class="box" id="site">
-              <a href="../IW/index.html"> Home > </a> <a id="actual">Ofertas </a>
+              <a href="/home"> Home > </a> <a id="actual">Proyectos </a>
 
           </div>
 
             <div class="box">
-            <h2>Proyectos de este tag</h2>
               <div class="row">
                   
                     <!--  <div class="colum1">

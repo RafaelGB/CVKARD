@@ -52,17 +52,15 @@
 				                    				<input type="text" name="title" id="title"  placeholder="Título del proyecto" style="width:250px;max-width:250px">
 				                    				<br></br>
 				                    			</li>
-<<<<<<< HEAD
+
 				                    			<li><input type="date" name="newDate" id="newDate" style="width: 200px; max-width: 200px"> <br></br>
-=======
-				                    			<li><input type="date" name="date" id="date"
-															 placeholder="Fecha"
-															style="width: 200px; max-width: 200px"> <br></br></li>
-												<li>Tags:<input type="checkbox" id="desWeb" name="checked" value="Desarrollo web" ></input>
-												<label for="desWeb">Desarrollo web</label>
-												<input type="checkbox" id="progJava" name="checked" value="Programacion java" ></input>
-												<label for="progJava">Programacion java</label>
->>>>>>> 91b843dcf738b4e73e584b47d8d91bac19c88ea6
+
+				                    			
+												<li>Tags:<c:forEach items="${tags}" var="t">
+												<input type="checkbox" id="${t.id}" name="checkedTag" value="${t.name}" ></input>
+												<label for="${t.id}">${t.name}</label>
+												</c:forEach></li>
+												
 												
 				                    		</ul>
 				                    	</div>
@@ -140,7 +138,7 @@
 
 
     <!-- Scripts -->
-<<<<<<< HEAD
+
     <script>
     document.getElementById('newDate').valueAsDate = new Date();
     </script>
@@ -151,7 +149,7 @@
     <script src="${s}js/skel.min.js"></script>
     <script src="${s}js/util.js"></script>
     <script src="${s}js/main.js"></script>
-=======
+
       <script>
       function checkMarcados(marks){
     	  var $b = document.getElementById("buttonM");
@@ -171,7 +169,6 @@
       <script src="${s}js/skel.min.js"></script>
       <script src="${s}js/util.js"></script>
       <script src="${s}js/main.js"></script>
->>>>>>> 91b843dcf738b4e73e584b47d8d91bac19c88ea6
    </body>
 </html>
 
