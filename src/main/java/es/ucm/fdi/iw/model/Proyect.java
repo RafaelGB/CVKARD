@@ -27,6 +27,7 @@ public class Proyect {
 	private List <User> members;
 	private List<Language> languages;
 	private List<Tag> tags;
+	private List<ScoreProyect> assessment;
 	
 	@Id
 	@GeneratedValue
@@ -82,7 +83,7 @@ public class Proyect {
 		this.languages = languages;
 	}
 	
-	@ManyToMany(targetEntity=Tag.class,cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToMany(targetEntity=Tag.class, fetch=FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
 	public List<Tag> getTags() {
 		return tags;
@@ -90,6 +91,15 @@ public class Proyect {
 	public void setTags(List<Tag> tags){
 		this.tags = tags;
 	}
-
+	
+	@OneToMany(targetEntity=ScoreProyect.class)
+	@JoinColumn(name="punctuated_id") // <-- this avoids creating an extra User_ScoreOffer table
+	public List<ScoreProyect> getAssessment() {
+		return assessment;
+	}
+	public void setAssessment(List<ScoreProyect> assessment) {
+		this.assessment = assessment;
+	}
+	
 
 }
