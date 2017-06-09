@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		 				 "/user/photo/*","/curriculum/*","/user/newUserEmployee",
 		 				 "/user/newUserBussines","/message/createExternalMessage/*").permitAll()
 		 	.antMatchers("/perfilusuario","/tablaproyectos").hasRole("EMPLOYEE")
-		 	.antMatchers("/perfilempresa","/tablaofertas").hasRole("BUSSINES")
+		 	.antMatchers("/perfilempresa","/tablaofertas","/proyect/puntuaProyect/**").hasRole("BUSSINES")
 	        .anyRequest().authenticated()
 	        .and()
 	     .formLogin()
