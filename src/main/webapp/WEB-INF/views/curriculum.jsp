@@ -131,25 +131,20 @@
 		<div class="box">
 			<section>
 				<h3>Contacta Conmigo</h3>
-				 <form method="post" action="#">
+				 <form id="contact-form" action="/message/createExternalMessage" method="POST">
 				 	<div class="row">
 	                    <div class="u">
 	                    	<div class="column1">
 	                    		<ul style="list-style:none;">
-	                    			<li><input type="text" name="name" id="name" value="" placeholder="Name"></li></br>
-	                    			<li><input type="text" name="asunto" id="asunto" value="" placeholder="Asunto"></li></br>
-	                    			<li>
-				                    	<input type="checkbox" id="copy" name="copy">
-				                    	<label for="copy">Email me a copy of this message</label>
-				                    </li>
+	                    			<li><input type="email" name="sender-form" id="sender-form"  placeholder="tu email..."></li></br>
+	                    			<li><input type="text" name="subject-form" id="subject-form" placeholder="Asunto"></li></br>
 	                    		</ul>
 	                    	</div>
 	                    </div>
 	                    <div class="u">
 	                    	<div class="column1">
 	                    		<ul style="list-style:none;">
-	                    			<li><input type="email" name="email" id="email" value="" placeholder="Email"></li></br>
-	                    			 <li>
+                    			 	<li>
 				                    	<div class="select-wrapper">
 					                        <select name="category" id="category">
 					                          <option value="">- Category -</option>
@@ -158,8 +153,8 @@
 					                          <option value="1">Contract</option>
 					                          <option value="1">Other</option>
 					                        </select>
-                     						</div> <br></br>
-                     					</li>
+                   						</div> <br></br>
+                   					</li>
 	                    		</ul>
 	                    	</div>
 	                    </div>
@@ -191,6 +186,7 @@
 	                    </div>
 	                </div><br></br>
 	                <div class="g-recaptcha" data-sitekey="6Lf1NyMUAAAAAALwub84xp42yPQpKAo8CXSeJX9W"></div>
+	                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				 </form>				
 			</section>
 		</div>

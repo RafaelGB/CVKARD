@@ -53,8 +53,17 @@
 												<sec:authorize access="hasRole('BUSSINES')">
 													/perfilempresa
 												</sec:authorize>
-							">${user.name}</a>
-							<li><a id="log" href="/perfilusuario"><img src="/user/photo/${user.id}" id ="logo3"/></a>
+							">${user.name}</a>				
+                        </li>
+                        <li>
+                        	<a id="log" href="
+                        						<sec:authorize access="hasRole('EMPLOYEE')">
+													/perfilusuario
+												</sec:authorize>
+												<sec:authorize access="hasRole('BUSSINES')">
+													/perfilempresa
+												</sec:authorize>
+												"><img src="/user/photo/${user.id}" id ="logo3"/></a>
                         </li>
                     	<!-- FORMULARIO DE LOGOUT: evita que cierren sesiÃ³n por ti -->
                     		<li><form id="logout_form" action= "/logout"  method = "POST">

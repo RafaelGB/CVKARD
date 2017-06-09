@@ -68,6 +68,39 @@ private static Logger log = Logger.getLogger(UserController.class);
 		}
 		return new RedirectView(url);
 	}
+	
+	@RequestMapping(value="/createExternalMessage/{id}", method=RequestMethod.POST)
+	@ResponseBody
+	@Transactional // needed to allow DB change
+    public RedirectView createExternalMessage(Model model,
+    		@PathVariable("id") long id,
+    		@RequestParam("sender-form") String sender,
+    		@RequestParam("asunto") String subject,
+			@RequestParam("email") String email,
+			@RequestParam("category") String category,
+			@RequestParam("message") String message){
+		String url = "/welcome";
+		try{
+		User u = entityManager.find(User.class, id);
+		url = "/curriculum/"+u.getNick()+"?contact=fallo+al+enviar+ensaje,+pruebe+mas+tarde";
+		log.info("Mensaje enviado por ");
+		Message m = new Message();
+		//m.setSender(u);
+		m.setBody(message);
+		m.setRead(false);
+		m.setSubject(subject);
+		m.setCategory(category);
+		m.setReceiver(u);
+		//u.getSentMessages().add(m);
+		u.getReceivedMessages().add(m);
+		entityManager.persist(m);//se crea un objeto nuevo
+		url = "/curriculum/"+u.getNick()+"?contact=mensaje+enviado+con+exito";
+		}catch(NoResultException nre){
+			log.error("No existe ningun usuario con ese email\n");
+		}
+		return new RedirectView(url);
+	}
+	
 	@RequestMapping(value="/actionOnMarks/{type}", method=RequestMethod.POST)
 	@ResponseBody
 	@Transactional // needed to allow DB change

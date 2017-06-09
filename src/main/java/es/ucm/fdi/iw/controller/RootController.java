@@ -272,8 +272,10 @@ public class RootController {
 	public String perfilempresa(HttpSession session) {
 		User u = (User) session.getAttribute("user");
 		u = entityManager.find(User.class, u.getId());//refresh de la base de datos
-		log.info(" cargamos la direccion  don id: "+u.getAddress().getId());
-		session.setAttribute("user", u);
+		if(u.getAddress() != null){
+			log.info(" cargamos la direccion  don id: "+u.getAddress().getId());
+			session.setAttribute("user", u);
+		}
 		return "perfilempresa";
 	}
 
