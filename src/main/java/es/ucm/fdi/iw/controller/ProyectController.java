@@ -182,13 +182,8 @@ public class ProyectController {
     public RedirectView createProyect(HttpSession session,HttpServletResponse response,Model model,
     		@RequestParam("title") String title,
 			@RequestParam("description") String description,
-<<<<<<< HEAD
-			@RequestParam("newDate") String date
-=======
-			@RequestParam("date") String date,
-    		@RequestParam("checked") List<String> checked
->>>>>>> 91b843dcf738b4e73e584b47d8d91bac19c88ea6
-			){
+			@RequestParam("newDate") String date,
+    		@RequestParam("checked") List<String> checked){
 		
 		String url = "/tablaproyectos/V/1";
 		try{
