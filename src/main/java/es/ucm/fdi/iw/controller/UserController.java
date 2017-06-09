@@ -255,13 +255,19 @@ public class UserController {
 				
 	}
 	
-	@RequestMapping(value="/updateCard", method=RequestMethod.POST)
+	@RequestMapping(value="/updateCard/{type}", method=RequestMethod.POST)
 	@ResponseBody
 	@Transactional // needed to allow DB change
 	 public RedirectView updateCard(
+			 	@PathVariable("type") String type,
 	    		@RequestParam("html_data") String html_data,
 				HttpServletRequest request, HttpServletResponse response, 
 				Model model, HttpSession session){
+			String url;
+			if(type.equals("E"))
+				url="/perfilusuario?card=";
+			else
+				url="/perfilempresa?card=";
 			String card = "error+no+se+ha+conseguido+actualizar+la+presentacion"; 
 			try {
 				User u = (User) session.getAttribute("user");
@@ -275,7 +281,7 @@ public class UserController {
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 				
 			}
-			return new RedirectView("/perfilusuario?card="+ card);
+			return new RedirectView(url + card);
 				
 	}
 	

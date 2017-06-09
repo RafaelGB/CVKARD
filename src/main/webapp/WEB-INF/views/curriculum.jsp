@@ -127,66 +127,66 @@
 	    <div id="download_div" style="background:url(${s}images/animal.gif) no-repeat center center;width:80px;height:80px;visibility:hidden;">
    	  	</div>
            </div>
-<sec:authorize access="isAnonymous()">
-		<div class="box">
-			<section>
-				<h3>Contacta Conmigo</h3>
-				 <form id="contact-form" action="/message/createExternalMessage/${user.id}" method="POST">
-				 	<div class="row">
-	                    <div class="u">
-	                    	<div class="column1">
-	                    		<ul style="list-style:none;">
-	                    			<li><input type="email" name="sender-form" id="sender-form"  placeholder="tu email..."></li></br>
-	                    			<li><input type="text" name="subject-form" id="subject-form" placeholder="Asunto"></li></br>
-	                    		</ul>
+		<sec:authorize access="isAnonymous()">
+			<div class="box">
+				<section>
+					<h3>Contacta Conmigo</h3>
+					 <form id="contact-form" action="/message/createExternalMessage/${user.id}" method="POST">
+					 	<div class="row">
+		                    <div class="u">
+		                    	<div class="column1">
+		                    		<ul style="list-style:none;">
+		                    			<li><input type="email" name="sender-form" id="sender-form"  placeholder="tu email..."></li></br>
+		                    			<li><input type="text" name="subject-form" id="subject-form" placeholder="Asunto"></li></br>
+		                    		</ul>
+		                    	</div>
+		                    </div>
+		                    <div class="u">
+		                    	<div class="column1">
+		                    		<ul style="list-style:none;">
+	                    			 	<li>
+					                    	<div class="select-wrapper">
+						                        <select name="category" id="category">
+						                          <option value="Category">- Category -</option>
+						                          <option value="Questions">Questions</option>
+						                          <option value="Interview">Interview</option>
+						                          <option value="Contract">Contract</option>
+						                          <option value="Other">Other</option>
+						                        </select>
+	                   						</div> <br></br>
+	                   					</li>
+		                    		</ul>
+		                    	</div>
+		                    </div>
+		                    <div class="u2">
+		                    	<div class="column1">
+		                    		<ul style="list-style:none;">
+		                    			<li><textarea name="message" id="message-form" placeholder="Enter your message" rows="6"></textarea></li>
+		                    			
+		                    		</ul>		                    		     
+		                    	</div>
+		                    </div>
+		                    
+		                </div>
+		                <div class="row">
+	                    	<div class="column1 u">
+	                    		<input type="button" onclick="checkAndCreateMessage()" value="Enviar mensaje">
 	                    	</div>
-	                    </div>
-	                    <div class="u">
-	                    	<div class="column1">
-	                    		<ul style="list-style:none;">
-                    			 	<li>
-				                    	<div class="select-wrapper">
-					                        <select name="category" id="category">
-					                          <option value="Category">- Category -</option>
-					                          <option value="Questions">Questions</option>
-					                          <option value="Interview">Interview</option>
-					                          <option value="Contract">Contract</option>
-					                          <option value="Other">Other</option>
-					                        </select>
-                   						</div> <br></br>
-                   					</li>
-	                    		</ul>
+	                    	<div class="column1 u2">
+	                    		<button type="reset">Limpiar mensaje</button>
 	                    	</div>
-	                    </div>
-	                    <div class="u2">
-	                    	<div class="column1">
-	                    		<ul style="list-style:none;">
-	                    			<li><textarea name="message" id="message-form" placeholder="Enter your message" rows="6"></textarea></li>
-	                    			
-	                    		</ul>		                    		     
-	                    	</div>
-	                    </div>
-	                    
-	                </div>
-	                <div class="row">
-                    	<div class="column1 u">
-                    		<input type="button" onclick="checkAndCreateMessage()" value="Enviar mensaje">
-                    	</div>
-                    	<div class="column1 u2">
-                    		<button type="reset">Limpiar mensaje</button>
-                    	</div>
-	                </div><br></br>
-	                 <div id="myRecaptcha"></div>
-	                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-				 </form>
-			 	 <h3><%
-			     if (request.getParameter("contact") != null) {
-			        out.println(request.getParameter("contact"));
-			     }
-				 %></h3>				
-			</section>
-		</div>
-	  </sec:authorize>
+		                </div><br></br>
+		                 <div id="myRecaptcha"></div>
+		                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+					 </form>
+				 	 <h3><%
+				     if (request.getParameter("contact") != null) {
+				        out.println(request.getParameter("contact"));
+				     }
+					 %></h3>				
+				</section>
+			</div>
+	  	</sec:authorize>
     </section>
 
 	  <!-- FOOTER -->   

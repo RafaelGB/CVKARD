@@ -21,6 +21,189 @@
 	<div id="page-wrapper">
 		<%@ include file="../fragments/header.jspf"%>
 	</div>
+<<<<<<< HEAD
+    <section>
+    	<div id="head"> 
+            <div class="carousel" style="text-align: -webkit-center">
+              <div id="owl-demo" class="owl-carousel owl-theme">
+               <div class="item">
+                  <img src="${s}images/Carousel.png" alt="">      
+                  <div class="carousel-text">
+                     <div class="line" id="line">
+                        <div class="s-12 l-9">
+                           <h5>Deslumbra a todos con una carta de presentacion de tus proyectos y consigue </h5>
+                        </div>
+                        <div class="s-12 l-9">
+                           <p>Trabajo al instante</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="item">
+                  <img src="${s}images/carousel.png" stylealt="">      
+                  <div class="carousel-text">
+                     <div class="line" id="line">
+                        <div class="s-12 l-9">
+                           <h5>Se el primero en estar al corriente de las</h5>
+                        </div>
+                        <div class="s-12 l-9">
+                           <p>Mejores ofertas del mercado</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="item">
+                  <img src="${s}images/carousel.png" stylealt="">      
+                  <div class="carousel-text">
+                     <div class="line" id="line">
+                        <div class="s-12 l-9">
+                           <h5>Comparte código con la comunidad para </h5>
+                        </div>
+                        <div class="s-12 l-9">
+                           <p>Ser el mejor valorado</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+     </div>
+
+      <div id="content">
+      	<div class="line">
+	        <section id="main" class="container">      
+		          <div class="box">
+                <div class="line">
+                  <h2>EMPRESAS MEJOR VALORADAS</h2>
+                </div>
+		            <div class="row">
+                  <div class="u">
+                    <div class="colum1">
+                      <img src="${s}images/empresa5.jpeg" alt="" WIDTH=150 HEIGHT=150/>
+                    </div>
+                    <ul style="list-style:none;">
+                    <li>Empresa</li>
+                    <li>Breve descripcion</li>
+                    <li>Valoración</li></br>
+                  <li><a href="empresavista" class="button special small">Empresa</a></li>
+                  </div>
+                  <div class="u">
+                  <div class="colum1">
+                    <img src="${s}images/empresa2.png" alt="" WIDTH=150 HEIGHT=150/>
+                  </div>
+                  <ul style="list-style:none;">
+                  <li>Empresa</li>
+                  <li>Breve descripcion</li>
+                  <li>Valoración</li></br>
+                  <li><a href="empresavista" class="button special small">Empresa</a></li>
+                </div>
+                <div class="u">
+                  <div class="colum1">
+                    <img src="${s}images/empresa3.jpeg" alt="" WIDTH=150 HEIGHT=150/>
+                  </div>
+                  <ul style="list-style:none;">
+                  <li>Empresa</li>
+                  <li>Breve descripcion</li>
+                  <li>Valoración</li></br>
+                  <li><a href="#" class="button special small">Empresa</a></li>
+                </div>
+                <div class="u">
+                  <div class="colum1">
+                    <img src="${s}images/empresa6.png" alt="" WIDTH=150 HEIGHT=150/>
+                  </div>
+                  <ul style="list-style:none;">
+                  <li>Empresa</li>
+                  <li>Breve descripcion</li>
+                  <li>Valoración</li></br>
+                  <li><a href="empresavista" class="button special small">Empresa</a></li>
+                </div>
+		            </div>
+              </div>
+      
+
+              <a href="empresas" class="button special small" style="float: none">Todas las empresas</a> 
+	         	</section>
+      	</div>
+
+                <div class="line">
+          <section id="main" class="container">      
+              <div class="box">
+                <div class="line">
+                  <h2>MEJORES OFERTAS</h2>
+                </div>
+                <div class="row">
+                  <div class="u">
+                    <div class="colum1">
+                      <img src="${s}images/oferta.png" alt="" WIDTH=150 HEIGHT=150/>
+                    </div>
+                    <ul style="list-style:none;">
+                    <li>Oferta</li>
+                    <li>Breve descripcion del proyecto</li>
+                    <li>Empresa</li></br>
+                  <li><a href="ofertavista" class="button special small">Oferta</a></li>
+                  </div>
+                  <div class="u">
+                  <div class="colum1">
+                    <img src="${s}images/oferta1.png" alt="" WIDTH=150 HEIGHT=150/>
+                  </div>
+                  <ul style="list-style:none;">
+                    <li>Oferta</li>
+                    <li>Breve descripcion del proyecto</li>
+                    <li>Empresa</li></br>
+                  <li><a href="ofertavista" class="button special small">Oferta</a></li>
+                </div>
+                <div class="u">
+                  <div class="colum1">
+                    <img src="${s}images/oferta2.png" alt="" WIDTH=150 HEIGHT=150/>
+                  </div>
+                  <ul style="list-style:none;">
+                    <li>Oferta</li>
+                    <li>Breve descripcion del proyecto</li>
+                    <li>Empresa</li></br>
+                  <li><a href="#" class="button special small">Oferta</a></li>
+                </div>
+                <div class="u">
+                  <div class="colum1">
+                    <img src="${s}images/oferta3.png" alt="" WIDTH=150 HEIGHT=150/>
+                  </div>
+                  <ul style="list-style:none;">
+                    <li>Oferta</li>
+                    <li>Breve descripcion del proyecto</li>
+                    <li>Empresa</li></br>
+                    <li><a href="ofertavista" class="button special small">Oferta</a></li>
+                </div>
+
+                </div>
+
+              </div>
+                <a href="ofertas" class="button special small" style="float: none">Todas las ofertas</a> 
+            </section>
+        </div>
+    	</div>
+      
+
+ 
+    </section>
+
+
+    <!-- FOOTER -->   
+      
+	 <%@ include file="../fragments/footer.jspf" %>
+
+
+
+    <!-- Scripts -->
+    
+      <script src="${s}js/jquery.min.js"></script>
+      <script src="${s}js/jquery.dropotron.min.js"></script>
+      <script src="${s}js/login.js"></script>
+      <script src="${s}js/jquery.scrollgress.min.js"></script>
+      <script src="${s}js/skel.min.js"></script>
+      <script src="${s}js/util.js"></script>
+      <script src="${s}js/main.js"></script>
+   </body>
+=======
 	<section>
 		<div id="head">
 			<div class="carousel" style="text-align: -webkit-center">
@@ -157,6 +340,7 @@
 	<script src="${s}js/util.js"></script>
 	<script src="${s}js/main.js"></script>
 </body>
+>>>>>>> 14ff21cb496401e82351724f1bd9d3f0a8eb0edc
 </html>
 
 <script type="text/javascript" src="${s}js/owl.carousel.js"></script>
