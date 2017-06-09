@@ -153,7 +153,7 @@ public class User {
 	}
 	
 	@OneToMany(targetEntity=ScoreOffer.class)
-	@JoinColumn(name="punctuatorOffers") // <-- this avoids creating an extra User_ScoreOffer table
+	@JoinColumn(name="punctuator_id") // <-- this avoids creating an extra User_ScoreOffer table
 	public List<ScoreOffer> getMyScoreOffers() {
 		return myScoreOffers;
 	}
@@ -170,8 +170,9 @@ public class User {
 		this.offers = offers;
 	}
 	
-	@OneToMany(targetEntity=ScoreProyect.class)
-	@JoinColumn(name="punctuatorProyects") // <-- this avoids creating an extra User_ScoreOffer table
+	@OneToMany(fetch = FetchType.EAGER,targetEntity=ScoreProyect.class)
+	@Fetch(value = FetchMode.SUBSELECT)
+	@JoinColumn(name="punctuator_id") // <-- this avoids creating an extra User_ScoreOffer table
 	public List<ScoreProyect> getMyScoreProyects() {
 		return myScoreProyects;
 	}
