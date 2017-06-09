@@ -1,5 +1,7 @@
 package es.ucm.fdi.iw.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.security.Principal;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
@@ -426,6 +428,40 @@ public class RootController {
 		
 		return exit;
 	}
+	
+	@GetMapping("/empresas/{pag}")
+	@Transactional
+	public String empresas(HttpSession session,HttpServletResponse response,
+			@PathVariable("pag") String pag,
+			Model model) {
+		String exit = "home";
+		
+		try {
+			log.info("pagina de empresas : "+pag);
+				if(pag.equals("1")){
+					List u = new ArrayList<User>(); 
+					u = entityManager.createQuery("select u from User u where roles = :roles")
+							.setParameter("roles", "USER,BUSSINES").getResultList();
+					
+				
+					log.info("Coge bien la lista" + u.size());
+					model.addAttribute("size",u.size());
+					model.addAttribute("bussines", u);
+					
+				}
+				exit = "empresas";
+			} catch (NoResultException nre) {
+				log.error("fallo al encontrar el usuario para actualizar");
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+				
+			}catch (EntityNotFoundException nre) {
+				
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);		
+			}
+		
+		return exit;
+	}
+	
 	@GetMapping("/tag/{id}/{pag}")
 	@Transactional
 	public String tag(Model model,@PathVariable("id") Long id,@PathVariable("pag") String pag, HttpSession session) {

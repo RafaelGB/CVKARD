@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>CVKard - Empresas</title>
+<title>CVKard - Ofertas</title>
 <link rel="stylesheet" type="text/css" href="${s}css/main.css">
 <link rel="stylesheet" type="text/css" href="${s}css/components.css">
 <link rel="stylesheet" type="text/css" href="${s}css/responsee.css">
