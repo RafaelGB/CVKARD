@@ -54,37 +54,67 @@
         <h1>VISTAS USADAS EN EL PROYECTO</h1>
         <i>posibles cambios futuros</i><br>
         <!-- cambiar el inicio d elos enlaces a http://localhost:8080/-->
+        <h2>---------------------------Sin loguear---------------------------</h2>
+        <ul>
+           <li> <a href="http://localhost:8080/welcome">
+                <h3>información de bienvenida!</a></h3>
+                <p>pagina de inicio, contiene el formulacio de login y un buscador por nick de los curriculum de los usuarios empleado<br/>
+                   Acceso a la vista de registro y una breve explicación sobre la web</p>
+            </li>
+            <li>
+                <a href="http://localhost:8080/registro">
+                <h3>formulario de registro</h3></a>
+                <p>muestra 2 botones para elegir tipo de usuario, cada uno muestra un formulario diferente con un 'Recapcha' diferente en pos de la seguridad<br/>
+                Los formularios tienen un minimo de expresiones regulares para evitar SQL inyect. En caso de ya existir el email o el nick 
+                mostará que ya existe y se deberá repetir el formulario.</p>
+            </li>
+            <li> 
+                <a href="http://localhost:8080/curriculum/martaCV"><h3>Curriculum</h3></a>
+                <p>Muestra la informacion del usuario registrado tipo empleado en función de su NICK (el enlace es el ejemplo de martaCV añadida en el import.sql) dando acceso a su carta de presentación o curriculum , la posibilidad de bajarselo en pdf y un formulario para comunicarse con el. Los mensajes que se manden sin loguearse se pedirá el email del emisor y en la bandeja de entrada del usuario constara como usuario no registrado y el email en el asunto.<br/>
+                Se añadio un ejemplo de publicidad, la cual se queria añadir con "addSense" de google, pero no permite solo pruebas en localhost</p>
+            </li>
+        </ul>
+        <h2>---------------------------Ya registrado en comun---------------------------</h2>
         <ul>
         	<li> 
-                <a href="http://localhost:8080/home"><h3>página de inicio de la web</h3></a>
-                <p>común para ambos usuarios</p>
+                <a href="http://localhost:8080/home">
+                <h3>página de inicio de la web</h3></a>
+                <p>Común para ambos tipos de usuarios, una vez dentro se activa la cabecera con los diferentes accesos rapidos<br/>
+                    ???
+                </p>
             </li>
-        	<li> 
+        </ul>
+        <h2>---------------------------Ya registrado como Empleado---------------------------</h2>
+        <ul>
+            <li> 
+                <a href="http://localhost:8080/perfilusuario">
+                <h3>Perfil del usuario empleado</h3></a>
+                <p>Muestra los datos personales y permite subir o cambiar la foto de perfil, los propios datos y la carta de 
+                presentación<br/>
+                Tiene el botón con el acceso a la tabla de proyectos propios y su edición.</p>
+            </li>
+        </ul>
+        <h2>---------------------------Ya registrado como Negocio---------------------------</h2>
+        <ul>
+            <li> 
+                 <a href="http://localhost:8080/perfilempresa">
+                <h3>Perfil del usuario negocio</h3></a>
+                <p>Muestra la info,como su direccion concreta.Permite subir o cambiar la foto de perfil, los propios datos y la descripcion del negocio<br/>
+                Tiene el botón con el acceso a la tabla de ofertas propias y su edición.</p>               
+            </li>
+        </ul>	
+        <h2>---------------------------sin determinar aun---------------------------</h2>
+            <li> 
                 <a href="http://localhost:8080/oferta"><h3>Oferta de empresa</h3></a>
                 <p>muestra los detalles sobre una oferta</p>
             </li>
-            <li> 
-                <a href="http://localhost:8080/curriculum"><h3>Curriculum</h3></a>
-                <p>vista visible para todo el mundo, anonimo o no, que muestra la informacion del usuario registrado tipo empleado
-                dando acceso a su carta de presentación o curriculum , la posibilidad de bajarselo en pdf y un formulario para comunicarse con el.</p>
-            </li>
             <li> <a href="http://localhost:8080/ofertas">Ofertas!</a></li>
-            <li> <a href="http://localhost:8080/welcome">
-                <h3>información de bienvenida!</a></h3>
-                <p>pagina de inicio, contiene el formulacio de login y un buscador por nick de los curriculum de los usuarios empleado</p>
-            </li>
-            <li> 
-                <a href="http://localhost:8080/empresas">información sobre las empresas afines</a>
-            </li>
+ 
+
             <li> <a href="http://localhost:8080/proyecto">información sobre los proyectos que has realizado</a></li>
-            <li> <a href="http://localhost:8080/registro">formulario de registro</a></li>
+
             <li> <a href="http://localhost:8080/ofertaVista">Vista de una oferta</a></li>
             <li> <a href="http://localhost:8080/empresaVista">Vista de una empresa</a></li>
             <li> <a href="http://localhost:8080/buzon">Vista del buzon</a></li>
-            <li> <a href="http://localhost:8080/perfilempresa">Edicion del usuario</a></li>
-            <li> <a href="http://localhost:8080/perfilusuario">Edicion de la empresa</a></li>
-            
-           
-        </ul>
 </body>
 </html>
