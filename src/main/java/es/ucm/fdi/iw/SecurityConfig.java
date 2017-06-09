@@ -27,7 +27,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http
 		 .authorizeRequests()
-		 	.antMatchers("/","/welcome","/static/**","/registro","/download/showpdf/*","/user/photo/*","/curriculum/*","/user/newUserEmployee","/user/newUserBussines").permitAll()
+		 	.antMatchers("/","/welcome","/static/**","/registro","/download/showpdf/*",
+		 				 "/user/photo/*","/curriculum/*","/user/newUserEmployee",
+		 				 "/user/newUserBussines","/message/createExternalMessage/*").permitAll()
 		 	.antMatchers("/perfilusuario","/tablaproyectos").hasRole("EMPLOYEE")
 		 	.antMatchers("/perfilempresa","/tablaofertas").hasRole("BUSSINES")
 	        .anyRequest().authenticated()

@@ -189,7 +189,10 @@ public class RootController {
 			model.addAttribute("entry",true);
 			if(m.getReceiver().getId() == u.getId()){//si existe dentro de los recibidos lo habilitamos
 				correct = true;
-				model.addAttribute("correo",m.getSender().getEmail());
+				if(m.getSender() != null)
+					model.addAttribute("correo",m.getSender().getEmail());
+				else
+					model.addAttribute("correo","Usuario no registrado");
 				if(!m.getRead()){
 					log.info("Mensaje "+id+ " actualizado como 'leido'");
 					m.setRead(true);

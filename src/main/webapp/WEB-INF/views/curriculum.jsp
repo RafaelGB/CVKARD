@@ -17,7 +17,7 @@
      <link rel="stylesheet" type="text/css"  href="${s}css/template-style.css">
      <link rel="stylesheet" type="text/css"  href="${s}css/style.css" />
  	 <script src="${s}tools/ckeditor/ckeditor.js"></script>
- 	 <script src='https://www.google.com/recaptcha/api.js'></script>
+ 	 <script src="${s}js/curriculum.js"></script>
      <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
      	
 </head>
@@ -127,11 +127,11 @@
 	    <div id="download_div" style="background:url(${s}images/animal.gif) no-repeat center center;width:80px;height:80px;visibility:hidden;">
    	  	</div>
            </div>
-
+<sec:authorize access="isAnonymous()">
 		<div class="box">
 			<section>
 				<h3>Contacta Conmigo</h3>
-				 <form id="contact-form" action="/message/createExternalMessage" method="POST">
+				 <form id="contact-form" action="/message/createExternalMessage/${user.id}" method="POST">
 				 	<div class="row">
 	                    <div class="u">
 	                    	<div class="column1">
@@ -147,11 +147,11 @@
                     			 	<li>
 				                    	<div class="select-wrapper">
 					                        <select name="category" id="category">
-					                          <option value="">- Category -</option>
-					                          <option value="1">Questions</option>
-					                          <option value="1">Interview</option>
-					                          <option value="1">Contract</option>
-					                          <option value="1">Other</option>
+					                          <option value="Category">- Category -</option>
+					                          <option value="Questions">Questions</option>
+					                          <option value="Interview">Interview</option>
+					                          <option value="Contract">Contract</option>
+					                          <option value="Other">Other</option>
 					                        </select>
                    						</div> <br></br>
                    					</li>
@@ -161,7 +161,7 @@
 	                    <div class="u2">
 	                    	<div class="column1">
 	                    		<ul style="list-style:none;">
-	                    			<li><textarea name="message" id="message" placeholder="Enter your message" rows="6"></textarea></li>
+	                    			<li><textarea name="message" id="message-form" placeholder="Enter your message" rows="6"></textarea></li>
 	                    			
 	                    		</ul>		                    		     
 	                    	</div>
@@ -169,27 +169,24 @@
 	                    
 	                </div>
 	                <div class="row">
-	                	<div class="u">
-	                    	<div class="column1">
-	                    		<input type="submit" value="Send Email">
-	                    	</div>
-	                    </div>
-	                    <div class="u">
-	                    	<div class="column1">
-	                    		<input type="submit" value="Telegram">
-	                    	</div>
-	                    </div>
-	                    <div class="u2">
-	                    	<div class="column1">
-	                    		<input type="reset" value="Clear" >
-	                    	</div>
-	                    </div>
+                    	<div class="column1 u">
+                    		<input type="button" onclick="checkAndCreateMessage()" value="Enviar mensaje">
+                    	</div>
+                    	<div class="column1 u2">
+                    		<button type="reset">Limpiar mensaje</button>
+                    	</div>
 	                </div><br></br>
-	                <div class="g-recaptcha" data-sitekey="6Lf1NyMUAAAAAALwub84xp42yPQpKAo8CXSeJX9W"></div>
+	                 <div id="myRecaptcha"></div>
 	                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-				 </form>				
+				 </form>
+			 	 <h3><%
+			     if (request.getParameter("contact") != null) {
+			        out.println(request.getParameter("contact"));
+			     }
+				 %></h3>				
 			</section>
 		</div>
+	  </sec:authorize>
     </section>
 
 	  <!-- FOOTER -->   
@@ -210,6 +207,7 @@
     		}, 5000);
       }
       </script>
+      <script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
       <script src="${s}js/jquery.min.js"></script>
       <script src="${s}js/jquery.dropotron.min.js"></script>
       <script src="${s}js/login.js"></script>

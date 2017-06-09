@@ -61,6 +61,7 @@ public class User {
 		this.id = id;
 	}	
 	
+	@Column(unique=true)
 	public String getEmail() {
 		return email;
 	}

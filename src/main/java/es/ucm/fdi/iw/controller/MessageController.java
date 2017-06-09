@@ -75,23 +75,23 @@ private static Logger log = Logger.getLogger(UserController.class);
     public RedirectView createExternalMessage(Model model,
     		@PathVariable("id") long id,
     		@RequestParam("sender-form") String sender,
-    		@RequestParam("asunto") String subject,
-			@RequestParam("email") String email,
+    		@RequestParam("subject-form") String subject,
 			@RequestParam("category") String category,
 			@RequestParam("message") String message){
+		log.info("entro en createExternalMessage");
 		String url = "/welcome";
 		try{
+		log.info("entro en el try{} de createExternalMessage");
 		User u = entityManager.find(User.class, id);
 		url = "/curriculum/"+u.getNick()+"?contact=fallo+al+enviar+ensaje,+pruebe+mas+tarde";
-		log.info("Mensaje enviado por ");
+		log.info("Mensaje enviado por "+sender+"(no registrado)");
 		Message m = new Message();
-		//m.setSender(u);
+		m.setSender(null);//usuario no registrado
 		m.setBody(message);
 		m.setRead(false);
-		m.setSubject(subject);
+		m.setSubject(subject+"(por "+sender+")");
 		m.setCategory(category);
 		m.setReceiver(u);
-		//u.getSentMessages().add(m);
 		u.getReceivedMessages().add(m);
 		entityManager.persist(m);//se crea un objeto nuevo
 		url = "/curriculum/"+u.getNick()+"?contact=mensaje+enviado+con+exito";
