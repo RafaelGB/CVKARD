@@ -2,6 +2,8 @@ package es.ucm.fdi.iw.controller;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.ArrayList;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
@@ -59,6 +61,14 @@ public class RootController {
 		                            .setParameter("email", principal.getName())
 		                            .getSingleResult();
 				session.setAttribute("user", u);
+				List b = new ArrayList<User>(); 
+ 				b = entityManager.createQuery("select b from User b where roles = :roles")
+ 						.setParameter("roles", "USER,BUSSINES").getResultList();
+ 				
+ 			
+ 				log.info("Coge bien la lista" + b.size());
+ 				session.setAttribute("bussines", b);
+
 			} catch (Exception e) {
 				// TODO: handle exception
 				System.err.println(e);
@@ -191,7 +201,11 @@ public class RootController {
 			model.addAttribute("entry",true);
 			if(m.getReceiver().getId() == u.getId()){//si existe dentro de los recibidos lo habilitamos
 				correct = true;
-				model.addAttribute("correo",m.getSender().getEmail());
+				if(m.getSender() != null)
+ 					model.addAttribute("correo",m.getSender().getEmail());
+ 				else
+ 					model.addAttribute("correo","Usuario no registrado");
+				
 				if(!m.getRead()){
 					log.info("Mensaje "+id+ " actualizado como 'leido'");
 					m.setRead(true);
@@ -274,8 +288,10 @@ public class RootController {
 	public String perfilempresa(HttpSession session) {
 		User u = (User) session.getAttribute("user");
 		u = entityManager.find(User.class, u.getId());//refresh de la base de datos
-		log.info(" cargamos la direccion  don id: "+u.getAddress().getId());
-		session.setAttribute("user", u);
+		if(u.getAddress() != null){
+ 			log.info(" cargamos la direccion  don id: "+u.getAddress().getId());
+ 			session.setAttribute("user", u);
+ 		}
 		return "perfilempresa";
 	}
 
@@ -427,6 +443,41 @@ public class RootController {
 		
 		return exit;
 	}
+	
+	@GetMapping("/empresas/{pag}")
+ 	@Transactional
+ 	public String empresas(HttpSession session,HttpServletResponse response,
+ 			@PathVariable("pag") String pag,
+ 			Model model) {
+ 		String exit = "home";
+ 		
+ 		try {
+ 			log.info("pagina de empresas : "+pag);
+ 				if(pag.equals("1")){
+ 					List u = new ArrayList<User>(); 
+ 					u = entityManager.createQuery("select u from User u where roles = :roles")
+ 							.setParameter("roles", "USER,BUSSINES").getResultList();
+ 					
+ 				
+ 					log.info("Coge bien la lista" + u.size());
+ 					model.addAttribute("size",u.size());
+ 					model.addAttribute("bussines", u);
+ 					
+ 				}
+ 				exit = "empresas";
+ 			} catch (NoResultException nre) {
+ 				log.error("fallo al encontrar el usuario para actualizar");
+ 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+ 				
+ 			}catch (EntityNotFoundException nre) {
+ 				
+ 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);		
+ 			}
+ 		
+ 		return exit;
+ 	}
+	
+	
 	@GetMapping("/tag/{id}/{pag}")
 	@Transactional
 	public String tag(Model model,@PathVariable("id") Long id,@PathVariable("pag") String pag, HttpSession session) {
