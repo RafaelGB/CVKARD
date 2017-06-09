@@ -37,6 +37,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import es.ucm.fdi.iw.LocalData;
 import es.ucm.fdi.iw.model.Proyect;
+import es.ucm.fdi.iw.model.ScoreProyect;
 import es.ucm.fdi.iw.model.Tag;
 import es.ucm.fdi.iw.model.User;
 
@@ -183,7 +184,7 @@ public class ProyectController {
     		@RequestParam("title") String title,
 			@RequestParam("description") String description,
 			@RequestParam("newDate") String date,
-    		@RequestParam("checked") List<String> checked){
+    		@RequestParam("checkedTag") List<String> checked){
 		
 		String url = "/tablaproyectos/V/1";
 		try{
@@ -203,6 +204,7 @@ public class ProyectController {
                     .getSingleResult();
 			
 			listTags.add(i,t);
+			log.info("Proyecto tag "+t.getName());
 			i++;
 			}
 		p.setTags(listTags);
@@ -250,4 +252,61 @@ public class ProyectController {
 		}
 		return new RedirectView("/tablaproyectos/V/1");
 	}
+	
+	@RequestMapping(value="/puntuaProyect/{id}/{puntuacion}", method=RequestMethod.GET)
+	@ResponseBody
+	@Transactional // needed to allow DB change
+    public RedirectView puntuaProyect(HttpSession session,HttpServletResponse response,Model model,
+    		@PathVariable("id") Long id,
+    		@PathVariable("puntuacion") int punt){
+		String desc = "";
+		try{
+		User u = (User) session.getAttribute("user");
+		Proyect p = entityManager.find(Proyect.class, id);
+		//u = entityManager.find(User.class, u.getId());//refresh de la base de datos
+		
+		List<ScoreProyect> scores = u.getMyScoreProyects();
+		log.info("Hay"+scores.size());
+		Iterator<ScoreProyect> it = scores.iterator();
+		String existe="false";
+		while(it.hasNext() && existe.equals("false"))
+		{
+			log.info("Entra1");
+			
+			if(it.next().getPunctuated().getId()==p.getId())
+			{
+				log.info("Entra2");
+				existe="true";
+			}
+				
+		}
+			if(existe.equals("false")){
+		
+			ScoreProyect score=new ScoreProyect();
+			score.setPunctuated(p);
+			score.setPunctuation(punt);
+			score.setPunctuator(u);
+			u.getMyScoreProyects().add(score);
+			p.getAssessment().add(score);
+			entityManager.persist(score);//si se crea un objeto nuevo
+			session.setAttribute("user", u);
+			response.setStatus(HttpServletResponse.SC_OK);
+			desc="puntuado con exito";
+			}
+			else{
+				desc="Ya has puntuado este proyecto";
+			}
+			
+		
+			
+		
+		
+		}catch(NoResultException nre){
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			log.error("Algo salio mal aplicando la opcion ");
+		}
+		return new RedirectView("/proyecto/"+id+"?desc="+ desc);	
+	}
+		
+	
 }
