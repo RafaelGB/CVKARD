@@ -6,7 +6,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>CVKard - Empresas</title>
+  <title>CVKard - Empresa</title>
     <link rel="stylesheet" type="text/css"  href="${s}css/main.css">
     <link rel="stylesheet" type="text/css"  href="${s}css/components.css">  
     <link rel="stylesheet" type="text/css"  href="${s}css/responsee.css"> 
@@ -32,16 +32,16 @@
 		              	<div class="row">
 			              	<div class="u">
 			                    <div class="colum1">
-			                      <img src="${s}images/nr.png" alt="" width="200" height="150/">
+			                     <img src="/user/photo/${user.id}" alt="" width="200"
+										height="150" />
 			                    </div>
 		                	</div>
 		                	<div class="u">		             
 			                    <div class="colum1">
 			                   		<ul style="list-style:none;">
-			                      		<li><h2>NetherRealm Studios</h2></li>
-			                      		<li>Dirección</li>
-			                      		<li>Telefono</li>
-			                      		<li>Correo</li>			                      	
+			                      		<li><h2>${user.name}</h2></li>
+			                      		<li>${user.address}</li>
+			                      		<li>${user.email}</li>	                      	
 			                      	</ul>
 			                    </div>
 		                	</div>
@@ -65,15 +65,15 @@
 		                </div>
 		             </div>
 		             <div class="box">
-		             	<h3>Descripción </h3>
-		             	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales porta venenatis. Aliquam tristique, purus id lacinia egestas, risus turpis iaculis eros, eget venenatis dolor magna eu ex. Nunc interdum varius urna sed lobortis. Sed feugiat, nulla sed imperdiet semper, metus risus aliquam odio, quis ullamcorper odio lorem at ante. Sed at dignissim leo. Morbi varius iaculis augue a consequat. Maecenas eget luctus purus. Sed venenatis efficitur lectus, ac posuere arcu tincidunt et. Vestibulum auctor nulla nec molestie tincidunt. Curabitur congue massa in dignissim fermentum. Mauris vel dapibus lacus, eget volutpat leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-		             	<div class="row">
+		             	<h3>Carta de Presentación</h3>
+		             	<p>${user.card}</p>
+		             	<!--  <div class="row">
 							<img src="${s}images/oficina.jpg" alt="" WIDTH=200 HEIGHT=140/>
 							<img src="${s}images/mkx.jpg" alt="" WIDTH=200 HEIGHT=140/>
 							<img src="${s}images/injustice.jpg" alt=""WIDTH=200 HEIGHT=140/>
 							<img src="${s}images/villians.jpg" alt="" WIDTH=200 HEIGHT=140/>
 							<img src="${s}images/f.png" alt="" WIDTH=100 HEIGHT=80 style="padding-top:1.8em;"/>
-						</div>             
+						</div> -->        
 		             </div>
 	
 			<div class="box">
@@ -116,7 +116,7 @@
                   <li>Valoración</li>
                 </div>
               </div>
-             <a href="#" class="button special small" style="float:right;">Mostrar 3 mas</a>
+             <a href="#" class="button special small" style="float:right;">Mostrar más</a>
             </div>
 	
 				</div>	
