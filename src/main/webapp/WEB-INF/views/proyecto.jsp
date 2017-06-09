@@ -65,7 +65,7 @@
 										<li>
 										<h4>Lenguajes</h4>
 										<c:forEach items="${languages}" var="l" >
-			                      		<c:out value="${l.name}"></c:out>
+			                      		<a href="/language/${l.id}/1"><c:out value="${l.name}"></c:out></a>
 			                      		</c:forEach>
 										</li>
 									</ul>						

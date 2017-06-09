@@ -31,18 +31,17 @@
       <div id="content">
         <div class="line">
           <section id="main" class="container"> 
-          <div class="box" id="site">
-              <a href="../IW/index.html"> Home > </a> <a id="actual">Ofertas </a>
+         	 <div class="box" id="site">
+              <a href="/home"> Home > </a> <a id="actual">Tag </a>
 
-          </div>
+          	</div>
 
             <div class="box">
             <h2>Proyectos de este tag</h2>
               <div class="row">
                   
-                    <!--  <div class="colum1">
-                      <img src="${s}images/oferta.png" alt="" WIDTH=150 HEIGHT=150/>
-                    </div>-->
+                   
+                    
                     
                     <c:forEach items="${proyects}" var="p" >
 		   					<div class="u">
@@ -52,26 +51,29 @@
 								<ul style="list-style:none;">
 		                   		<li><a href="/proyecto/${p.id}"><c:out value="${p.title}"></c:out></a></li>
 		                   		<li><c:out value="${p.description}"></c:out></li>
+		                   		<li><a href="/proyecto/${p.id}"
+											class="button special small">Proyecto</a></li>
 		                   		</ul>
 	                   		</div>
                    		</c:forEach>
                     
             </div>
             </div>
+            
              <div class="w3-bar w3-border w3-round">
-                <div class="w3-bar">
-                  <a href="#" class="w3-bar-item w3-button"> &laquo; </a>
-                  <a href="#" class="w3-button"> 1 </a>
-                  <a href="#" class="w3-button"> 2 </a>
-                  <a href="#" class="w3-button"> 3 </a>
-                  <a href="#" class="w3-button"> 4 </a>
-                  <a href="#" class="w3-button"> &raquo; </a>
-                </div>
-              </div>
+		                    <div class="w3-bar">
+		                      <a href="/tag/${tag.id}/${pag}>=5 ? pag-4 : 1}" class="w3-bar-item w3-button"> &laquo; </a>
+		                      <a href="/tag/${tag.id}/${pag}" class="w3-button"> ${pag} </a>
+		                      <a href="/tag/${tag.id}/${(((pag)*4)+1) <= sizeProyect ? pag+1 : pag}" class="w3-button"> ${(((pag)*4)+1) <= sizeProyect ? pag+1 : '-'} </a>
+		                      <a href="/tag/${tag.id}/${(((pag+1)*4)+1) <= sizeProyect ? pag+2 : pag}#" class="w3-button">${(((pag+1)*4)+1) <= sizeProyect ? pag+2 : '-'} </a>
+		                      <a href="/tag/${tag.id}/${(((pag+2)*4)+1)<= sizeProyect ? pag+3 : pag}#" class="w3-button">${(((pag+2)*4)+1) <= sizeProyect ? pag+3 : '-'} </a>
+		                      <a href="/tag/${tag.id}/${(((pag+3)*4)+1) <= sizeProyect ? pag+4 : pag}#" class="w3-button"> &raquo; </a>
+		                    </div>
+		     </div>
           </section>
-        </div>
-      </div>
-    </section>
+       </div>
+       </div>
+       </section>
        
     <!-- FOOTER -->   
       

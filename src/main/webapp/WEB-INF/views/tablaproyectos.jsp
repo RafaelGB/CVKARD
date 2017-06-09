@@ -60,7 +60,11 @@
 												<input type="checkbox" id="${t.id}" name="checkedTag" value="${t.name}" ></input>
 												<label for="${t.id}">${t.name}</label>
 												</c:forEach></li>
-												
+												<li>Lenguajes:<c:forEach items="${lang}" var="l">
+												<input type="checkbox" id="l${l.id}" name="checkedLang" value="${l.name}" ></input>
+												<label for="l${l.id}">${l.name}</label>
+												</c:forEach></li>
+													
 												
 				                    		</ul>
 				                    	</div>
