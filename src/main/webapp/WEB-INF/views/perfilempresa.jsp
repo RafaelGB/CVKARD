@@ -15,6 +15,7 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js?ver=1.4.2"></script>
     <script src="${s}js/login.js"></script>
+    <script src="${s}tools/ckeditor/ckeditor.js"></script>
 </head>
 
 <body class="landing" style="background: url(${s}images/banner.jpg);background-repeat: no-repeat;background-attachment: fixed;background-size: 100%;">
@@ -107,17 +108,21 @@
 		             </div>
 		             <div class="box">
 		             	<h3>Descripción </h3>
-		             	<p contenteditable="true">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales porta venenatis. Aliquam tristique, purus id lacinia egestas, risus turpis iaculis eros, eget venenatis dolor magna eu ex. Nunc interdum varius urna sed lobortis. Sed feugiat, nulla sed imperdiet semper, metus risus aliquam odio, quis ullamcorper odio lorem at ante. Sed at dignissim leo. Morbi varius iaculis augue a consequat. Maecenas eget luctus purus. Sed venenatis efficitur lectus, ac posuere arcu tincidunt et. Vestibulum auctor nulla nec molestie tincidunt. Curabitur congue massa in dignissim fermentum. Mauris vel dapibus lacus, eget volutpat leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-		             	<div class="row">
-							<img src="${s}images/oficina.jpg" alt="" WIDTH=200 HEIGHT=140/>
-							<img src="${s}images/mkx.jpg" alt="" WIDTH=200 HEIGHT=140/>
-							<img src="${s}images/injustice.jpg" alt=""WIDTH=200 HEIGHT=140/>
-							<img src="${s}images/villians.jpg" alt="" WIDTH=200 HEIGHT=140/>
-							<img src="${s}images/f.png" alt="" WIDTH=100 HEIGHT=80 style="padding-top:1.8em;"/>
-						</div></br>  
-						<a href="#" class="button special small" style="float:right; margin-left:0.5em;">Guardar Cambios</a> 
-						<a href="#" class="button special small" style="float:right;">Subir Fotos</a>          
-		             </div>
+		             	<form id="description_form" action="/user/updateCard/B" method="post">
+				            <textarea name="editor1" id="editor1" rows="10" cols="80">
+				                ${user.card}
+				            </textarea>
+				            <input type="text" name="html_data" id="html_data" style="visibility:hidden;"> </input>
+				            <input name="${_csrf.parameterName}" type="hidden"
+									value="${_csrf.token}" />
+				            <script>
+				                // Replace the <textarea id="editor1"> with a CKEditor
+				                // instance, using default configuration.
+				                CKEDITOR.replace( 'editor1' );
+				            </script>
+				            <input type="button" onclick="updateCkeditor()" value="Guardar cambios">        
+				        </form> 
+					 </div>
 					</div>	
             	</section>
           	</div>        	
@@ -154,6 +159,11 @@
 	    		  $avatar.style.visibility = "hidden";
 	    		  button.innerHTML = "Activar edición";
 	    	  }
+	      }
+	      function updateCkeditor(){
+	    	  var data = CKEDITOR.instances.editor1.getData();
+	    	  document.getElementById("html_data").value = data;
+	    	  document.getElementById("description_form").submit();
 	      }
       </script>
    </body>

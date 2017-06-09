@@ -121,7 +121,7 @@
 					</div>
 					<div class="box">
 						<h3>Carta de Presentacion</h3>
-				        <form id="ckeditor_form" action="/user/updateCard" method="post">
+				        <form id="ckeditor_form" action="/user/updateCard/E" method="post">
 				            <textarea name="editor1" id="editor1" rows="10" cols="80">
 				                ${user.card}
 				            </textarea>
