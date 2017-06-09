@@ -25,7 +25,7 @@
             <div class="carousel" style="text-align: -webkit-center">
               <div id="owl-demo" class="owl-carousel owl-theme">
                <div class="item">
-                  <img src="${s}images/m.png" alt="">      
+                  <img src="${s}images/carousel.png" alt="">      
                   <div class="carousel-text">
                      <div class="line" id="line">
                         <div class="s-12 l-9">
@@ -38,7 +38,7 @@
                   </div>
                </div>
                <div class="item">
-                  <img src="${s}images/m.png" stylealt="">      
+                  <img src="${s}images/carousel.png" stylealt="">      
                   <div class="carousel-text">
                      <div class="line" id="line">
                         <div class="s-12 l-9">
@@ -51,7 +51,7 @@
                   </div>
                </div>
                <div class="item">
-                  <img src="${s}images/m.png" stylealt="">      
+                  <img src="${s}images/carousel.png" stylealt="">      
                   <div class="carousel-text">
                      <div class="line" id="line">
                         <div class="s-12 l-9">
