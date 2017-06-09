@@ -39,7 +39,6 @@
 							<!-- Si se trata de componer un mensaje muestra un formulario, sino muestra los mensajes -->
 							<c:choose>
 								<c:when test="${pag=='N'}">
-									<h3>Componer </h3>
 									<form method="post" action="/offer/createOffer">
 										<div class="row">
 											<div class="u">
@@ -77,7 +76,7 @@
 		                  <table>
 		                    <thead>
 		                      <tr>
-								<th id="selec">
+								<th style="width:10%" class="selec">
 									Marcados
 									<select onChange="checkMarcados(this)" name="markOptions" id="markOptions" style=" height: 20px;line-height: 1.5;font-size: 12px;padding: 1px 5px;border-radius: 3px;">
 			                          <option value="opciones">- Opciones -</option>
@@ -86,22 +85,22 @@
 									<button id="buttonM" style ="display:none;" type="submit">Aplicar</button>
 								</th>                  
 		                      		
-									<th id="selec">Ofertas</th>
-									<th>Description</th>
-									<th>Fecha</th>
+									<th style="width: 30%;">Ofertas</th>
+									<th style="width: 50%;">Description</th>
+									<th style="width: 20%;">Fecha</th>
 													
 		                      </tr>
 		                    </thead>
 				           <tbody>
 		                     <c:forEach items="${user.offers}" var="f" begin="${(pag-1)*10}" end="${((pag-1)*10)+9}"> 
 		                      	<tr>
-			                      	<td class="selec">
+			                      	<td style="width: 10%" class="selec">
 			                          <input type="checkbox" id="copy${f.id}" name="checked" value="${f.id}"></input>
 			                          <label for="copy${f.id}"></label>
    			                        </td>
-   			                        <td><a href="/editOffer/${f.id}">${f.title}</a></td>
-			                        <td><a href="/editOffer/${f.id}">${f.description}</a></td>
-		                            <td>${f.date}</td> 
+   			                        <td style="width: 30%"><a href="/editOffer/${f.id}">${f.title}</a></td>
+			                        <td style="width: 50%"><a href="/editOffer/${f.id}">${f.description}</a></td>
+		                            <td style="width: 20%">${f.date}</td> 
 		                      	</tr>
 		                     </c:forEach>
 		                    </tbody>
