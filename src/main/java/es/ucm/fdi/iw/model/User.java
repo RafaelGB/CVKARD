@@ -50,7 +50,6 @@ public class User {
 	private List<Offer> offers;//solo bussines
 	private List<ScoreProyect> myScoreProyects;//solo bussines
 
-
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
