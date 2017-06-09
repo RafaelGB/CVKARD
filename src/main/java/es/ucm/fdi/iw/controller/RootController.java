@@ -59,6 +59,15 @@ public class RootController {
 		                            .setParameter("email", principal.getName())
 		                            .getSingleResult();
 				session.setAttribute("user", u);
+				
+				List b = new ArrayList<User>(); 
+				b = entityManager.createQuery("select b from User b where roles = :roles")
+						.setParameter("roles", "USER,BUSSINES").getResultList();
+				
+			
+				log.info("Coge bien la lista" + b.size());
+				session.setAttribute("bussines", b);
+				
 			} catch (Exception e) {
 				// TODO: handle exception
 				System.err.println(e);

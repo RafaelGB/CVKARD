@@ -80,85 +80,29 @@
 						</div>
 						<div class="row">
 
-							<c:forEach items="${user.offers}" var="f" begin="0" end="3">
+							<c:forEach items="${bussines}" var="f" begin="0" end="3">
 
 								<div class="u">
 									<div class="colum1">
-										<img src="/offer/photo/${f.id}" alt="" WIDTH=150 HEIGHT=150 />
+										<img src="/user/photo/${f.id}" alt="" WIDTH=150 HEIGHT=150 />
 									</div>
 									<ul style="list-style: none;">
-										<li>${f.title}</li>
-										<li>${f.description}</li>
-										<li>${user.name}</li>
+										<li>${f.name}</li>
+										<li>${f.email}</li>
 										</br>
-										<li><a href="/ofertas/ofertavista/${f.id}"
-											class="button special small">Oferta</a></li>
+										<li><a href="empresavista/${f.id}"
+											class="button special small">Empresa</a></li>
 								</div>
 							</c:forEach>
 
 						</div>
 
 					</div>
-					<a href="/ofertas/1" class="button special small"
-						style="float: none">Todas las ofertas</a>
+					<a href="/empresas/1" class="button special small"
+						style="float: none">Todas las Empresas</a>
 				</section>
-				<section id="main" class="container">
-					<div class="box">
-						<div class="line">
-							<h2>EMPRESAS MEJOR VALORADAS</h2>
-						</div>
-						<div class="row">
-							<div class="u">
-								<div class="colum1">
-									<img src="${s}images/empresa5.jpeg" alt="" WIDTH=150 HEIGHT=150 />
-								</div>
-								<ul style="list-style: none;">
-									<li>Empresa</li>
-									<li>Breve descripcion</li>
-									<li>Valoración</li>
-									</br>
-									<li><a href="empresavista" class="button special small">Empresa</a></li>
-							</div>
-							<div class="u">
-								<div class="colum1">
-									<img src="${s}images/empresa2.png" alt="" WIDTH=150 HEIGHT=150 />
-								</div>
-								<ul style="list-style: none;">
-									<li>Empresa</li>
-									<li>Breve descripcion</li>
-									<li>Valoración</li>
-									</br>
-									<li><a href="empresavista" class="button special small">Empresa</a></li>
-							</div>
-							<div class="u">
-								<div class="colum1">
-									<img src="${s}images/empresa3.jpeg" alt="" WIDTH=150 HEIGHT=150 />
-								</div>
-								<ul style="list-style: none;">
-									<li>Empresa</li>
-									<li>Breve descripcion</li>
-									<li>Valoración</li>
-									</br>
-									<li><a href="#" class="button special small">Empresa</a></li>
-							</div>
-							<div class="u">
-								<div class="colum1">
-									<img src="${s}images/empresa6.png" alt="" WIDTH=150 HEIGHT=150 />
-								</div>
-								<ul style="list-style: none;">
-									<li>Empresa</li>
-									<li>Breve descripcion</li>
-									<li>Valoración</li>
-									</br>
-									<li><a href="empresavista" class="button special small">Empresa</a></li>
-							</div>
-						</div>
-					</div>
 
 
-					<a href="empresas" class="button special small" style="float: none">Todas
-						las empresas</a>
-				</section>
 			</div>
 
 			<div class="line">
