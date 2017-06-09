@@ -36,6 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
 import es.ucm.fdi.iw.LocalData;
+import es.ucm.fdi.iw.model.Language;
 import es.ucm.fdi.iw.model.Proyect;
 import es.ucm.fdi.iw.model.ScoreProyect;
 import es.ucm.fdi.iw.model.Tag;
@@ -184,7 +185,8 @@ public class ProyectController {
     		@RequestParam("title") String title,
 			@RequestParam("description") String description,
 			@RequestParam("newDate") String date,
-    		@RequestParam("checkedTag") List<String> checked){
+    		@RequestParam("checkedTag") List<String> checked,
+    		@RequestParam("checkedLang") List<String> checked2){
 		
 		String url = "/tablaproyectos/V/1";
 		try{
@@ -192,6 +194,7 @@ public class ProyectController {
 		u = entityManager.find(User.class, u.getId());//refresh de la base de datos
 		log.info("Proyecto creado por "+u.getName());
 		Iterator<String> it = checked.iterator();
+		Iterator<String> it2 = checked2.iterator();
 		Proyect p = new Proyect();
 		p.setTitle(title);
 		p.setDescription(description);
@@ -204,10 +207,21 @@ public class ProyectController {
                     .getSingleResult();
 			
 			listTags.add(i,t);
-			log.info("Proyecto tag "+t.getName());
 			i++;
 			}
 		p.setTags(listTags);
+		
+		List<Language> listLang = new ArrayList<Language>();
+		i=0;
+		while(it2.hasNext()) {
+			Language l = entityManager.createQuery("from Language where name = :name", Language.class)
+                    .setParameter("name", it2.next())
+                    .getSingleResult();
+			
+			listLang.add(i,l);
+			i++;
+			}
+		p.setLanguages(listLang);
 		//f.setImg(img);
 		List<User> users= Arrays.asList(u);
 		p.setMembers(users);

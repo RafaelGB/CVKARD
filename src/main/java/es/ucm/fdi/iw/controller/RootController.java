@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import es.ucm.fdi.iw.model.Language;
 import es.ucm.fdi.iw.model.Message;
 import es.ucm.fdi.iw.model.Offer;
 import es.ucm.fdi.iw.model.Proyect;
@@ -317,6 +318,9 @@ public class RootController {
 			List<Tag> t = entityManager.createQuery("from Tag ", Tag.class).getResultList();
 			
 	        model.addAttribute("tags",t);
+	        List<Language> l = entityManager.createQuery("from Language ", Language.class).getResultList();
+			
+	        model.addAttribute("lang",l);
 			
 			exit="tablaproyectos";
 		}
@@ -489,13 +493,37 @@ public class RootController {
 		log.info("refresh de usuario."+ u.getId());
 		Tag t= entityManager.find(Tag.class, id);
 		//Solo proyectos por ahora
-		model.addAttribute("size",t.getProyects().size());
+		model.addAttribute("sizeProyect",t.getProyects().size());
 		model.addAttribute("pag",pag);
 		model.addAttribute("tag",t);
 		
 		session.setAttribute("user", u);
 		model.addAttribute("proyects", t.getProyects());
 		exit="tag";
+		
+		
+		
+		return exit;
+	}
+	
+	@GetMapping("/language/{id}/{pag}")
+	@Transactional
+	public String language(Model model,@PathVariable("id") Long id,@PathVariable("pag") String pag, HttpSession session) {
+		String exit="home";
+		
+		
+		User u = (User) session.getAttribute("user");
+		u= entityManager.find(User.class, u.getId());
+		log.info("refresh de usuario."+ u.getId());
+		Language l= entityManager.find(Language.class, id);
+		//Solo proyectos por ahora
+		model.addAttribute("size",l.getProyects().size());
+		model.addAttribute("pag",pag);
+		model.addAttribute("lang",l);
+		
+		session.setAttribute("user", u);
+		model.addAttribute("proyects", l.getProyects());
+		exit="language";
 		
 		
 		
@@ -514,8 +542,7 @@ public class RootController {
 
                
 		
-		//Solo proyectos por ahora
-		model.addAttribute("sizeProyect",p.size());
+		model.addAttribute("size",p.size());
 		model.addAttribute("pag",pag);
 		model.addAttribute("proyects",p);
 		
