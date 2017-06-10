@@ -486,21 +486,21 @@ public class RootController {
 		
 		try {
 			log.info("pagina de ofertas : "+pag);
-				if(pag.equals("1")){
-					User u = (User) session.getAttribute("user");
-					log.info("carga el usuario : "+u.getName());
-					u = entityManager.find(User.class, u.getId());//refresh de la base de datos
-					log.info("refresh de usuario lanzado.");
-					model.addAttribute("size",u.getOffers().size());
-					log.info("Tamaño."+u.getOffers().size());
-					session.setAttribute("user", u);	
-					model.addAttribute("pag",pag);
-					List<Offer> o = entityManager.createQuery("select o  from Offer o left join o.assessment a group by o order by AVG(a.punctuation) DESC ", Offer.class).getResultList();
-               
-					model.addAttribute("offers", o);
+
+			User u = (User) session.getAttribute("user");
+			log.info("carga el usuario : "+u.getName());
+			u = entityManager.find(User.class, u.getId());//refresh de la base de datos
+			log.info("refresh de usuario lanzado.");
+			
+			log.info("Tamaño."+u.getOffers().size());
+			session.setAttribute("user", u);	
+			model.addAttribute("pag",pag);
+			List<Offer> o = entityManager.createQuery("select o  from Offer o left join o.assessment a group by o order by AVG(a.punctuation) DESC ", Offer.class).getResultList();
+			model.addAttribute("size",o.size());
+			model.addAttribute("offers", o);
 					
-				}
-				exit = "ofertas";
+				
+			exit = "ofertas";
 			} catch (NoResultException nre) {
 				log.error("fallo al encontrar el usuario para actualizar");
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
