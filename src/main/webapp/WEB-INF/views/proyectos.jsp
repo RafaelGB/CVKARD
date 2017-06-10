@@ -55,18 +55,19 @@
 	                   		</div>
                    		</c:forEach>
                     
+            	</div>
+	            	<div class="w3-bar w3-border w3-round">
+		                <div class="w3-bar">
+		                  <a href="/proyectos/${pag>=5 ? pag-4 : 1}" class="w3-bar-item w3-button"> &laquo; </a>
+		                  <a href="/proyectos/${pag}" class="w3-button"> ${pag} </a>
+		                  <a href="/proyectos/${(((pag)*4)+1) <= size ? pag+1 : pag}" class="w3-button"> ${(((pag)*4)+1) <= size ? pag+1 : '-'} </a>
+		                  <a href="/proyectos/${(((pag+1)*4)+1) <= size ? pag+2 : pag}#" class="w3-button">${(((pag+1)*4)+1) <= size ? pag+2 : '-'} </a>
+		                  <a href="/proyectos/${(((pag+2)*4)+1)<= size ? pag+3 : pag}#" class="w3-button">${(((pag+2)*4)+1) <= size ? pag+3 : '-'} </a>
+		                  <a href="/proyectos/${(((pag+3)*4)+1) <= size ? pag+4 : pag}#" class="w3-button"> &raquo; </a>
+		              	</div>
+		     	</div>          
             </div>
-            </div>
-             <div class="w3-bar w3-border w3-round">
-		                    <div class="w3-bar">
-		                      <a href="/proyectos/${pag>=5 ? pag-4 : 1}" class="w3-bar-item w3-button"> &laquo; </a>
-		                      <a href="/proyectos/${pag}" class="w3-button"> ${pag} </a>
-		                      <a href="/proyectos/${(((pag)*4)+1) <= size ? pag+1 : pag}" class="w3-button"> ${(((pag)*4)+1) <= size ? pag+1 : '-'} </a>
-		                      <a href="/proyectos/${(((pag+1)*4)+1) <= size ? pag+2 : pag}#" class="w3-button">${(((pag+1)*4)+1) <= size ? pag+2 : '-'} </a>
-		                      <a href="/proyectos/${(((pag+2)*4)+1)<= size ? pag+3 : pag}#" class="w3-button">${(((pag+2)*4)+1) <= size ? pag+3 : '-'} </a>
-		                      <a href="/proyectos/${(((pag+3)*4)+1) <= size ? pag+4 : pag}#" class="w3-button"> &raquo; </a>
-		                    </div>
-		     </div>
+
           </section>
         </div>
       </div>
