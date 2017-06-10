@@ -27,7 +27,7 @@
 	<section>
 		<div id="head">
 			<div class="line">
-				<h1>${offer.title}</h1>
+				<h1>${theOffer.title}</h1>
 			</div>
 		</div>
 		<div id="content">
@@ -37,16 +37,16 @@
 						<div class="row">
 							<div class="u">
 								<div class="colum1">
-									<img src="/offer/photo/${offer.id}" alt="" width="200"
+									<img src="/offer/photo/${theOffer.id}" alt="" width="200"
 										height="150" />
 								</div>
 							</div>
 							<div class="u">
 								<div class="colum1">
 									<ul style="list-style: none;">
-										<li><h2>${user.name}</h2></li>
+										<li>por: <h2>${theOffer.offerer.name}</h2></li>
 
-										<li>${user.email}</li>
+										<li>contacto: ${theOffer.offerer.email}</li>
 									</ul>
 								</div>
 							</div>
@@ -63,10 +63,11 @@
 													<a href="#" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
 												</div>
 											</h4></li>
-										<li></br>
-											<h4>Tags</h4> <a href="" class="w3-button">Videojuegos</a> ;
-											<a href="" class="w3-button">NetherReam</a> ; <a href=""
-											class="w3-button">Accion</a> ; <a href="" class="w3-button">Plataformas</a>
+										<li><br/>
+											<h4>Tags</h4>
+											<c:forEach items="${theOffer.tags}" var="f" begin="0" end="5">
+												<a href="" class="w3-button">${f.name}</a>
+											</c:forEach>
 										</li>
 									</ul>
 								</div>
@@ -77,8 +78,8 @@
 						<div class="row">
 							<div class="u3">
 								<div class="colum1">
-									<h3>Descripción Oferta</h3>
-									<p>${offer.description}</p>
+									<h3>Descripción</h3>
+									<p>${theOffer.description}</p>
 								</div>
 							</div>
 
@@ -91,80 +92,8 @@
 								src="${s}images/f.png" alt="" WIDTH=100 HEIGHT=80
 								style="padding-top: 1.8em;" />
 						</div> -->
-					</div>
-
-					<div class="box">
-						<section>
-							<h3>Solicitar oferta</h3>
-							<form method="post" action="#">
-								<div class="row">
-									<div class="u">
-										<div class="column1">
-											<ul style="list-style: none;">
-												<li><input type="text" name="name" id="name" value=""
-													placeholder="Name"></li>
-												</br>
-												<li><input type="text" name="mobile" id="mobile"
-													value="" placeholder="Mobile"></li>
-												</br>
-												<li><input type="checkbox" id="copy" name="copy">
-													<label for="copy">Email me a copy of this message</label></li>
-											</ul>
-										</div>
-									</div>
-									<div class="u">
-										<div class="column1">
-											<ul style="list-style: none;">
-												<li><input type="email" name="email" id="email"
-													value="" placeholder="Email"></li>
-												</br>
-												<li>
-													<div class="select-wrapper">
-														<select name="category" id="category">
-															<option value="">- Disponibilidad -</option>
-															<option value="1">Tiempo completo</option>
-															<option value="1">Tarde</option>
-															<option value="1">Mañana</option>
-															<option value="1">Otra</option>
-														</select>
-													</div> </br>
-												</li>
-												<li><input type="checkbox" id="human" name="human"
-													checked=""> <label for="human">I am a human
-														and not a robot</label></li>
-											</ul>
-										</div>
-									</div>
-									<div class="u2">
-										<div class="column1">
-											<ul style="list-style: none;">
-												<li><textarea name="message" id="message"
-														placeholder="Enter your message" rows="6"></textarea></li>
-
-											</ul>
-										</div>
-									</div>
-
-								</div>
-								<div class="row">
-									<div class="u2">
-										<div class="column1">
-											<input type="submit" value="Send Email">
-										</div>
-									</div>
-
-									<div class="u2">
-										<div class="column1">
-											<input type="reset" value="Clear">
-										</div>
-									</div>
-								</div>
-							</form>
-						</section>
-					</div>
-
-
-
+					</div>	
+					<a href="/buzon/N/${theOffer.offerer.email}" class="button special"><h3>Solicitar oferta</h3></a>				
 				</section>
 			</div>
 

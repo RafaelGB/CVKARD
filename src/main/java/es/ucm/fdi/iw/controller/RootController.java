@@ -400,13 +400,18 @@ public class RootController {
 	public String ofertavista(HttpSession session, Model model, @PathVariable("id") long id) {
 		String url = "home";
 
-		Offer f = entityManager.find(Offer.class, id);// refresh de la base de
-														// datos
-		User u = (User) session.getAttribute("user");
-		// si está habilitado asignamos al modelo el mensaje
-		model.addAttribute("offer", f);
-		url = "ofertavista";
+		
+		try {
+			Offer f = entityManager.find(Offer.class, id);// refresh de la base de
+			// datos
+			model.addAttribute("theOffer", f);
+			log.info("oferta del usuario con email : " + f.getOfferer().getEmail());
+			log.info("numero te tags en la oferta : " + f.getTags().size());
+			url = "ofertavista";
 
+		} catch (NoResultException nre) {
+			log.error("fallo al encontrar el usuario para actualizar");
+		}
 		return url;
 	}
 
