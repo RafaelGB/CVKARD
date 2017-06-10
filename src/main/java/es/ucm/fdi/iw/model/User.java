@@ -104,6 +104,7 @@ public class User {
 		this.card = card;
 	}
 	
+	@Column(unique=true)
 	public String getNick() {
 		return nick;
 	}

@@ -33,16 +33,16 @@
 						<div class="row">
 							<div class="u">
 								<div class="colum1">
-									<img src="/user/photo/${user.id}" alt="" width="200"
+									<img src="/user/photo/${TheBussines.id}" alt="" width="200"
 										height="150" />
 								</div>
 							</div>
 							<div class="u">
 								<div class="colum1">
 									<ul style="list-style: none;">
-										<li><h2>${user.name}</h2></li>
-										<li>${user.address}</li>
-										<li>${user.email}</li>
+										<li><h2>${TheBussines.name}</h2></li>
+										<li>${TheBussines.address}</li>
+										<li>${TheBussines.email}</li>
 									</ul>
 								</div>
 							</div>
@@ -67,7 +67,7 @@
 					</div>
 					<div class="box">
 						<h3>Carta de Presentación</h3>
-						<p>${user.card}</p>
+						<p>${TheBussines.card}</p>
 						<!--  <div class="row">
 							<img src="${s}images/oficina.jpg" alt="" WIDTH=200 HEIGHT=140/>
 							<img src="${s}images/mkx.jpg" alt="" WIDTH=200 HEIGHT=140/>
@@ -81,8 +81,8 @@
 						<h3>OFERTAS</h3>
 						<div class="row">
 
-							<c:forEach items="${user.offers}" var="f" begin="${(pag-1)*10}"
-								end="${((pag-1)*10)+9}">
+							<c:forEach items="${TheBussines.offers}" var="f" begin="${(pag-1)*4}"
+								end="${((pag-1)*4)+3}">
 
 								<div class="u">
 									<div class="colum1">
@@ -91,7 +91,7 @@
 									<ul style="list-style: none;">
 										<li>${f.title}</li>
 										<li>${f.description}</li>
-										<li>${user.name}</li>
+										<li>${TheBussines.name}</li>
 										</br>
 										<li><a href="/ofertas/ofertavista/${f.id}"
 											class="button special small">Oferta</a></li>
@@ -104,20 +104,20 @@
 						<div class="w3-bar w3-border w3-round">
 								<div class="w3-bar">
 									<a
-										href="/empresas/empresavista/${user.id}/${pag>=5 ? pag-4 : 1}"
+										href="/empresas/empresavista/${TheBussines.id}/${pag>=5 ? pag-4 : 1}"
 										class="w3-bar-item w3-button"> &laquo; </a> <a
-										href="/empresas/empresavista/${user.id}/${pag}"
+										href="/empresas/empresavista/${TheBussines.id}/${pag}"
 										class="w3-button"> ${pag} </a> <a
-										href="/empresas/empresavista/${user.id}/${(((pag)*10)+1) <= size ? pag+1 : pag}"
-										class="w3-button"> ${(((pag)*10)+1) <= size ? pag+1 : '-'}
+										href="/empresas/empresavista/${TheBussines.id}/${(((pag)*4)+1) <= size ? pag+1 : pag}"
+										class="w3-button"> ${(((pag)*4)+1) <= size ? pag+1 : '-'}
 									</a> <a
-										href="/empresas/empresavista/${user.id}/${(((pag+1)*10)+1) <= size ? pag+2 : pag}#"
-										class="w3-button">${(((pag+1)*10)+1) <= size ? pag+2 : '-'}
+										href="/empresas/empresavista/${TheBussines.id}/${(((pag+1)*4)+1) <= size ? pag+2 : pag}#"
+										class="w3-button">${(((pag+1)*4)+1) <= size ? pag+2 : '-'}
 									</a> <a
-										href="//empresas/empresavista/${user.id}/${(((pag+2)*10)+1)<= size ? pag+3 : pag}#"
-										class="w3-button">${(((pag+2)*10)+1) <= size ? pag+3 : '-'}
+										href="//empresas/empresavista/${TheBussines.id}/${(((pag+2)*4)+1)<= size ? pag+3 : pag}#"
+										class="w3-button">${(((pag+2)*4)+1) <= size ? pag+3 : '-'}
 									</a> <a
-										href="/empresas/empresavista/${user.id}/${(((pag+3)*10)+1) <= size ? pag+4 : pag}#"
+										href="/empresas/empresavista/${TheBussines.id}/${(((pag+3)*4)+1) <= size ? pag+4 : pag}#"
 										class="w3-button"> &raquo; </a>
 								</div>
 							</div>
