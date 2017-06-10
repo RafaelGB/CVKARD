@@ -19,7 +19,13 @@
                    <ul class="right top-ul chevron" >
                       <li><a href="/home">Home</a>
                       </li>
-                      <li><a href="/curriculum/${user.nick}">Porfolio</a>
+                      <li>
+   						<sec:authorize access="hasRole('EMPLOYEE')">
+							<a href="/curriculum/${user.nick}">Porfolio</a>
+						</sec:authorize>
+						<sec:authorize access="hasRole('BUSSINES')">
+							<a href="/empresas/empresavista/${user.id}/1">Perfil</a>
+						</sec:authorize>
                       </li>
                       <li><a href="/proyectos/1">Proyectos</a>
                       </li>
