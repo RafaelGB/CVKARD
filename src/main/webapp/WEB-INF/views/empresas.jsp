@@ -53,7 +53,7 @@
 										<li>${f.name}</li>
 										<li>${f.email}</li>
 										</br>
-										<li><a href="/empresas/empresavista/${f.id}"
+										<li><a href="/empresas/empresavista/${f.id}/${pag}"
 											class="button special small">Empresa</a></li>
 								</div>
 							</c:forEach>
