@@ -36,8 +36,8 @@
  
           <section id="main" class="container"> 
          <div class="tab">
-   			<button  style="font-size: 20px;" class="tablinks" onclick="changeForm('Usuario')">USUARIO</button>                                            
-  			<button  style="font-size: 20px;" class="tablinks" onclick="changeForm('Empresa')">EMPRESA</button>
+   			<button  class="button special small" style="font-size: 20px;" class="tablinks" onclick="changeForm('Usuario')">USUARIO</button>                                            
+  			<button  class="button special small" style="font-size: 20px;" class="tablinks" onclick="changeForm('Empresa')">EMPRESA</button>
 		</div>
               <div id="employee" class="tabcontent">
               	<div class="box">
@@ -48,7 +48,9 @@
 		                    		<ul style="list-style:none;">
 		                    			<li><input type="text" name="nameE" id="nameE"  placeholder="Nombre"></li></br>
 		                    			<li><input type="text" class="form-control" name="nickE" id="nickE" placeholder="Indique su nick"/></li></br>
-		                    			<li><input type="password" class="form-control" name="passE" id="passE"  placeholder="Password"/></li></br>                 		                    		
+		                    			<li><input type="password" class="form-control" name="passE" id="passE"  placeholder="Password"/></li></br> 
+		                    			<li><div id="RecaptchaField1"></div></li>
+		                    			                		                    		
 		                    		</ul>
 		                    	</div>
 		                    </div>
@@ -65,8 +67,7 @@
 		                    		</ul>
 		                    	</div>
 		                    </div>		                   		                    
-		                </div>	
-		                <div id="RecaptchaField1"></div>	   
+		                </div>	   
                     </form>		               
               	</div>
               </div>
@@ -79,6 +80,8 @@
 			                    		<ul style="list-style:none;">
 			                    			<li><input type="text" name="nameB" id="nameB"  placeholder="Business Name"></li></br>
 			                    			<li><input type="password" class="form-control" name="passB" id="passB"  placeholder="Password"/></li></br>
+			                    			<li><div id="RecaptchaField2"></div></li>
+			                    			
 			                    		</ul>
 			                    	</div>
 			                    </div>
@@ -95,7 +98,6 @@
 			                    	</div>
 			                    </div>		                   		                    
 			                </div>	
-			                <div id="RecaptchaField2"></div>
 			            </form>		               
 	              </div>
               </div>
