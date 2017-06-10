@@ -45,6 +45,7 @@
 		                	<div class="u2">		             
 			                    <div class="colum1">
 			                    	<ul style="list-style:none;">
+				                   		<sec:authorize access="hasRole('BUSSINES')">
 				                   		<li><h4> Puntuacion: </h4>
 										<div class="ec-stars-wrapper">
 										<!-- En el security poner en usuario /puntuaProyect/** -->
@@ -55,6 +56,10 @@
 											<a href="/proyect/puntuaProyect/${proyect.id}/5" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
 										</div>
 										
+										
+										</li>
+										</sec:authorize>
+										<li><h4> Puntuacion media:<c:out value="${media}"></c:out></h4>
 										</li>
 										<li>
 										<h4>Tags</h4>
