@@ -167,7 +167,13 @@ public class RootController {
 		model.addAttribute("participante", p.getMembers());
 		model.addAttribute("tags",p.getTags());
 		model.addAttribute("languages",p.getLanguages());
-		
+		double media=0;
+		if(p.getAssessment().size()>0)
+		{
+			media= (double) entityManager.createQuery("select avg(a.punctuation) from Proyect p inner join p.assessment a  where p.id = :id ").setParameter("id",id).getSingleResult();
+			
+		}
+		model.addAttribute("media",media);
 		
 		
 		return "proyecto";
@@ -429,6 +435,13 @@ public class RootController {
 			model.addAttribute("theOffer", f);
 			log.info("oferta del usuario con email : " + f.getOfferer().getEmail());
 			log.info("numero te tags en la oferta : " + f.getTags().size());
+			double media=0;
+			if(f.getAssessment().size()>0)
+			{
+				media= (double) entityManager.createQuery("select avg(a.punctuation) from Offer o inner join o.assessment a  where o.id = :id ").setParameter("id",id).getSingleResult();
+				
+			}
+			model.addAttribute("media",media);
 			url = "ofertavista";
 
 		} catch (NoResultException nre) {
@@ -482,7 +495,7 @@ public class RootController {
 					log.info("Tamaño."+u.getOffers().size());
 					session.setAttribute("user", u);	
 					model.addAttribute("pag",pag);
-					List<Offer> o = entityManager.createQuery("select o from Offer o  order by o.id DESC ", Offer.class).getResultList();
+					List<Offer> o = entityManager.createQuery("select o  from Offer o left join o.assessment a group by o order by AVG(a.punctuation) DESC ", Offer.class).getResultList();
                
 					model.addAttribute("offers", o);
 					
@@ -592,7 +605,7 @@ public class RootController {
 		u= entityManager.find(User.class, u.getId());
 		log.info("refresh de usuario."+ u.getId());
 		//List<Proyect> p = entityManager.createQuery("select p, AVG(p.assessment.punctuation) as score from Proyect p inner join p.assessment order by score DESC ", Proyect.class).getResultList();
-		List<Proyect> p = entityManager.createQuery("select p from Proyect p  order by p.id DESC ", Proyect.class).getResultList();
+		List<Proyect> p = entityManager.createQuery("select p  from Proyect p left join p.assessment a group by p order by AVG(a.punctuation) DESC ", Proyect.class).getResultList();
                
 		
 		model.addAttribute("size",p.size());
