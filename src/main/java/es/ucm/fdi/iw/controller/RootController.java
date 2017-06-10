@@ -75,6 +75,18 @@ public class RootController {
 				System.err.println(e);
 			}
 		}
+		List<Offer> o = new ArrayList<Offer>();
+ 		o = entityManager.createQuery("select o from Offer o ORDER BY o.date")
+ 				.setMaxResults(4)
+ 				.getResultList();
+		
+ 		List<User> b = new ArrayList<User>();
+ 		b = entityManager.createQuery("select b from User b where roles = :roles")
+ 				.setParameter("roles", "USER,BUSSINES").getResultList();
+ 
+ 		log.info("Coge bien la lista" + b.size());
+ 		session.setAttribute("offerList", o);
+ 		session.setAttribute("bussines", b);
 		return "home";
 	}
 	/**
@@ -425,6 +437,32 @@ public class RootController {
 		}
 		return url;
 	}
+	
+	/**
+	 * Empresavista - vista sobre la información de un negocio y sus referencias
+ 	 */
+  	
+ 	@GetMapping("/empresas/empresavista/{id}/{pag}")
+ 	@Transactional
+ 	public String empresavista(HttpSession session, Model model,
+ 			@PathVariable("id") long id,
+ 			@PathVariable("pag") String pag) {
+ 		String url = "home";
+ 		User u;
+ 		log.info("pagina de ofertas : " + pag);
+ 		
+ 		u = entityManager.find(User.class, id);// refresh de la												// base de datos
+ 		log.info("refresh de usuario lanzado.");
+ 		model.addAttribute("size", u.getOffers().size());
+ 		log.info("Tamaño." + u.getOffers().size());
+ 		model.addAttribute("pag", pag);
+ 		model.addAttribute("offers", u.getOffers());
+ 		model.addAttribute("TheBussines", u);
+ 
+ 		url = "empresavista";
+ 
+ 		return url;
+ 	}
 
 	
 	@GetMapping("/ofertas/{pag}")
@@ -465,34 +503,33 @@ public class RootController {
 	
 	@GetMapping("/empresas/{pag}")
  	@Transactional
- 	public String empresas(HttpSession session,HttpServletResponse response,
- 			@PathVariable("pag") String pag,
+ 	public String empresas(HttpSession session, HttpServletResponse response, @PathVariable("pag") String pag,
  			Model model) {
  		String exit = "home";
- 		
+ 
  		try {
- 			log.info("pagina de empresas : "+pag);
- 				if(pag.equals("1")){
- 					List u = new ArrayList<User>(); 
- 					u = entityManager.createQuery("select u from User u where roles = :roles")
- 							.setParameter("roles", "USER,BUSSINES").getResultList();
- 					
- 				
- 					log.info("Coge bien la lista" + u.size());
- 					model.addAttribute("size",u.size());
- 					model.addAttribute("bussines", u);
- 					
- 				}
- 				exit = "empresas";
- 			} catch (NoResultException nre) {
- 				log.error("fallo al encontrar el usuario para actualizar");
- 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
- 				
- 			}catch (EntityNotFoundException nre) {
- 				
- 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);		
+ 			log.info("pagina de empresas : " + pag);
+ 			if (pag.equals("1")) {
+ 				List u = new ArrayList<User>();
+ 				u = entityManager.createQuery("select u from User u where roles = :roles")
+ 						.setParameter("roles", "USER,BUSSINES").getResultList();
+ 
+ 				log.info("Coge bien la lista" + u.size());
+ 				model.addAttribute("size", u.size());
+ 				model.addAttribute("bussines", u);
+ 				model.addAttribute("pag", pag);
+ 
  			}
- 		
+ 			exit = "empresas";
+ 		} catch (NoResultException nre) {
+ 			log.error("fallo al encontrar el usuario para actualizar");
+ 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+ 
+ 		} catch (EntityNotFoundException nre) {
+ 
+ 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+ 		}
+ 
  		return exit;
  	}
 	
