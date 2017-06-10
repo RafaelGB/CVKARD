@@ -445,7 +445,7 @@ public class RootController {
 					log.info("Tamaño."+u.getOffers().size());
 					session.setAttribute("user", u);	
 					model.addAttribute("pag",pag);
-					List<Offer> o = entityManager.createQuery("select o from Offer o  order by p.id DESC ", Offer.class).getResultList();
+					List<Offer> o = entityManager.createQuery("select o from Offer o  order by o.id DESC ", Offer.class).getResultList();
                
 					model.addAttribute("offers", o);
 					
