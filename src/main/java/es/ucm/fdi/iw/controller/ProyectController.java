@@ -121,13 +121,13 @@ public class ProyectController {
 			@RequestParam("name-form") String title,
 			@RequestParam("date-form") String date,
 			@PathVariable("id") long id,
-    		@RequestParam("checked") List<String> checked,
+    		@RequestParam("checkedTag") List<String> checked1,
 			HttpServletRequest request, HttpServletResponse response, 
 			Model model, HttpSession session){
 		log.info("dentro del update\n name = "+title+"\n date = "+date+"\n");
 		try {
 			Proyect p = entityManager.find(Proyect.class, id);
-			Iterator<String> it = checked.iterator();
+			Iterator<String> it = checked1.iterator();
 			p.setTitle(title);
 			p.setDate(date);
 			List<Tag> listTags = new ArrayList<Tag>();

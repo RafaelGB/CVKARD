@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -35,6 +36,10 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import es.ucm.fdi.iw.LocalData;
 import es.ucm.fdi.iw.model.Offer;
+import es.ucm.fdi.iw.model.Proyect;
+import es.ucm.fdi.iw.model.ScoreOffer;
+import es.ucm.fdi.iw.model.ScoreProyect;
+import es.ucm.fdi.iw.model.Tag;
 import es.ucm.fdi.iw.model.User;
 
 @Controller	
@@ -54,7 +59,8 @@ private LocalData localData;
     public RedirectView createOffer(HttpSession session,HttpServletResponse response,Model model,
     		@RequestParam("title") String title,
 			@RequestParam("description") String description,
-			@RequestParam("date") String date
+			@RequestParam("date") String date,
+    		@RequestParam("checkedTag") List<String> checked
 			){
 		//@RequestParam("img") String img
 		String url = "/tablaofertas/1";
@@ -62,12 +68,25 @@ private LocalData localData;
 		User u = (User) session.getAttribute("user");
 		u = entityManager.find(User.class, u.getId());//refresh de la base de datos
 		log.info("Oferta creada por "+u.getName());
+		Iterator<String> it = checked.iterator();
 		Offer f = new Offer();
 		f.setTitle(title);
 		f.setDescription(description);
 		f.setDate(date);
+		List<Tag> listTags = new ArrayList<Tag>();
+		int i=0;
+		while(it.hasNext()) {
+			Tag t = entityManager.createQuery("from Tag where name = :name", Tag.class)
+                    .setParameter("name", it.next())
+                    .getSingleResult();
+			
+			listTags.add(i,t);
+			i++;
+			}
+		f.setTags(listTags);
 		//f.setImg(img);
 		f.setOfferer(u);
+		u.getOffers().add(f);
 		entityManager.persist(f);//si se crea un objeto nuevo
 		session.setAttribute("user", u);
 		response.setStatus(HttpServletResponse.SC_OK);
@@ -210,5 +229,61 @@ private LocalData localData;
 	    	log.info("Error retrieving file: " + f + " -- " + ioe.getMessage());
 	    }
 	}
+	
+	@RequestMapping(value="/puntuaOffer/{id}/{puntuacion}", method=RequestMethod.GET)
+	@ResponseBody
+	@Transactional // needed to allow DB change
+    public RedirectView puntuaOffer(HttpSession session,HttpServletResponse response,Model model,
+    		@PathVariable("id") Long id,
+    		@PathVariable("puntuacion") int punt){
+		String desc = "";
+		try{
+		User u = (User) session.getAttribute("user");
+		Offer o = entityManager.find(Offer.class, id);
+		//u = entityManager.find(User.class, u.getId());//refresh de la base de datos
+		
+		List<ScoreOffer> scores = u.getMyScoreOffers();
+		log.info("Hay"+scores.size());
+		Iterator<ScoreOffer> it = scores.iterator();
+		String existe="false";
+		while(it.hasNext() && existe.equals("false"))
+		{
+			
+			
+			if(it.next().getPunctuated().getId()==o.getId())
+			{
+			
+				existe="true";
+			}
+				
+		}
+			if(existe.equals("false")){
+		
+			ScoreOffer score=new ScoreOffer();
+			score.setPunctuated(o);
+			score.setPunctuation(punt);
+			score.setPunctuator(u);
+			u.getMyScoreOffers().add(score);
+			o.getAssessment().add(score);
+			entityManager.persist(score);//si se crea un objeto nuevo
+			session.setAttribute("user", u);
+			response.setStatus(HttpServletResponse.SC_OK);
+			desc="puntuado con exito";
+			}
+			else{
+				desc="Ya has puntuado este proyecto";
+			}
+			
+		
+			
+		
+		
+		}catch(NoResultException nre){
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			log.error("Algo salio mal aplicando la opcion ");
+		}
+		return new RedirectView("/ofertas/ofertavista/"+id+"?desc="+ desc);	
+	}
+		
 	
 }
