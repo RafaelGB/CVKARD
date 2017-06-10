@@ -178,6 +178,7 @@ public class ProyectController {
 				
 	}
 	
+	
 	@RequestMapping(value="/createProyect", method=RequestMethod.POST)
 	@ResponseBody
 	@Transactional // needed to allow DB change
@@ -185,21 +186,23 @@ public class ProyectController {
     		@RequestParam("title") String title,
 			@RequestParam("description") String description,
 			@RequestParam("newDate") String date,
-    		@RequestParam("checkedTag") List<String> checked,
-    		@RequestParam("checkedLang") List<String> checked2){
+    		@RequestParam(value="checkedTag",required=false) List<String> checked ,
+    		@RequestParam(value="checkedLang",required=false) List<String> checked2){
 		
 		String url = "/tablaproyectos/V/1";
 		try{
 		User u = (User) session.getAttribute("user");
 		u = entityManager.find(User.class, u.getId());//refresh de la base de datos
 		log.info("Proyecto creado por "+u.getName());
-		Iterator<String> it = checked.iterator();
-		Iterator<String> it2 = checked2.iterator();
+		
+		
 		Proyect p = new Proyect();
 		p.setTitle(title);
 		p.setDescription(description);
 		p.setDate(date);
 		List<Tag> listTags = new ArrayList<Tag>();
+		if(checked!=null){
+		Iterator<String> it = checked.iterator();
 		int i=0;
 		while(it.hasNext()) {
 			Tag t = entityManager.createQuery("from Tag where name = :name", Tag.class)
@@ -210,9 +213,11 @@ public class ProyectController {
 			i++;
 			}
 		p.setTags(listTags);
-		
+		}
+		if(checked2!=null){
+		Iterator<String> it2 = checked2.iterator();
 		List<Language> listLang = new ArrayList<Language>();
-		i=0;
+		int i=0;
 		while(it2.hasNext()) {
 			Language l = entityManager.createQuery("from Language where name = :name", Language.class)
                     .setParameter("name", it2.next())
@@ -221,7 +226,7 @@ public class ProyectController {
 			listLang.add(i,l);
 			i++;
 			}
-		p.setLanguages(listLang);
+		p.setLanguages(listLang);}
 		//f.setImg(img);
 		List<User> users= Arrays.asList(u);
 		p.setMembers(users);
@@ -235,6 +240,38 @@ public class ProyectController {
 		}
 		return new RedirectView(url);
 	}
+	
+	@RequestMapping(value="/actionOnMarks", method=RequestMethod.POST)
+	@ResponseBody
+	@Transactional // needed to allow DB change
+    public RedirectView changeMarks(HttpSession session,HttpServletResponse response,Model model,
+    		@RequestParam("markOptions") String markOptions,
+    		@RequestParam("checked") List<Long> checked){
+		try{
+		User u = (User) session.getAttribute("user");
+		//u = entityManager.find(User.class, u.getId());//refresh de la base de datos
+		Iterator<Long> it = checked.iterator();
+		Proyect p;
+		while(it.hasNext()) {
+			p = entityManager.find(Proyect.class, it.next());
+			 if(markOptions.equals("borrar")){
+				entityManager.remove(p);
+				for (User user : p.getMembers()) {
+				     user.getProyects().remove(p);
+				}
+				log.info("mensaje con la key "+p.getId()+ " eliminado");
+			}
+		}
+		session.setAttribute("user", u);
+		log.info("opcion "+markOptions+" aplicada");
+		
+		}catch(NoResultException nre){
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			log.error("Algo salio mal aplicando la opcion "+markOptions);
+		}
+		return new RedirectView("/tablaproyectos/V/1");
+	}
+	
 	
 	@RequestMapping(value="/actionOnMarks", method=RequestMethod.POST)
 	@ResponseBody
