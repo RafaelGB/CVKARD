@@ -64,13 +64,13 @@
 								<a href="/ofertas/${pag>=5 ? pag-4 : 1}"
 									class="w3-bar-item w3-button"> &laquo; </a> <a
 									href="/ofertas/${pag}" class="w3-button"> ${pag} </a> <a
-									href="/ofertas/${(((pag)*10)+1) <= size ? pag+1 : pag}"
-									class="w3-button"> ${(((pag)*10)+1) <= size ? pag+1 : '-'}
-								</a> <a href="/ofertas/${(((pag+1)*10)+1) <= size ? pag+2 : pag}#"
-									class="w3-button">${(((pag+1)*10)+1) <= size ? pag+2 : '-'}
-								</a> <a href="/ofertas/${(((pag+2)*10)+1)<= size ? pag+3 : pag}#"
-									class="w3-button">${(((pag+2)*10)+1) <= size ? pag+3 : '-'}
-								</a> <a href="/ofertas/${(((pag+3)*10)+1) <= size ? pag+4 : pag}#"
+									href="/ofertas/${(((pag)*4)+1) <= size ? pag+1 : pag}"
+									class="w3-button"> ${(((pag)*4)+1) <= size ? pag+1 : '-'}
+								</a> <a href="/ofertas/${(((pag+1)*4)+1) <= size ? pag+2 : pag}#"
+									class="w3-button">${(((pag+1)*4)+1) <= size ? pag+2 : '-'}
+								</a> <a href="/ofertas/${(((pag+2)*4)+1)<= size ? pag+3 : pag}#"
+									class="w3-button">${(((pag+2)*4)+1) <= size ? pag+3 : '-'}
+								</a> <a href="/ofertas/${(((pag+3)*4)+1) <= size ? pag+4 : pag}#"
 									class="w3-button"> &raquo; </a>
 							</div>
 						</div>
