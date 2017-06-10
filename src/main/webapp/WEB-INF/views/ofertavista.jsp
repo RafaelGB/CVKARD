@@ -65,8 +65,8 @@
 												</div>
 											</li>
 											
-											</sec:authorize>
-											<li><h4> Puntuacion media:<c:out value="${media}"></c:out></h4>
+										</sec:authorize>
+											<li><h4> Puntuacion media: ${media}</h4>
 											</li>
 										<li><br/>
 											<h4>Tags</h4>

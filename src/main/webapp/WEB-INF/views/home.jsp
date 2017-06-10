@@ -123,7 +123,7 @@
 									<ul style="list-style: none;">
 										<li>${f.title}</li>
 										<li>${f.description}</li>
-										<li>${user.name}</li>
+										<li>${f.offerer.name}</li>
 										</br>
 										<li><a href="/ofertavista/${f.id}"
 											class="button special small">Oferta</a></li>
