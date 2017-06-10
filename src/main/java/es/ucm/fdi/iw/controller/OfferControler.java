@@ -53,14 +53,14 @@ private LocalData localData;
 	@Autowired
 	private EntityManager entityManager;
 	
-	@RequestMapping(value="/createOffer", method=RequestMethod.POST)
+		@RequestMapping(value="/createOffer", method=RequestMethod.POST)
 	@ResponseBody
 	@Transactional // needed to allow DB change
     public RedirectView createOffer(HttpSession session,HttpServletResponse response,Model model,
     		@RequestParam("title") String title,
 			@RequestParam("description") String description,
 			@RequestParam("date") String date,
-    		@RequestParam("checkedTag") List<String> checked
+    		@RequestParam(value="checkedTag",required=false) List<String> checked
 			){
 		//@RequestParam("img") String img
 		String url = "/tablaofertas/1";
@@ -68,11 +68,13 @@ private LocalData localData;
 		User u = (User) session.getAttribute("user");
 		u = entityManager.find(User.class, u.getId());//refresh de la base de datos
 		log.info("Oferta creada por "+u.getName());
-		Iterator<String> it = checked.iterator();
+		
 		Offer f = new Offer();
 		f.setTitle(title);
 		f.setDescription(description);
 		f.setDate(date);
+		if(checked!=null){
+		Iterator<String> it = checked.iterator();
 		List<Tag> listTags = new ArrayList<Tag>();
 		int i=0;
 		while(it.hasNext()) {
@@ -84,6 +86,7 @@ private LocalData localData;
 			i++;
 			}
 		f.setTags(listTags);
+		}
 		//f.setImg(img);
 		f.setOfferer(u);
 		u.getOffers().add(f);
@@ -96,6 +99,7 @@ private LocalData localData;
 		}
 		return new RedirectView(url);
 	}
+	
 	
 
 	
