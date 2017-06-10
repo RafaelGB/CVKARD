@@ -282,7 +282,7 @@ private LocalData localData;
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			log.error("Algo salio mal aplicando la opcion ");
 		}
-		return new RedirectView("/ofertas/ofertavista/"+id+"?desc="+ desc);	
+		return new RedirectView("/ofertavista/"+id+"?desc="+ desc);	
 	}
 		
 	
