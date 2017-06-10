@@ -36,7 +36,7 @@
                       <li><a href="/ofertas/1">Ofertas</a>
                       </li>
                       <li>
-                      	<a href="/empresas/1">Empresas</a>
+                      	<a href="/empresas/1/1">Empresas</a>
                       </li>
                       <li>
                       	<a href="/buzon/R/1"><img src="${s}images/sobre.png" id ="logo2"/></a>

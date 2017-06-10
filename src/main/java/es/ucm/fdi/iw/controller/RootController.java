@@ -408,18 +408,27 @@ public class RootController {
 	/**
 	 * Empresavista - vista sobre la información de un negocio y sus referencias
 	 */
-	@GetMapping("/empresas/empresavista/{id}")
+	
+	@GetMapping("/empresas/empresavista/{id}/{pag}")
 	@Transactional
-	public String empresavista(HttpSession session, Model model, @PathVariable("id") long id) {
+	public String empresavista(HttpSession session, Model model, @PathVariable("id") long id,
+			@PathVariable("pag") String pag) {
 		String url = "home";
 
-		List b = new ArrayList<User>();
-		b = entityManager.createQuery("select b from User b where roles = :roles")
-				.setParameter("roles", "USER,BUSSINES").getResultList();
-		
-		User u = (User) session.getAttribute("user");
-		
-		model.addAttribute("bussines", b);
+		log.info("pagina de ofertas : " + pag);
+		if (pag.equals("1")) {
+			User u = (User) session.getAttribute("user");
+			log.info("carga el usuario : " + u.getName());
+			u = entityManager.find(User.class, u.getId());// refresh de la
+															// base de datos
+			log.info("refresh de usuario lanzado.");
+			model.addAttribute("size", u.getOffers().size());
+			log.info("Tamaño." + u.getOffers().size());
+			session.setAttribute("user", u);
+			model.addAttribute("pag", pag);
+			model.addAttribute("offers", u.getOffers());
+
+		}
 
 		url = "empresavista";
 
