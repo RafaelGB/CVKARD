@@ -81,7 +81,7 @@
              <h3>Carta de Presentacion</h3>
 	        <form id="pdf_form" action="/download/showpdf/${user.id}" method="post">
 	            <textarea name="vitae" id="vitae" rows="10" cols="80" disabled="disabled">
-	                ${user.card}
+	                ${theUser.card}
 	            </textarea>
 	            <input type="text" name="ckeditor_data" id="ckeditor_data" style="visibility:hidden;"> </input>
 	            <input name="${_csrf.parameterName}" type="hidden"
