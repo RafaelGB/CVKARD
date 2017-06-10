@@ -83,14 +83,14 @@
 							</div>
 
 						</div>
-						<div class="row">
+						<!--  <div class="row">
 							<img src="${s}images/oficina.jpg" alt="" WIDTH=200 HEIGHT=140 />
 							<img src="${s}images/mkx.jpg" alt="" WIDTH=200 HEIGHT=140 /> <img
 								src="${s}images/injustice.jpg" alt="" WIDTH=200 HEIGHT=140 /> <img
 								src="${s}images/villians.jpg" alt="" WIDTH=200 HEIGHT=140 /> <img
 								src="${s}images/f.png" alt="" WIDTH=100 HEIGHT=80
 								style="padding-top: 1.8em;" />
-						</div>
+						</div> -->
 					</div>
 
 					<div class="box">
