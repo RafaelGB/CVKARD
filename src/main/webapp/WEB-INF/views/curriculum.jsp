@@ -39,30 +39,19 @@
                <div class="row">
                 <div class="u">
                     <div class="colum1">
-                      <img src="/user/photo/${user.id}" alt="" width="200"	height="150/">
+                      <img src="/user/photo/${theUser.id}" alt="" width="200"	height="150/">
                     </div>
                 </div>
                 <div class="u">
                     <div class="colum1">
-                    	<h3>${user.name} ${user.lastName}</h3>
+                    	<h3>${theUser.name} ${theUser.lastName}</h3>
                      	<ul style="list-style:none;">		              
-		                    <li>${user.DNI}</li>
-		                    <li>${user.birthday}</li>
+		                    <li>${theUser.DNI}</li>
+		                    <li>${theUser.birthday}</li>
 		                    <li>Domicilio</li>		               
 	                   </ul>
                     </div>
-                </div>
-                <div class="u2">
-                    <div class="colum1">
-                    	<h3>ESTUDIOS Y CURSOS</h3>
-                     	<ul style="list-style:none;">		              
-		                    <li>Estudio 1</li>
-		                    <li>Estudio 2</li>
-		                    <li>Estudio 3</li>		               
-	                   </ul>
-                    </div>
-                </div>
-                
+                </div>               
                </div>
                </div>
                <div class="box">

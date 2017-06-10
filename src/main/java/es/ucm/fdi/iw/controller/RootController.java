@@ -98,12 +98,11 @@ public class RootController {
 		String url = "index";
 		log.info("Buscando usuario con nick: '"+nick+"'\n");
 		try {
-			if(session.getAttribute("user")==null){
 			User u = entityManager.createQuery("from User where nick = :nick", User.class)
 	                            .setParameter("nick", nick)
 	                            .getSingleResult();
-			model.addAttribute("user", u);
-			}
+			log.info("Buscando usuario con nick: '"+u.getProyects().size());
+			model.addAttribute("theUser", u);
 			url = "curriculum";
 		} catch (Exception e) {
 			// TODO: handle exception
