@@ -485,6 +485,7 @@ public class RootController {
 				log.info("Coge bien la lista" + u.size());
 				model.addAttribute("size", u.size());
 				model.addAttribute("bussines", u);
+				model.addAttribute("pag", pag);
 
 			}
 			exit = "empresas";
