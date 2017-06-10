@@ -241,37 +241,7 @@ public class ProyectController {
 		return new RedirectView(url);
 	}
 	
-	@RequestMapping(value="/actionOnMarks", method=RequestMethod.POST)
-	@ResponseBody
-	@Transactional // needed to allow DB change
-    public RedirectView changeMarks(HttpSession session,HttpServletResponse response,Model model,
-    		@RequestParam("markOptions") String markOptions,
-    		@RequestParam("checked") List<Long> checked){
-		try{
-		User u = (User) session.getAttribute("user");
-		//u = entityManager.find(User.class, u.getId());//refresh de la base de datos
-		Iterator<Long> it = checked.iterator();
-		Proyect p;
-		while(it.hasNext()) {
-			p = entityManager.find(Proyect.class, it.next());
-			 if(markOptions.equals("borrar")){
-				entityManager.remove(p);
-				for (User user : p.getMembers()) {
-				     user.getProyects().remove(p);
-				}
-				log.info("mensaje con la key "+p.getId()+ " eliminado");
-			}
-		}
-		session.setAttribute("user", u);
-		log.info("opcion "+markOptions+" aplicada");
-		
-		}catch(NoResultException nre){
-			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-			log.error("Algo salio mal aplicando la opcion "+markOptions);
-		}
-		return new RedirectView("/tablaproyectos/V/1");
-	}
-	
+
 	
 	@RequestMapping(value="/actionOnMarks", method=RequestMethod.POST)
 	@ResponseBody
