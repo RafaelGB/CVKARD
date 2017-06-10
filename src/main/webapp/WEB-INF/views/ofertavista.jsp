@@ -53,6 +53,7 @@
 							<div class="u2">
 								<div class="colum1">
 									<ul style="list-style: none;">
+										<sec:authorize access="hasRole('EMPLOYEE')">
 										<li><h4>
 												Puntuacion:</h4>
 												<div class="ec-stars-wrapper">
@@ -62,6 +63,10 @@
 												<a href="/offer/puntuaOffer/${theOffer.id}/4" data-value="4" title="Votar con 4 estrellas">&#9733;</a>
 												<a href="/offer/puntuaOffer/${theOffer.id}/5" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
 												</div>
+											</li>
+											
+											</sec:authorize>
+											<li><h4> Puntuacion media:<c:out value="${media}"></c:out></h4>
 											</li>
 										<li><br/>
 											<h4>Tags</h4>
