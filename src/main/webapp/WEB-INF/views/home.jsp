@@ -114,7 +114,7 @@
 						</div>
 						<div class="row">
 
-							<c:forEach items="${user.offers}" var="f" begin="0" end="3">
+							<c:forEach items="${offerList}" var="f" begin="0" end="3">
 
 								<div class="u">
 									<div class="colum1">

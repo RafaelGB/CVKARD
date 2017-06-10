@@ -79,8 +79,31 @@
         	<li> 
                 <a href="http://localhost:8080/home">
                 <h3>página de inicio de la web</h3></a>
-                <p>Común para ambos tipos de usuarios, una vez dentro se activa la cabecera con los diferentes accesos rapidos<br/>
-                    ???
+                <p>Común para ambos tipos de usuarios, una vez dentro se activa la cabecera con los diferentes accesos rapidos.<br/>
+                    Muestra las ultimas 4 ofertas segun la fecha de subida, ylas mejores empresas según las puntuaciones recibidas en
+                    dichas ofertas. Cada una de estaslistas incluye un acceso rápido a la lista de todas las ofertas y empresas.
+                </p>
+            </li>
+            <li> 
+                <a href="http://localhost:8080/proyectos/1">
+                <h3>Listado de todos los proyectos</h3></a>
+                <p>paginación con todos los proyectos ordenados por puntuacion y acceso rápido en cada uno de ellos a si mismo.
+                </p>
+            </li>
+            <li> 
+                <a href="http://localhost:8080/ofertas/1">
+                <h3>Listado de todas las ofertas</h3></a>
+                <p>paginación con todas las ofertas disponibles acceso rápido en cada una de ellas a si misma.
+                </p>
+            </li>
+            <li> 
+                <a href="http://localhost:8080/buzon/R/1">
+                <h3>Buzon de correo</h3></a>
+                <p>(enlace a la seccion de recibidos, pero jsp compartido para enviados y crear nuevo correo.<br/>
+                Herramienta para poner en contacto usuarios entre sí. Paginados todos los enviados y recibidos, en caso de entrar en un
+                recibido con su acceso rápido se marcara como leído y en al vista del mensaje se activara el boton de responder.(pequeño
+                bug al ir por responder autocompletando el campo de correo componiendo el mensaje, una vez llega al xx@xxx.  no muestra el sufijo...).<br/>
+                Tanto enviados como recibidos pueden borrar mensajes con el boton de opciones > borrar, y se borrará para las dos partes. En el listado de recibidos también está la opción de marcar como leídos todos los seleccionados.
                 </p>
             </li>
         </ul>
@@ -104,10 +127,6 @@
             </li>
         </ul>	
         <h2>---------------------------sin determinar aun---------------------------</h2>
-            <li> 
-                <a href="http://localhost:8080/oferta"><h3>Oferta de empresa</h3></a>
-                <p>muestra los detalles sobre una oferta</p>
-            </li>
             <li> <a href="http://localhost:8080/ofertas">Ofertas!</a></li>
  
 

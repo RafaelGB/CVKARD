@@ -75,6 +75,7 @@ public class RootController {
 				.setParameter("roles", "USER,BUSSINES").getResultList();
 
 		log.info("Coge bien la lista" + b.size());
+		session.setAttribute("offerList", o);
 		session.setAttribute("bussines", b);
 		return "home";
 	}
