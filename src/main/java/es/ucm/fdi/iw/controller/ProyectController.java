@@ -72,7 +72,7 @@ public class ProyectController {
 		    	in = new BufferedInputStream(new FileInputStream(f));
 		    } else {
 		    	in = new BufferedInputStream(
-		    			this.getClass().getClassLoader().getResourceAsStream("unknown-user.jpg"));
+		    			this.getClass().getClassLoader().getResourceAsStream("unknownObject.png"));
 		    }
 	    	FileCopyUtils.copy(in, response.getOutputStream());
 	    } catch (IOException ioe) {

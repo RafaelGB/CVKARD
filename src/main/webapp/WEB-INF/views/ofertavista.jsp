@@ -93,7 +93,9 @@
 								style="padding-top: 1.8em;" />
 						</div> -->
 					</div>	
-					<a href="/buzon/N/${theOffer.offerer.email}" class="button special"><h3>Solicitar oferta</h3></a>				
+					<sec:authorize access="hasRole('EMPLOYEE')">
+						<a href="/buzon/N/${theOffer.offerer.email}" class="button special"><h3>Solicitar oferta</h3></a>				
+					</sec:authorize>
 				</section>
 			</div>
 
