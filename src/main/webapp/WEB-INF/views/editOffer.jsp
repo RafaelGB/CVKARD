@@ -89,6 +89,11 @@
 
 										</li>
 										
+										<li id="selector" style="visibility: hidden;">Tags:<c:forEach items="${tags}" var="t">
+										<input type="checkbox" id="${t.id}" name="checkedTag" value="${t.name}" ></input>
+										<label for="${t.id}">${t.name}</label>
+										</c:forEach></li>
+										
 									</ul>
 								</div>
 							</div>
@@ -117,7 +122,7 @@
 				            <textarea name="editor1" id="editor1" rows="10" cols="80">
 				                ${offer.description}
 				            </textarea>
-				            <input type="text" name="html_data" id="html_data" style="visibility:hidden;"> </input>
+				            <input type="text" name="html_data" id="html_data" style="visibility:hidden;"> 
 				            <input name="${_csrf.parameterName}" type="hidden"
 									value="${_csrf.token}" />
 							 <input type="button" onclick="updateCkeditor()" value="Actualizar">
@@ -148,16 +153,19 @@
 	<script> 
 	      function updateState(button){
 	    	  var $div=$('.changingClass');
+	    	  var $select = document.getElementById ("selector");
 	    	  var $update = document.getElementById ("update_button");
 	    	  var $image = document.getElementById ("formImage");
 	    	  if($update.style.visibility == 'hidden'){
 	    		  $div.attr('disabled',false);
+	    		  $select.style.visibility = 'visible';
 	    		  $update.style.visibility = 'visible';
 	    		  $image.style.visibility = "visible";
 	    		  button.innerHTML = "Desactivar edición";
 	    	  }
 	    	  else{
 	    		  $div.attr('disabled',true);
+	    		  $select.style.visibility = 'hidden';
 	    		  $update.style.visibility = "hidden";
 	    		  $image.style.visibility = "hidden";
 	    		  button.innerHTML = "Activar edición";

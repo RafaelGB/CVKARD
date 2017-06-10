@@ -54,19 +54,19 @@
 								<div class="colum1">
 									<ul style="list-style: none;">
 										<li><h4>
-												Puntuacion:
+												Puntuacion:</h4>
 												<div class="ec-stars-wrapper">
-													<a href="#" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
-													<a href="#" data-value="2" title="Votar con 2 estrellas">&#9733;</a>
-													<a href="#" data-value="3" title="Votar con 3 estrellas">&#9733;</a>
-													<a href="#" data-value="4" title="Votar con 4 estrellas">&#9733;</a>
-													<a href="#" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
+												<a href="/offer/puntuaOffer/${theOffer.id}/1" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
+												<a href="/offer/puntuaOffer/${theOffer.id}/2" data-value="2" title="Votar con 2 estrellas">&#9733;</a>
+												<a href="/offer/puntuaOffer/${theOffer.id}/3" data-value="3" title="Votar con 3 estrellas">&#9733;</a>
+												<a href="/offer/puntuaOffer/${theOffer.id}/4" data-value="4" title="Votar con 4 estrellas">&#9733;</a>
+												<a href="/offer/puntuaOffer/${theOffer.id}/5" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
 												</div>
-											</h4></li>
+											</li>
 										<li><br/>
 											<h4>Tags</h4>
-											<c:forEach items="${theOffer.tags}" var="f" begin="0" end="5">
-												<a href="" class="w3-button">${f.name}</a>
+											<c:forEach items="${theOffer.tags}" var="t" >
+												<a href="/tag/${t.id}/1" class="w3-button">${t.name}</a>
 											</c:forEach>
 										</li>
 									</ul>
@@ -119,3 +119,9 @@
 	<script src="${s}js/main.js"></script>
 </body>
 </html>
+
+
+
+
+
+

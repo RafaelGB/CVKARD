@@ -41,7 +41,7 @@
 					<div class="box">
 						<div class="row">
 
-							<c:forEach items="${user.offers}" var="f" begin="${(pag-1)*4}"
+							<c:forEach items="${offers}" var="f" begin="${(pag-1)*4}"
 								end="${((pag-1)*4)+3}">
 
 								<div class="u">
@@ -53,7 +53,7 @@
 										<li>${f.description}</li>
 										<li>${user.name}</li>
 										</br>
-										<li><a href="ofertavista/${f.id}"
+										<li><a href="/ofertavista/${f.id}"
 											class="button special small">Oferta</a></li>
 								</div>
 							</c:forEach>

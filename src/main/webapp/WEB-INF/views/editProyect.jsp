@@ -88,20 +88,15 @@
 											value="${!empty proyect.date ? proyect.date : ''}">
 
 										</li>
-										<li id="selector" style="visibility: hidden;">Tags:
-										<!--<select multiple id="selector" style="visibility: hidden;">-->
-										<input type="checkbox" id="desWeb" name="checked" value="Desarrollo web" form="confirmUpdate"></input>
-										<label for="desWeb">Desarrollo web</label>
-										<input type="checkbox" id="progJava" name="checked" value="Programacion java" form="confirmUpdate"></input>
-										<label for="progJava">Programacion java</label>
-										<!--  <option value="Desarrollo web">Desarrollo web</option>
-										<option value="Programacion java">Programacion java</option>
-
-										</select>-->
-										
-											</li>
-											
-										
+										<li id="selector" style="visibility: hidden;">Tags:<c:forEach items="${tags}" var="t">
+										<input type="checkbox" id="${t.id}" name="checkedTag" value="${t.name}" ></input>
+										<label for="${t.id}">${t.name}</label>
+										</c:forEach></li>
+										<li id="selector" style="visibility: hidden;">Lenguajes:<c:forEach items="${lang}" var="l">
+										<input type="checkbox" id="l${l.id}" name="checkedTag" value="${l.name}" ></input>
+										<label for="l${l.id}">${l.name}</label>
+										</c:forEach></li>
+									
 									</ul>
 								</div>
 							</div>

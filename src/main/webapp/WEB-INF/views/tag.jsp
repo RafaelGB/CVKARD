@@ -43,7 +43,7 @@
                    
                     
                     
-                    <c:forEach items="${proyects}" var="p" >
+                    <c:forEach items="${proyects}" var="p" begin="${(pag-1)*4}" end="${((pag-1)*4)+3}" >
 		   					<div class="u">
 			   					<div class="colum1">
 		       					<img src="/proyect/photo/${p.id}" alt="" width="100" height="100/">
@@ -59,8 +59,7 @@
                     
             </div>
             </div>
-            
-             <div class="w3-bar w3-border w3-round">
+            <div class="w3-bar w3-border w3-round">
 		                    <div class="w3-bar">
 		                      <a href="/tag/${tag.id}/${pag}>=5 ? pag-4 : 1}" class="w3-bar-item w3-button"> &laquo; </a>
 		                      <a href="/tag/${tag.id}/${pag}" class="w3-button"> ${pag} </a>
@@ -70,6 +69,42 @@
 		                      <a href="/tag/${tag.id}/${(((pag+3)*4)+1) <= sizeProyect ? pag+4 : pag}#" class="w3-button"> &raquo; </a>
 		                    </div>
 		     </div>
+            
+            <div class="box">
+            <h2>Ofertas de este tag</h2>
+              <div class="row">
+                  
+                   
+                    
+                    
+                    <c:forEach items="${offers}" var="o" begin="${(pag-1)*4}" end="${((pag-1)*4)+3}">
+		   					<div class="u">
+			   					<div class="colum1">
+		       					<img src="/offer/photo/${o.id}" alt="" width="100" height="100/">
+								</div>
+								<ul style="list-style:none;">
+		                   		<li><a href="/ofertavista/${o.id}"><c:out value="${o.title}"></c:out></a></li>
+		                   		<li><c:out value="${o.description}"></c:out></li>
+		                   		<li><a href="/ofertavista/${o.id}"
+											class="button special small">Oferta</a></li>
+		                   		</ul>
+	                   		</div>
+                   		</c:forEach>
+                    
+            </div>
+            </div>
+            <div class="w3-bar w3-border w3-round">
+		                    <div class="w3-bar">
+		                      <a href="/tag/${tag.id}/${pag}>=5 ? pag-4 : 1}" class="w3-bar-item w3-button"> &laquo; </a>
+		                      <a href="/tag/${tag.id}/${pag}" class="w3-button"> ${pag} </a>
+		                      <a href="/tag/${tag.id}/${(((pag)*4)+1) <= sizeOffer ? pag+1 : pag}" class="w3-button"> ${(((pag)*4)+1) <= sizeOffer ? pag+1 : '-'} </a>
+		                      <a href="/tag/${tag.id}/${(((pag+1)*4)+1) <= sizeOffer ? pag+2 : pag}#" class="w3-button">${(((pag+1)*4)+1) <= sizeOffer ? pag+2 : '-'} </a>
+		                      <a href="/tag/${tag.id}/${(((pag+2)*4)+1)<= sizeOffer ? pag+3 : pag}#" class="w3-button">${(((pag+2)*4)+1) <= sizeOffer ? pag+3 : '-'} </a>
+		                      <a href="/tag/${tag.id}/${(((pag+3)*4)+1) <= sizeOffer ? pag+4 : pag}#" class="w3-button"> &raquo; </a>
+		                    </div>
+		     </div>
+            
+             
           </section>
        </div>
        </div>

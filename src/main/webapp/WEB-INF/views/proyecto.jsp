@@ -59,13 +59,13 @@
 										<li>
 										<h4>Tags</h4>
 										<c:forEach items="${tags}" var="t" >
-			                      		<a href="/tag/${t.id}/1"><c:out value="${t.name}"></c:out></a>
+			                      		<a href="/tag/${t.id}/1" class="w3-button"><c:out value="${t.name}"></c:out></a>
 			                      		</c:forEach>
 										</li>
 										<li>
 										<h4>Lenguajes</h4>
 										<c:forEach items="${languages}" var="l" >
-			                      		<a href="/language/${l.id}/1"><c:out value="${l.name}"></c:out></a>
+			                      		<a href="/language/${l.id}/1" class="w3-button"><c:out value="${l.name}"></c:out></a>
 			                      		</c:forEach>
 										</li>
 									</ul>						
