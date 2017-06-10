@@ -93,7 +93,7 @@
 										<li>${f.description}</li>
 										<li>${TheBussines.name}</li>
 										</br>
-										<li><a href="/ofertas/ofertavista/${f.id}"
+										<li><a href="/ofertavista/${f.id}"
 											class="button special small">Oferta</a></li>
 								</div>
 							</c:forEach>

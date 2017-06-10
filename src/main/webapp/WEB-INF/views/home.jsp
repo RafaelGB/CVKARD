@@ -125,7 +125,7 @@
 										<li>${f.description}</li>
 										<li>${user.name}</li>
 										</br>
-										<li><a href="/ofertas/ofertavista/${f.id}"
+										<li><a href="/ofertavista/${f.id}"
 											class="button special small">Oferta</a></li>
 								</div>
 							</c:forEach>
@@ -165,6 +165,5 @@
 			});
 		});
 	</script>
-	</footer>
 </body>
 </html>
