@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		 	.antMatchers("/","/welcome","/static/**","/registro","/download/showpdf/*",
 		 				 "/user/photo/*","/curriculum/*","/user/newUserEmployee",
 		 				 "/user/newUserBussines","/message/createExternalMessage/*").permitAll()
-		 	.antMatchers("/perfilusuario","/tablaproyectos").hasRole("EMPLOYEE")
+		 	.antMatchers("/perfilusuario","/tablaproyectos","/offer/puntuaOffer/**").hasRole("EMPLOYEE")
 		 	.antMatchers("/perfilempresa","/tablaofertas","/proyect/puntuaProyect/**").hasRole("BUSSINES")
 	        .anyRequest().authenticated()
 	        .and()
