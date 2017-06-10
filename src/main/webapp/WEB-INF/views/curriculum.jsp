@@ -68,46 +68,26 @@
                <div class="box">
                <h3>Proyectos realizados</h3> 
              	
-             	<div class="row">
-                 <div class="u">
-                   <div class="colum1">
-                     <img src="${s}images/oferta.png" alt="" WIDTH=150 HEIGHT=150/>
-                   </div>
-                   <ul style="list-style:none;">
-                   <li>Proyecto</li>
-                   <li>Breve Descripcion del proyecto</li>
-                   <li>Ha escrito 500 lineas</li></br>
-                 </div>
-                 <div class="u">
-                 <div class="colum1">
-                   <img src="${s}images/oferta1.png" alt="" WIDTH=150 HEIGHT=150/>
-                 </div>
-                 <ul style="list-style:none;">
-                   <li>Proyecto</li>
-                   <li>Breve Descripcion del proyecto</li>
-                   <li>Ha escrito 500 lineas</li></br>
-               </div>
-               <div class="u">
-                 <div class="colum1">
-                   <img src="${s}images/oferta2.png" alt="" WIDTH=150 HEIGHT=150/>
-                 </div>
-                 <ul style="list-style:none;">
-                  <li>Proyecto</li>
-                   <li>Breve Descripcion del proyecto</li>
-                   <li>Ha escrito 500 lineas</li></br>
-               </div>
-               <div class="u">
-                 <div class="colum1">
-                   <img src="${s}images/oferta3.png" alt="" WIDTH=150 HEIGHT=150/>
-                 </div>
-                 <ul style="list-style:none;">
-                   <li>Proyecto</li>
-                   <li>Breve Descripcion del proyecto</li>
-                   <li>Ha escrito 500 lineas</li></br>
-               </div>
-           </div>
-             <a href="#" class="button special small" style="float:right;">Mostrar mas</a>
-           </div>
+	             	<div class="row">
+		             	<c:forEach items="${theUser.proyects}" var="f" begin="0" end="3">
+		
+		                	<div class="u">
+		                   <div class="colum1">
+		                     <img src="/proyect/photo/${f.id}" alt="" WIDTH=150 HEIGHT=150/>
+		                   </div>
+		                   <ul style="list-style:none;">
+			                   <li>${f.title}</li>
+			                   <li>${f.description}</li>
+			                   <li>${f.date}</li>
+			                   <sec:authorize access="isAuthenticated()">
+			                   <li><a href="/proyecto/${f.id}"
+													class="button special small">Mas información</a></li>
+		                   	   </sec:authorize>
+		                   </ul>
+		                </div>
+						</c:forEach>
+	           		</div>
+           		</div>
            <div class="box">
              <h3>Carta de Presentacion</h3>
 	        <form id="pdf_form" action="/download/showpdf/${user.id}" method="post">
