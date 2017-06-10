@@ -60,18 +60,22 @@ public class RootController {
 				User u = entityManager.createQuery("from User where email = :email", User.class)
 						.setParameter("email", principal.getName()).getSingleResult();
 				session.setAttribute("user", u);
-				List b = new ArrayList<User>();
-				b = entityManager.createQuery("select b from User b where roles = :roles")
-						.setParameter("roles", "USER,BUSSINES").getResultList();
-
-				log.info("Coge bien la lista" + b.size());
-				session.setAttribute("bussines", b);
-
 			} catch (Exception e) {
 				// TODO: handle exception
 				System.err.println(e);
 			}
 		}
+		List<Offer> o = new ArrayList<Offer>();
+		o = entityManager.createQuery("select o from Offer o ORDER BY o.date")
+				.setMaxResults(4)
+				.getResultList();
+		
+		List<User> b = new ArrayList<User>();
+		b = entityManager.createQuery("select b from User b where roles = :roles")
+				.setParameter("roles", "USER,BUSSINES").getResultList();
+
+		log.info("Coge bien la lista" + b.size());
+		session.setAttribute("bussines", b);
 		return "home";
 	}
 
