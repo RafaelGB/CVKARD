@@ -153,7 +153,8 @@ public class User {
 		this.proyects = proyects;
 	}
 	
-	@OneToMany(targetEntity=ScoreOffer.class)
+	@OneToMany(fetch = FetchType.EAGER,targetEntity=ScoreOffer.class)
+	@Fetch(value = FetchMode.SUBSELECT)
 	@JoinColumn(name="punctuator_id") // <-- this avoids creating an extra User_ScoreOffer table
 	public List<ScoreOffer> getMyScoreOffers() {
 		return myScoreOffers;
