@@ -337,22 +337,6 @@ public class RootController {
 		return exit;
 	}
 	
-	@GetMapping("/editOffer/{id}")
-	@Transactional
-	public String editOffer(HttpSession session,Model model,
-			@PathVariable("id") long id) {
-		
-		Offer f = entityManager.find(Offer.class, id);//refresh de la base de datos
-		User u = (User) session.getAttribute("user");
-		//si está habilitado asignamos al modelo el mensaje
-			model.addAttribute("offer", f);
-			model.addAttribute("tags",f.getTags());
-			session.setAttribute("user", u);
-			String url = "editOffer";
-		
-		return url;
-	}
-	
 	/**
 	 * TablaOfertas - vista sobre las ofertas de un negocio en concreto bajo su log y sus opciones de edición
 	 */

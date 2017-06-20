@@ -28,6 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,7 +57,10 @@ public class ProyectController {
 	private EntityManager entityManager;
 	
 
-	
+    @ModelAttribute
+    public void addAttributes(Model model) {
+        model.addAttribute("s", "/static/");
+    }
 	
 	/**
 	 * Returns a proyect photo
@@ -99,12 +103,12 @@ public class ProyectController {
                         		new FileOutputStream(localData.getFile("proyect/"+id, "image")));
                 stream.write(bytes);
                 stream.close();
-                return new RedirectView("/editProyect/"+id+"?image=actualizado+con+exito");
+                return new RedirectView("/proyect/editProyect/"+id+"?image=actualizado+con+exito");
             } catch (Exception e) {
-                return new RedirectView("/editProyect/"+id+"?image=fallo+al+actualizar+el+avatar");
+                return new RedirectView("/proyect/editProyect/"+id+"?image=fallo+al+actualizar+el+avatar");
             }
         } else {
-        	return new RedirectView("/editProyect/"+id+"?image=archivo+vacio");
+        	return new RedirectView("/proyect/editProyect/"+id+"?image=archivo+vacio");
         }
 	}
 	
@@ -334,7 +338,6 @@ public class ProyectController {
 	 * editProyect -  vista de edición de un proyecto
 	 */
 	@GetMapping("/editProyect/{id}")
-	@Transactional
 	public String editProyect(Model model,
 			@PathVariable("id") long id,
 			HttpSession session) {
