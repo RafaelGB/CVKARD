@@ -25,6 +25,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,8 +54,13 @@ private LocalData localData;
 		
 	@Autowired
 	private EntityManager entityManager;
-	
-		@RequestMapping(value="/createOffer", method=RequestMethod.POST)
+
+    @ModelAttribute
+    public void addAttributes(Model model) {
+        model.addAttribute("s", "/static/");
+    }
+    
+	@RequestMapping(value="/createOffer", method=RequestMethod.POST)
 	@ResponseBody
 	@Transactional // needed to allow DB change
     public RedirectView createOffer(HttpSession session,HttpServletResponse response,Model model,
@@ -288,6 +295,20 @@ private LocalData localData;
 		}
 		return new RedirectView("/ofertavista/"+id+"?desc="+ desc);	
 	}
-		
+	@GetMapping("/editOffer/{id}")
+	public String editOffer(HttpSession session,Model model,
+			@PathVariable("id") long id) {
+		String url = "redirect:/home?error=acceso+denegado";
+		Offer f = entityManager.find(Offer.class, id);//refresh de la base de datos
+		User u = (User) session.getAttribute("user");
+		if(f.getOfferer().getId()==u.getId()){
+		//si está habilitado asignamos al modelo el mensaje
+			model.addAttribute("offer", f);
+			model.addAttribute("tags",f.getTags());
+			session.setAttribute("user", u);
+			url = "editOffer";
+		}
+		return url;
+	}	
 	
 }

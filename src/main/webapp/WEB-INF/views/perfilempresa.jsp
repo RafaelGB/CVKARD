@@ -131,7 +131,7 @@
 						<form id="description_form" action="/user/updateCard/B"
 							method="post">
 							<textarea name="editor1" id="editor1" rows="10" cols="80">
-				                ${user.card}
+				                <c:out value="${user.card}"></c:out>
 				            </textarea>
 							<input type="text" name="html_data" id="html_data"
 								style="visibility: hidden;"> </input> <input
