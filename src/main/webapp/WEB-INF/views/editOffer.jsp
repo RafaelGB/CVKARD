@@ -75,7 +75,7 @@
 										<li style="font-size: 24px; margin-top: 0.5em;"><input
 											class="changingClass" disabled="disabled" type="text"
 											id="name-form" name="name-form" form="confirmUpdate"
-											value="${offer.title}"/></li>
+											value="<c:out value="${offer.title}"></c:out>"/></li>
 										
 
 
@@ -85,7 +85,7 @@
 											<input class="changingClass"
 											disabled="disabled" type="date" id="birthday-form"
 											name="date-form" form="confirmUpdate"
-											value="${offer.date}">
+											value="<c:out value="${offer.date}"></c:out>">
 
 										</li>
 										
