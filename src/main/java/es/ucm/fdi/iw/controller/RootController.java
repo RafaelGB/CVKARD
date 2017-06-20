@@ -305,7 +305,6 @@ public class RootController {
 	 * TablaProyectos -  vista sobre los proyectos de un trabajador en concreto bajo su log y sus opciones de edición
 	 */
 	@GetMapping("/tablaproyectos/{type}/{pag}")
-	@Transactional
 	public String tablaproyectos(Model model,@PathVariable("pag") String pag,@PathVariable("type") String type, HttpSession session) {
 		String exit="home";
 		if(type.equals("N")){
@@ -341,7 +340,6 @@ public class RootController {
 	 * TablaOfertas - vista sobre las ofertas de un negocio en concreto bajo su log y sus opciones de edición
 	 */
 	@GetMapping("/tablaofertas/{pag}")
-	@Transactional
 	public String tablaofertas(HttpSession session,HttpServletResponse response,
 			@PathVariable("pag") String pag,
 			Model model) {
@@ -385,7 +383,6 @@ public class RootController {
 	 */
 
 	@GetMapping("/ofertavista/{id}")
-	@Transactional
 	public String ofertavista(HttpSession session, Model model, @PathVariable("id") long id) {
 		String url = "home";
 
@@ -416,7 +413,6 @@ public class RootController {
  	 */
   	
  	@GetMapping("/empresas/empresavista/{id}/{pag}")
- 	@Transactional
  	public String empresavista(HttpSession session, Model model,
  			@PathVariable("id") long id,
  			@PathVariable("pag") String pag) {
@@ -439,7 +435,6 @@ public class RootController {
 
 	
 	@GetMapping("/ofertas/{pag}")
-	@Transactional
 	public String ofertas(HttpSession session,HttpServletResponse response,
 			@PathVariable("pag") String pag,
 			Model model) {
@@ -475,7 +470,6 @@ public class RootController {
 	}
 	
 	@GetMapping("/empresas/{pag}")
- 	@Transactional
  	public String empresas(HttpSession session, HttpServletResponse response, @PathVariable("pag") String pag,
  			Model model) {
  		String exit = "home";
@@ -508,7 +502,6 @@ public class RootController {
 	
 	
 	@GetMapping("/tag/{id}/{pag}")
-	@Transactional
 	public String tag(Model model,@PathVariable("id") Long id,@PathVariable("pag") String pag, HttpSession session) {
 		String exit="home";
 		
@@ -534,7 +527,6 @@ public class RootController {
 	}
 	
 	@GetMapping("/language/{id}/{pag}")
-	@Transactional
 	public String language(Model model,@PathVariable("id") Long id,@PathVariable("pag") String pag, HttpSession session) {
 		String exit="home";
 		
@@ -558,7 +550,6 @@ public class RootController {
 	}
 	
 	@GetMapping("/proyectos/{pag}")
-	@Transactional
 	public String proyectos(Model model,@PathVariable("pag") String pag, HttpSession session) {
 		String exit="home";
 		
