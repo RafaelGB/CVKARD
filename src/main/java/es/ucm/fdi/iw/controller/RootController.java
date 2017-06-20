@@ -19,6 +19,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import es.ucm.fdi.iw.model.Language;
 import es.ucm.fdi.iw.model.Message;
@@ -581,9 +584,9 @@ public class RootController {
 		return exit;
 	}
 	
-	@GetMapping("/buscador/{type}/{busqueda}")
-	public String busqueda(@PathVariable("busqueda") String busqueda,@PathVariable("type") String type,HttpSession session,
-			Model model) {
+	@RequestMapping(value="/buscador/{type}", method=RequestMethod.POST)
+	public String busqueda(@PathVariable("type") String type,HttpSession session,
+			Model model, @RequestParam("busqueda") String busqueda) {
 		String url = "home";
 		log.info("Buscando datos: '"+busqueda+"'\n");
 		List<Proyect> p;
@@ -595,12 +598,13 @@ public class RootController {
 		try {
 		
 			if (type.equals("P")) {
-				p = entityManager.createQuery("select p from Proyect p where title like '%=:busqueda%'")
+				p = entityManager.createQuery("select p from Proyect p where p.title LIKE CONCAT('%',:busqueda,'%')")
 					.setParameter("busqueda", busqueda).getResultList();
-				
+				System.out.println("tamaño de la lista "+p.size());
 				model.addAttribute("size",p.size());
 				model.addAttribute("proyects",p);
-				
+				model.addAttribute("type", "P");
+				url = "buscador";
 				}
 				
 			
@@ -623,10 +627,9 @@ public class RootController {
 		
 		} catch (Exception e) {
 			// TODO: handle exception
+			log.error("entro en el catch de buscador");
 			log.error(e);
 		}
-		
-		session.setAttribute("user", u);
 		return url;
 	}
 	

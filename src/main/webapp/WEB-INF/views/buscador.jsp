@@ -41,8 +41,7 @@
       
                 <div class="box" style="padding-bottom:0px">
                   <div class="row">
-                  	 <c:when test="${type=='P'}">
-	                    <c:forEach items="${proyects}" var="p" begin="${(pag-1)*4}" end="${((pag-1)*4)+3}" >
+	                    <c:forEach items="${proyects}" var="p" begin="0" end="${proyects.size()}" >
 		   					<div class="u">
 			   					<div class="colum1">
 		       					<img src="/proyect/photo/${p.id}" alt="" width="100" height="100/">
@@ -54,38 +53,8 @@
 									class="button special small">Proyecto</a></li>
 		                   		</ul>
 	                   		</div>
-	               		</c:forEach> 
-	               	</c:when>
-	               	<c:when test="${type=='O'}">
-	                    <c:forEach items="${offers}" var="o" begin="${(pag-1)*4}" end="${((pag-1)*4)+3}" >
-		   					<div class="u">
-			   					<div class="colum1">
-		       					<img src="/proyect/photo/${p.id}" alt="" width="100" height="100/">
-								</div>
-								<ul style="list-style:none;">
-		                   		<li><a href="/proyecto/${o.id}"><c:out value="${o.title}"></c:out></a></li>
-		                   		<li><c:out value="${o.description}"></c:out></li>
-		                   		<li><a href="/proyecto/${o.id}"
-											class="button special small">Oferta</a></li>
-		                   		</ul>
-	                   		</div>
-	               		</c:forEach> 
-	               	</c:when>
-	               	<c:when test="${type=='E'}">
-	                    <c:forEach items="${business}" var="b" begin="${(pag-1)*4}" end="${((pag-1)*4)+3}" >
-		   					<div class="u">
-			   					<div class="colum1">
-		       					<img src="/proyect/photo/${b.id}" alt="" width="100" height="100/">
-								</div>
-								<ul style="list-style:none;">
-		                   		<li><a href="/proyecto/${b.id}"><c:out value="${b.title}"></c:out></a></li>
-		                   		<li><c:out value="${b.description}"></c:out></li>
-		                   		<li><a href="/proyecto/${b.id}"
-											class="button special small">Empresa</a></li>
-		                   		</ul>
-	                   		</div>
-	               		</c:forEach> 
-	               	</c:when>
+	               		</c:forEach>
+	               
                   </div>                 
                 </div>                
             </section>        
