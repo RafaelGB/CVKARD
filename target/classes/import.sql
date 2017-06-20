@@ -34,10 +34,6 @@ INSERT INTO Proyect(id,date,description,title) VALUES (1,'2017-06-09','Ejemplo d
 INSERT INTO Proyect(id,date,description,title) VALUES (4,'2017-06-24','Ejemplo de proyecto 2','Proyecyo 2');
 
 
-/*----- PROYECTS TAGS -----*/
-INSERT INTO Proyect_Tags(proyects_id,tags_id) VALUES(1,1);
-INSERT INTO Proyect_Tags(proyects_id,tags_id) VALUES(2,2);
-
 
 /*-------- TAGS ---------*/
 

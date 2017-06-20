@@ -106,7 +106,7 @@
 		                          <input type="checkbox" id="copy${p.id}" name="checked" value="${p.id}"></input>
 		                          <label for="copy${p.id}"></label>
 		                          </td>
-		                        <td><a href="/editProyect/${p.id}"><c:out value="${p.title}"></c:out></a></td>  
+		                        <td><a href="/proyect/editProyect/${p.id}"><c:out value="${p.title}"></c:out></a></td>  
 		                        <td>${p.date}</td>
 		                      </tr>
 		                     </c:forEach>

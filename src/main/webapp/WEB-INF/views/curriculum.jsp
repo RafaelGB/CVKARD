@@ -47,8 +47,7 @@
                     	<h3>${theUser.name} ${theUser.lastName}</h3>
                      	<ul style="list-style:none;">		              
 		                    <li>${theUser.DNI}</li>
-		                    <li>${theUser.birthday}</li>
-		                    <li>Domicilio</li>		               
+		                    <li>${theUser.birthday}</li>	               
 	                   </ul>
                     </div>
                 </div>               
@@ -79,7 +78,7 @@
            		</div>
            <div class="box">
              <h3>Carta de Presentacion</h3>
-	        <form id="pdf_form" action="/download/showpdf/${user.id}" method="post">
+	        <form id="pdf_form" action="/download/showpdf/${theUser.id}" method="post">
 	            <textarea name="vitae" id="vitae" rows="10" cols="80" disabled="disabled">
 	                ${theUser.card}
 	            </textarea>
@@ -100,7 +99,7 @@
 			<div class="box">
 				<section>
 					<h3>Contacta Conmigo</h3>
-					 <form id="contact-form" action="/message/createExternalMessage/${user.id}" method="POST">
+					 <form id="contact-form" action="/message/createExternalMessage/${theUser.id}" method="POST">
 					 	<div class="row">
 		                    <div class="u">
 		                    	<div class="column1">

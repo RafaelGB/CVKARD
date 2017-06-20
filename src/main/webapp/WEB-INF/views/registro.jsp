@@ -46,8 +46,10 @@
 		                    <div class="u2">
 		                    	<div class="column1">
 		                    		<ul style="list-style:none;">
-		                    			<li><input type="text" name="nameE" id="nameE"  placeholder="Nombre"></li></br>
-		                    			<li><input type="text" class="form-control" name="nickE" id="nickE" placeholder="Indique su nick"/></li></br>
+		                    			<li><input type="text" name="nameE" id="nameE"  placeholder="Nombre" pattern="^[A-Za-z -]+$"
+											title="Sólo letras y espacios"></li></br>
+		                    			<li><input type="text" class="form-control" name="nickE" id="nickE" placeholder="Indique su nick"
+		                    			 pattern="^[A-Za-z -]+$" title="Sólo letras y espacios"/></li></br>
 		                    			<li><input type="password" class="form-control" name="passE" id="passE"  placeholder="Password"/></li></br> 
 		                    			<li><div id="RecaptchaField1"></div></li>
 		                    			                		                    		
@@ -57,7 +59,8 @@
 		                    <div class="u2">
 		                    	<div class="column1">
 		                    		<ul style="list-style:none;">
-		                    			<li><input type="text" name="lastNameE" id="lastNameE" placeholder="Last Name"></li></br>
+		                    			<li><input type="text" name="lastNameE" id="lastNameE" placeholder="Last Name" 
+		                    			pattern="^[A-Za-z -]+$"	title="Sólo letras y espacios"></li></br>
 		                    			<li><input type="email" class="form-control" name="emailE" id="emailE"  placeholder="Indique su email"/></li></br><!--  onchange="javascript:validateMail('id_email')"?¿? -->		                    		
 				                    	<li><input type="password" class="form-control" name="passConfirmE" id="passConfirmE"  placeholder="Confirm your password"/></li></br>
 										<li>

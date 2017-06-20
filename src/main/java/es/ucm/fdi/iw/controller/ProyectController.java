@@ -27,6 +27,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -328,6 +329,35 @@ public class ProyectController {
 		}
 		return new RedirectView("/proyecto/"+id+"?desc="+ desc);	
 	}
+	
+	/**
+	 * editProyect -  vista de edición de un proyecto
+	 */
+	@GetMapping("/editProyect/{id}")
+	@Transactional
+	public String editProyect(Model model,
+			@PathVariable("id") long id,
+			HttpSession session) {
+		String exit="redirect:/home?error=acceso+denegado";
+		User u = (User) session.getAttribute("user");
+		int i = 0;
+		boolean validate = false;
+		Proyect p = entityManager.find(Proyect.class, id);
+		//comprobamos si el usuario pertenece a la lista de miembros del proyecto
+		while(!validate && i < p.getMembers().size()){
+			if(p.getMembers().get(i).getId()== u.getId())
+				validate = true;
+			i++;
+		}
+		if(validate){	
+			model.addAttribute("proyect", p);
+			model.addAttribute("tags",p.getTags());
+			model.addAttribute("lang",p.getLanguages());
+			exit="editProyect";
+		}
 		
+		return exit;
+	}
+			
 	
 }

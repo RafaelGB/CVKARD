@@ -180,29 +180,6 @@ public class RootController {
 		
 	}
 	
-	/**
-	 * editProyect -  vista de edición de un proyecto
-	 */
-	@GetMapping("/editProyect/{id}")
-	@Transactional
-	public String editProyect(Model model,@PathVariable("id") long id, HttpSession session) {
-		String exit="home";
-		User u = (User) session.getAttribute("user");
-		u= entityManager.find(User.class, u.getId());
-		Proyect p = entityManager.find(Proyect.class, id);
-		
-		log.info("refresh de proyecto."+ p.getId());
-		
-		session.setAttribute("user", u);
-		model.addAttribute("proyect", p);
-		model.addAttribute("tags",p.getTags());
-		model.addAttribute("lang",p.getLanguages());
-		exit="editProyect";
-		
-		
-		return exit;
-	}
-	
 	
 	/**
 	 * Proyecto - vista sobre los detalles y referencias de un proyecto concreto
