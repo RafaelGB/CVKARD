@@ -88,11 +88,11 @@
 											value="${!empty proyect.date ? proyect.date : ''}">
 
 										</li>
-										<li id="selector" style="visibility: hidden;">Tags:<c:forEach items="${tags}" var="t">
+										<li id="selectorT" style="visibility: hidden;">Tags:<c:forEach items="${tags}" var="t">
 										<input type="checkbox" id="${t.id}" name="checkedTag" value="${t.name}" ></input>
 										<label for="${t.id}">${t.name}</label>
 										</c:forEach></li>
-										<li id="selector" style="visibility: hidden;">Lenguajes:<c:forEach items="${lang}" var="l">
+										<li id="selectorL" style="visibility: hidden;">Lenguajes:<c:forEach items="${lang}" var="l">
 										<input type="checkbox" id="l${l.id}" name="checkedTag" value="${l.name}" ></input>
 										<label for="l${l.id}">${l.name}</label>
 										</c:forEach></li>
