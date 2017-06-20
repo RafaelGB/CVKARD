@@ -620,5 +620,116 @@ public class RootController {
 		session.setAttribute("user", u);
 		return url;
 	}
+	/**
+	 * Usuarios - vista sobre usuarios
+	 */
+	@GetMapping("/Usuarios/{pag}")
+	public String Usuarios(HttpSession session,HttpServletResponse response,
+			@PathVariable("pag") String pag,
+			Model model) {
+		String exit = "home";
+		
+		try {
+			log.info("pagina de usuarios : "+pag);
+				if(pag.equals("1")){
+					User u = (User) session.getAttribute("user");
+					log.info("carga el usuario : "+u.getName());
+					u = entityManager.find(User.class, u.getId());//refresh de la base de datos
+					log.info("refresh de usuario lanzado.");
+					List<User> lu = entityManager.createQuery("select u  from User u where roles LIKE '%USER%'", User.class).getResultList();
+					model.addAttribute("pag",pag);
+					model.addAttribute("Alluser", lu);
+					
+				}
+				else if(pag.equals("N"))
+				{
+					List<Tag> t = entityManager.createQuery("from Tag ", Tag.class).getResultList();
+					
+			        model.addAttribute("tags",t);
+				}
+			
+				exit = "Usuarios";
+			} catch (NoResultException nre) {
+				log.error("fallo al encontrar el usuario para actualizar");
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+				
+			}catch (EntityNotFoundException nre) {
+				
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);		
+			}
+		
+		return exit;
+	}
+	
+	
+	/**
+	 * Tags - vista sobre tags
+	 */
+	@GetMapping("/Tags/{pag}")
+	public String Tags(HttpSession session,HttpServletResponse response,
+			@PathVariable("pag") String pag,
+			Model model) {
+		String exit = "home";
+		
+		try {
+			log.info("pagina de tags : "+pag);
+				if(pag.equals("1")){
+					User u = (User) session.getAttribute("user");
+					log.info("carga el usuario : "+u.getName());
+					u = entityManager.find(User.class, u.getId());//refresh de la base de datos
+					log.info("refresh de usuario lanzado.");
+					List<Tag> t = entityManager.createQuery("select t  from Tag t", Tag.class).getResultList();	
+					model.addAttribute("pag",pag);
+					model.addAttribute("Alltag", t);
+					
+				}
+			
+				exit = "Tags";
+			} catch (NoResultException nre) {
+				log.error("fallo al encontrar el usuario para actualizar");
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+				
+			}catch (EntityNotFoundException nre) {
+				
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);		
+			}
+		
+		return exit;
+	}
+	
+	/**
+	 * Language - vista sobre lenguajes
+	 */
+	@GetMapping("/Ls/{pag}")
+	public String Ls(HttpSession session,HttpServletResponse response,
+			@PathVariable("pag") String pag,
+			Model model) {
+		String exit = "home";
+		
+		try {
+			log.info("pagina de ls : "+pag);
+				if(pag.equals("1")){
+					User u = (User) session.getAttribute("user");
+					log.info("carga el usuario : "+u.getName());
+					u = entityManager.find(User.class, u.getId());//refresh de la base de datos
+					log.info("refresh de usuario lanzado.");
+					List<Language> l = entityManager.createQuery("select l  from Language l", Language.class).getResultList();	
+					model.addAttribute("pag",pag);
+					model.addAttribute("Ls", l);
+					
+				}
+			
+				exit = "Ls";
+			} catch (NoResultException nre) {
+				log.error("fallo al encontrar el usuario para actualizar");
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+				
+			}catch (EntityNotFoundException nre) {
+				
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);		
+			}
+		
+		return exit;
+	}
 	
 }

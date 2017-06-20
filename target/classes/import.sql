@@ -8,6 +8,8 @@ INSERT INTO User(id,enabled,name,card,email,password,roles) VALUES (2, 1,'INDRA'
 INSERT INTO User(id,enabled,name,card,email,password,roles) VALUES (3, 1,'Facebook','somos una compañia seria y decidida','fb@fb.com', '$2a$10$oEomdmFNCh3YtRsYiGwLnexXZSQW/.a0rgShNhml0w9k9/dfZvnG', 'USER,BUSSINES');
 /*password miguel*/
 INSERT INTO User(id,enabled,name,last_name,nick,card,email,password,roles) VALUES (4, 1,'Miguel','Gomez','miguelCV','Esto es una carta de prueba de Miguel','miguel@ucm.es', '$2a$10$5ZW42mtBGZPCxVh9jSvOKeCuiUl0D0D0Ckqf94Q3ay6M5t6fvgYBq', 'USER,EMPLOYEE');
+/*password adminUCM*/
+INSERT INTO User(id,enabled,name,last_name,nick,card,email,password,roles) VALUES (5, 1,'Admin','Admin','adminCV',null,'admin@ucm.es', '$2a$10$oOdv1zOSYfWLrDbdtfk7medVZgcM8pdb/FycOlu97xxZXyja6pO8O', 'ADMIN');
 
 
 

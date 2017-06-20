@@ -14,7 +14,8 @@
 
         <nav id="nav1">
           <div class="line">
-             <div class="top-nav">                              
+             <div class="top-nav"> 
+             <sec:authorize access="hasRole('EMPLOYEE') or hasRole('BUSSINES')">                             
                 <div class="top-nav s-12 l-5">
                    <ul class="right top-ul chevron" >
                       <li><a href="/home">Home</a>
@@ -27,10 +28,14 @@
 							<a href="/empresas/empresavista/${user.id}/1">Perfil</a>
 						</sec:authorize>
                       </li>
+                      <sec:authorize access="hasRole('EMPLOYEE') or hasRole('BUSSINES')">
                       <li><a href="/proyectos/1">Proyectos</a>
                       </li>
+                      </sec:authorize>
                    </ul>
                 </div>
+                </sec:authorize>
+                <sec:authorize access="hasRole('EMPLOYEE') or hasRole('BUSSINES')">
                 <ul class="s-12 l-2">
                    <li class="logo hide-s hide-m">
                       <h2><img src="${s}images/logo1.png" id ="logo1"/></h2>
@@ -49,6 +54,35 @@
                       </li>
                    </ul> 
                 </div>
+                </sec:authorize>
+                   <sec:authorize access="hasRole('ADMIN')">
+                                   <div class="top-nav s-12 l-5">
+                   <ul class="right top-ul chevron" >
+                      <li><a href="/home">Home</a>
+                      </li>
+                      <li>
+   						<li><a href="/Ls/1">Lenguajes</a></li>
+                      <li><a href="/Tags/1">Tags</a>
+                      </li>
+                   </ul>
+                </div>
+                      
+                      
+                      <ul class="s-12 l-2">
+                   <li class="logo hide-s hide-m">
+                      <h2><img src="${s}images/logo1.png" id ="logo1"/></h2>
+                   </li>
+                </ul>
+                <div class="top-nav s-12 l-3">
+                   <ul class="left top-ul chevron">
+                      <li>
+                      <li><a href="/Usuarios/1">Usuarios</a>
+                      </li>
+                   
+                   </ul> 
+                </div>
+                      
+                      </sec:authorize>
                 <div class="top-nav s-12 l-4">
                     <ul class="right top-ul chevron">
                    		<!-- segÃºn el rol tendran acceso al tipo de perfil de acorde -->
