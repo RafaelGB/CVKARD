@@ -308,7 +308,6 @@ public class RootController {
 	 * TablaProyectos -  vista sobre los proyectos de un trabajador en concreto bajo su log y sus opciones de edición
 	 */
 	@GetMapping("/tablaproyectos/{type}/{pag}")
-	@Transactional
 	public String tablaproyectos(Model model,@PathVariable("pag") String pag,@PathVariable("type") String type, HttpSession session) {
 		String exit="home";
 		if(type.equals("N")){
@@ -344,7 +343,6 @@ public class RootController {
 	 * TablaOfertas - vista sobre las ofertas de un negocio en concreto bajo su log y sus opciones de edición
 	 */
 	@GetMapping("/tablaofertas/{pag}")
-	@Transactional
 	public String tablaofertas(HttpSession session,HttpServletResponse response,
 			@PathVariable("pag") String pag,
 			Model model) {
@@ -388,7 +386,6 @@ public class RootController {
 	 */
 
 	@GetMapping("/ofertavista/{id}")
-	@Transactional
 	public String ofertavista(HttpSession session, Model model, @PathVariable("id") long id) {
 		String url = "home";
 
@@ -419,7 +416,6 @@ public class RootController {
  	 */
   	
  	@GetMapping("/empresas/empresavista/{id}/{pag}")
- 	@Transactional
  	public String empresavista(HttpSession session, Model model,
  			@PathVariable("id") long id,
  			@PathVariable("pag") String pag) {
@@ -442,7 +438,6 @@ public class RootController {
 
 	
 	@GetMapping("/ofertas/{pag}")
-	@Transactional
 	public String ofertas(HttpSession session,HttpServletResponse response,
 			@PathVariable("pag") String pag,
 			Model model) {
@@ -478,7 +473,6 @@ public class RootController {
 	}
 	
 	@GetMapping("/empresas/{pag}")
- 	@Transactional
  	public String empresas(HttpSession session, HttpServletResponse response, @PathVariable("pag") String pag,
  			Model model) {
  		String exit = "home";
@@ -511,7 +505,6 @@ public class RootController {
 	
 	
 	@GetMapping("/tag/{id}/{pag}")
-	@Transactional
 	public String tag(Model model,@PathVariable("id") Long id,@PathVariable("pag") String pag, HttpSession session) {
 		String exit="home";
 		
@@ -537,7 +530,6 @@ public class RootController {
 	}
 	
 	@GetMapping("/language/{id}/{pag}")
-	@Transactional
 	public String language(Model model,@PathVariable("id") Long id,@PathVariable("pag") String pag, HttpSession session) {
 		String exit="home";
 		
@@ -561,7 +553,6 @@ public class RootController {
 	}
 	
 	@GetMapping("/proyectos/{pag}")
-	@Transactional
 	public String proyectos(Model model,@PathVariable("pag") String pag, HttpSession session) {
 		String exit="home";
 		
@@ -598,7 +589,7 @@ public class RootController {
 		try {
 		
 			if (type.equals("P")) {
-				p = entityManager.createQuery("select p from Proyect p where p.title LIKE CONCAT('%',:busqueda,'%')")
+				p = entityManager.createQuery("select p from Proyect p where p.title like concat('%',:busqueda,'%')")
 					.setParameter("busqueda", busqueda).getResultList();
 				System.out.println("tamaño de la lista "+p.size());
 				model.addAttribute("size",p.size());
@@ -609,20 +600,24 @@ public class RootController {
 				
 			
 			else if (type.equals("O")) {
-				o = entityManager.createQuery("select p from Proyect p where title like '%=:busqueda%'")
+				o = entityManager.createQuery("select p from Offer p where p.title like concat('%',:busqueda,'%')")
 						.setParameter("busqueda", busqueda).getResultList();
+				System.out.println("tamaño de la lista "+o.size());
 				model.addAttribute("size",o.size());
-				model.addAttribute("offers",o);	
+				model.addAttribute("offers",o);
+				model.addAttribute("type", "O");
+				url = "buscador";	
 					
 			}
 			
 			else if (type.equals("E")) {
-				b = entityManager.createQuery("select p from Proyect p where title like '%=:busqueda%'")
+				b = entityManager.createQuery("select p from User p where p.name like concat('%',:busqueda,'%') and p.roles like '%BUSSINES%'")
 						.setParameter("busqueda", busqueda).getResultList();
-				
+				System.out.println("tamaño de la lista "+b.size());
 				model.addAttribute("size",b.size());
-				model.addAttribute("business",b);	
-					
+				model.addAttribute("bussines",b);
+				model.addAttribute("type", "E");
+				url = "buscador";	
 			}
 		
 		} catch (Exception e) {

@@ -24,6 +24,7 @@ public class Proyect {
 	private String img;
 	private String title;
 	private String date;
+	private String link;
 	private List <User> members;
 	private List<Language> languages;
 	private List<Tag> tags;
@@ -66,6 +67,12 @@ public class Proyect {
 		this.date = date;
 	}
 	
+	public String getLink() {
+		return link;
+	}
+	public void setLink(String link) {
+		this.link = link;
+	}
 	@ManyToMany(targetEntity=User.class, mappedBy="proyects")
 	public List<User> getMembers() {
 		return members;
