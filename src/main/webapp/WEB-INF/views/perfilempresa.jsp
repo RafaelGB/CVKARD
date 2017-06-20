@@ -65,22 +65,16 @@
 										<li style="font-size: 24px; margin-top: 0.5em;"><input
 											class="changingClass" type="text" disabled="disabled"
 											id="name-form" name="name-form" form="confirmUpdate"
-											value="${user.name}" /></li>
-										</br>
-										<li><c:choose>
-												<c:when test="${!empty user.email}">
-													<input class="changingClass" type="text"
-														disabled="disabled" id="email-form" name="email-form"
-														form="confirmUpdate" value="${user.email}" />
-													<br />
-												</c:when>
-												<c:otherwise>
-													<input class="changingClass" type="text"
-														disabled="disabled" id="email-form" name="email-form"
-														form="confirmUpdate" placeholder="ejemplo@ej.ej" />
-													<br />
-												</c:otherwise>
-											</c:choose></li>
+											value="<c:out value="${user.name}"></c:out>" />
+										</li>
+										<br></br>
+										<li>
+											<input class="changingClass" type="text"
+												disabled="disabled" id="email-form" name="email-form"
+												form="confirmUpdate" 
+												value="<c:out value="${!empty user.email ? user.email : 'email@ejemplo.sub'}"></c:out>" />
+											<br />
+										</li>
 									</ul>
 								</div>
 							</div>
@@ -93,12 +87,12 @@
 										<li><input class="changingClass" type="text"
 											placeholder="Municipio" disabled="disabled"
 											id="municipality-form" name="municipality-form"
-											form="confirmUpdate" value="${user.address.municipality}" /></br>
+											form="confirmUpdate" value="<c:out value="${user.address.municipality}"></c:out>" /></br>
 										</li>
 										<li><input class="changingClass" type="text"
 											placeholder="Calle" disabled="disabled" id="street-form"
 											name="street-form" form="confirmUpdate"
-											value="${user.address.street}" /> <span
+											value="<c:out value="${user.address.street}"></c:out>" /> <span
 											style="display: inline-block; width: 10px;"></span></li>
 
 									</ul>
@@ -112,11 +106,11 @@
 										<li style="padding-top: 4em"><input class="changingClass" type="text"
 											placeholder="País" disabled="disabled" id="country-form"
 											name="country-form" form="confirmUpdate"
-											value="${user.address.country}" /></br></li>
+											value="<c:out value="${user.address.country}"></c:out>" /></br></li>
 										<li><input class="changingClass" type="text"
 											placeholder="Número" disabled="disabled" id="number-form"
 											name="number-form" form="confirmUpdate"
-											value="${user.address.number}" /></li>
+											value="<c:out value="${user.address.number}"></c:out>" /></li>
 									</ul>
 
 								</div>

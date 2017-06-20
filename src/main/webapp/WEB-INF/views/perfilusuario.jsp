@@ -73,27 +73,26 @@
 										<li style="font-size: 24px; margin-top: 0.5em;"><input
 											class="changingClass" disabled="disabled" type="text"
 											id="name-form" name="name-form" form="confirmUpdate"
-											value="${user.name}" pattern="^[A-Za-z -]+$"
+											value="<c:out value="${user.name}"></c:out>" pattern="^[A-Za-z -]+$"
 											title="Sólo letras y espacios"/></li>
 										<li class="changingClass"
 											style="font-size: 21px; margin-bottom: 1em;"><input
 											class="changingClass" disabled="disabled" type="text"
 											id="lastName-form" name="lastName-form" form="confirmUpdate"
-											value="${user.lastName}" pattern="^[A-Za-z -]+$"
-											title="Sólo letras y espacios"/></li>
+											value="<c:out value="${user.lastName}"></c:out>" pattern="^[A-Za-z -]+$" title="Sólo letras y espacios"/></li>
 
 
 										<li>
 											<input disabled="disabled" class="changingClass" pattern="^(\d){8}[a-zA-Z]$"
 											title="8 digitos + letra" type="text" id="dni-form" name="dni-form"
-											form="confirmUpdate" value="${!empty user.DNI ? user.DNI : '00000000A'}" />
+											form="confirmUpdate" value="<c:out value="${!empty user.DNI ? user.DNI : '00000000A'}"></c:out>" />
 										</li>
 										<li>fecha de nacimiento: 
 										
 											<input class="changingClass"
 											disabled="disabled" type="date" id="birthday-form"
 											name="birthday-form" form="confirmUpdate"
-											value="${!empty user.birthday ? user.birthday : ''}">
+											value="<c:out value="${!empty user.birthday ? user.birthday : 'fecha de nacimiento'}"></c:out>">
 
 										</li>
 									</ul>
@@ -123,7 +122,7 @@
 						<h3>Carta de Presentacion</h3>
 				        <form id="ckeditor_form" action="/user/updateCard/E" method="post">
 				            <textarea name="editor1" id="editor1" rows="10" cols="80">
-				                ${user.card}
+				                <c:out value="${user.card}"></c:out>
 				            </textarea>
 				            <input type="text" name="html_data" id="html_data" style="visibility:hidden;"> </input>
 				            <input name="${_csrf.parameterName}" type="hidden"
