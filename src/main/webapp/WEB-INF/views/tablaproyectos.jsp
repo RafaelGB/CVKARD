@@ -8,7 +8,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>CVKard - Ofertas</title>
+	<title>CVKard - Proyectos</title>
     <link rel="stylesheet" type="text/css"  href="${s}css/main.css">
     <link rel="stylesheet" type="text/css"  href="${s}css/components.css">  
 
@@ -29,9 +29,7 @@
         <div class="line">
           <section id="main" class="container">
             <a href="/tablaproyectos/N/0" id ="new" class="button alt fit small">Nuevo</a>
-            <a href="#" class="button alt fit small">Modificar</a>
-            <a href="#" class="button alt fit small">Eliminar</a>
-			<a href="#" class="button alt fit small">Buscar</a>
+  
             <div class="box">
 
               <div class="row"> 
@@ -175,9 +173,3 @@
       <script src="${s}js/main.js"></script>
    </body>
 </html>
-
-
-
-
-
-

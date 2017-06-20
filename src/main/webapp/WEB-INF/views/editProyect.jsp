@@ -17,7 +17,6 @@
 <link rel="stylesheet" type="text/css" href="${s}css/template-style.css">
 <link rel="stylesheet" type="text/css" href="${s}css/style.css" />
 
-<script src="${s}tools/ckeditor/ckeditor.js"></script>
 
 <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 
@@ -75,7 +74,7 @@
 										<li style="font-size: 24px; margin-top: 0.5em;"><input
 											class="changingClass" disabled="disabled" type="text"
 											id="name-form" name="name-form" form="confirmUpdate"
-											value="${proyect.title}" /></li>
+											value="<c:out value="${proyect.title}"></c:out>" /></li>
 										
 
 
@@ -85,7 +84,7 @@
 											<input class="changingClass"
 											disabled="disabled" type="date" id="birthday-form"
 											name="date-form" form="confirmUpdate"
-											value="${!empty proyect.date ? proyect.date : ''}">
+											value="<c:out value="${!empty proyect.date ? proyect.date : ''}"></c:out>">
 
 										</li>
 										<li id="selectorT" style="visibility: hidden;">Tags:<c:forEach items="${tags}" var="t">
@@ -122,18 +121,13 @@
 					<div class="box">
 						<h3>Descripción del proyecto</h3>
 				        <form id="ckeditor_form" action="/proyect/updateDescript/${proyect.id}" method="post">
-				            <textarea name="editor1" id="editor1" rows="10" cols="80">
-				                ${proyect.description}
+				            <textarea name="editor1" id="editor1" rows="2" cols="40">
+				                <c:out value="${proyect.description}"></c:out>
 				            </textarea>
 				            <input type="text" name="html_data" id="html_data" style="visibility:hidden;"> 
 				            <input name="${_csrf.parameterName}" type="hidden"
 									value="${_csrf.token}" />
 							 <input type="button" onclick="updateCkeditor()" value="Actualizar">
-				            <script>
-				                // Replace the <textarea id="editor1"> with a CKEditor
-				                // instance, using default configuration.
-				                CKEDITOR.replace( 'editor1' );
-				            </script>
 				        </form>
 					</div>
 				</section>
@@ -175,7 +169,7 @@
 	    	  }
 	      }
 	      function updateCkeditor(){
-	    	  var data = CKEDITOR.instances.editor1.getData();
+	    	  var data = document.getElementById("editor1").value;
 	    	  document.getElementById("html_data").value = data;
 	    	  document.getElementById("ckeditor_form").submit();
 	      }
