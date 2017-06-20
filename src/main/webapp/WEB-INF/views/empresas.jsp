@@ -34,6 +34,14 @@
 		<div id="content">
 			<div class="line">
 				<section id="main" class="container">
+					<div class="row">
+					 <form method="post" action="buscador/E/" style="float: inherit;">
+						<ul class="actions" style="float: inherit;">
+							<li><input type="text" name="nick" id="nick"  placeholder="Escribe una oferta..." /></li>
+							<li><a href="#" class="button special" id="search_button">Buscar Empresas</a></li>
+						</ul>
+					</form>
+					</div>	
 					<div class="box" id="site">
 						<a href="/home"> Home > </a> <a id="actual">Empresas </a>
 

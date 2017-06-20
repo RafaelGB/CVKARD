@@ -73,9 +73,10 @@
 
 		<div id="content">
 			<div class="line">
-
 				<section id="main" class="container">
+						
 					<div class="box">
+					
 						<div class="line">
 							<h2>MEJORES EMPRESAS</h2>
 						</div>

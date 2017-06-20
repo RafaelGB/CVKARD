@@ -31,29 +31,34 @@
       <div id="content">
         <div class="line">
           <section id="main" class="container"> 
-          <div class="box" id="site">
+	          <div class="row">
+		           <form method="post" action="buscador/P/"+title style="float: inherit;">
+						<ul class="actions" style="float: inherit;">
+							<li><input type="text" name="title" id="title"  placeholder="Escribe el titulo del proyecto..." /></li>
+							<li><a href="#" class="button special" id="search_button">Buscar Proyectos</a></li>
+						</ul>
+					</form>
+				</div>	
+	          <div class="box" id="site">
               <a href="/home"> Home > </a> <a id="actual">Proyectos </a>
 
           </div>
 
             <div class="box">
               <div class="row">
-                  
-                    
-                    
                     <c:forEach items="${proyects}" var="p" begin="${(pag-1)*4}" end="${((pag-1)*4)+3}" >
-		   					<div class="u">
-			   					<div class="colum1">
-		       					<img src="/proyect/photo/${p.id}" alt="" width="100" height="100/">
-								</div>
-								<ul style="list-style:none;">
-		                   		<li><a href="/proyecto/${p.id}"><c:out value="${p.title}"></c:out></a></li>
-		                   		<li><c:out value="${p.description}"></c:out></li>
-		                   		<li><a href="/proyecto/${p.id}"
-											class="button special small">Proyecto</a></li>
-		                   		</ul>
-	                   		</div>
-                   		</c:forEach>
+	   					<div class="u">
+		   					<div class="colum1">
+	       					<img src="/proyect/photo/${p.id}" alt="" width="100" height="100/">
+							</div>
+							<ul style="list-style:none;">
+	                   		<li><a href="/proyecto/${p.id}"><c:out value="${p.title}"></c:out></a></li>
+	                   		<li><c:out value="${p.description}"></c:out></li>
+	                   		<li><a href="/proyecto/${p.id}"
+										class="button special small">Proyecto</a></li>
+	                   		</ul>
+                   		</div>
+               		</c:forEach>
                     
             	</div>
 	            	<div class="w3-bar w3-border w3-round">

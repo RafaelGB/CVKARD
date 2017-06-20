@@ -597,4 +597,53 @@ public class RootController {
 		return exit;
 	}
 	
+	@GetMapping("/buscador/{type}/{busqueda}")
+	public String busqueda(@PathVariable("busqueda") String busqueda,@PathVariable("type") String type,HttpSession session,
+			Model model) {
+		String url = "home";
+		log.info("Buscando datos: '"+busqueda+"'\n");
+		List<Proyect> p;
+		List<User> b;
+		List<Offer> o;
+		User u = (User) session.getAttribute("user");
+		u= entityManager.find(User.class, u.getId());
+		
+		try {
+		
+			if (type.equals("P")) {
+				p = entityManager.createQuery("select p from Proyect p where title like '%=:busqueda%'")
+					.setParameter("busqueda", busqueda).getResultList();
+				
+				model.addAttribute("size",p.size());
+				model.addAttribute("proyects",p);
+				
+				}
+				
+			
+			else if (type.equals("O")) {
+				o = entityManager.createQuery("select p from Proyect p where title like '%=:busqueda%'")
+						.setParameter("busqueda", busqueda).getResultList();
+				model.addAttribute("size",o.size());
+				model.addAttribute("offers",o);	
+					
+			}
+			
+			else if (type.equals("E")) {
+				b = entityManager.createQuery("select p from Proyect p where title like '%=:busqueda%'")
+						.setParameter("busqueda", busqueda).getResultList();
+				
+				model.addAttribute("size",b.size());
+				model.addAttribute("business",b);	
+					
+			}
+		
+		} catch (Exception e) {
+			// TODO: handle exception
+			log.error(e);
+		}
+		
+		session.setAttribute("user", u);
+		return url;
+	}
+	
 }

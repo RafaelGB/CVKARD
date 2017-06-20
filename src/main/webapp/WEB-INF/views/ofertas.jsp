@@ -33,6 +33,14 @@
 		<div id="content">
 			<div class="line">
 				<section id="main" class="container">
+					<div class="row">
+					 <form method="post" action="buscador/O/" style="float: inherit;">
+						<ul class="actions" style="float: inherit;">
+							<li><input type="text" name="nick" id="nick"  placeholder="escribe un nick..." /></li>
+							<li><a href="#" class="button special" id="search_button">Buscar Ofertas</a></li>
+						</ul>
+					</form>
+					</div>	
 					<div class="box" id="site">
 						<a href="/home"> Home > </a> <a id="actual">Ofertas </a>
 
@@ -89,7 +97,11 @@
 
 
 	<!-- Scripts -->
-
+	<script>
+    function searchingCV(myLink){
+    	myLink.href = "/ofertavista/"+document.getElementById("nick").value;
+    }
+    </script>
 	<script src="${s}js/jquery.min.js"></script>
 	<script src="${s}js/jquery.dropotron.min.js"></script>
 	<script src="${s}js/login.js"></script>
