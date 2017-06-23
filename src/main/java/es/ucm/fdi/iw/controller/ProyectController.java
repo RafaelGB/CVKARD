@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -125,34 +127,25 @@ public class ProyectController {
     public RedirectView updateInfoProyect(
 			@RequestParam("name-form") String title,
 			@RequestParam("date-form") String date,
+			@RequestParam("link-form") String link,
 			@PathVariable("id") long id,
-    		@RequestParam("checkedTag") List<String> checked1,
 			HttpServletRequest request, HttpServletResponse response, 
 			Model model, HttpSession session){
 		log.info("dentro del update\n name = "+title+"\n date = "+date+"\n");
 		try {
 			Proyect p = entityManager.find(Proyect.class, id);
-			Iterator<String> it = checked1.iterator();
+			
 			p.setTitle(title);
 			p.setDate(date);
-			List<Tag> listTags = new ArrayList<Tag>();
-			int i=0;
-			while(it.hasNext()) {
-				Tag t = entityManager.createQuery("from Tag where name = :name", Tag.class)
-                        .setParameter("name", it.next())
-                        .getSingleResult();
-				
-				listTags.add(i,t);
-				i++;
-				}
-			p.setTags(listTags);
+			p.setLink(link);
+			
 			entityManager.merge(p);
 			response.setStatus(HttpServletResponse.SC_OK);
-			return new RedirectView("/editProyect/"+id+"?update=tus+datos+se+actualizaron+correctamente");
+			return new RedirectView("/proyect/editProyect/"+id+"?update=tus+datos+se+actualizaron+correctamente");
 		} catch (NoResultException nre) {
 			log.error("fallo al encontrar el proyecto para actualizar\n");
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-			return new RedirectView("/editProyect/"+id+"?update=false");
+			return new RedirectView("/proyect/editProyect/"+id+"?update=false");
 		}	
 	}
 	
@@ -179,7 +172,7 @@ public class ProyectController {
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 				
 			}
-			return new RedirectView("/editProyect/"+id+"?desc="+ desc);
+			return new RedirectView("/proyect/editProyect/"+id+"?desc="+ desc);
 				
 	}
 	
@@ -189,23 +182,21 @@ public class ProyectController {
 	@Transactional // needed to allow DB change
     public RedirectView createProyect(HttpSession session,HttpServletResponse response,Model model,
     		@RequestParam("title") String title,
+    		@RequestParam("link") String link,
 			@RequestParam("description") String description,
 			@RequestParam("newDate") String date,
     		@RequestParam(value="checkedTag",required=false) List<String> checked ,
     		@RequestParam(value="checkedLang",required=false) List<String> checked2){
 		
-		String url = "/tablaproyectos/V/1";
+		String url = "/home"; 
 		try{
 		User u = (User) session.getAttribute("user");
 		u = entityManager.find(User.class, u.getId());//refresh de la base de datos
-		log.info("Proyecto creado por "+u.getName());
-		
-		
 		Proyect p = new Proyect();
 		p.setTitle(title);
 		p.setDescription(description);
 		p.setDate(date);
-		List<Tag> listTags = new ArrayList<Tag>();
+		p.setLink(link);
 		if(checked!=null){
 		Iterator<String> it = checked.iterator();
 		int i=0;
@@ -214,35 +205,43 @@ public class ProyectController {
                     .setParameter("name", it.next())
                     .getSingleResult();
 			
-			listTags.add(i,t);
+			p.getTags().add(i,t);
 			i++;
 			}
-		p.setTags(listTags);
 		}
 		if(checked2!=null){
 		Iterator<String> it2 = checked2.iterator();
-		List<Language> listLang = new ArrayList<Language>();
 		int i=0;
 		while(it2.hasNext()) {
 			Language l = entityManager.createQuery("from Language where name = :name", Language.class)
                     .setParameter("name", it2.next())
                     .getSingleResult();
 			
-			listLang.add(i,l);
+			p.getLanguages().add(i,l);
 			i++;
 			}
-		p.setLanguages(listLang);}
-		//f.setImg(img);
-		List<User> users= Arrays.asList(u);
-		p.setMembers(users);
+		}
+		//añadimos a las listas de proyectos y de miembros de proyecto
+		
+		log.info("size de getMembers"+p.getMembers().size());
+		p.getMembers().add(u);
+		
+		log.info("size de getProyects"+u.getProyects().size());
 		u.getProyects().add(p);
 		entityManager.persist(p);//si se crea un objeto nuevo
+		
+		log.info("llega hasta despues de getMembers");
+
+		log.info("llega hasta despues de getProyects");
+		log.info("Proyecto creado por "+u.getName());
 		session.setAttribute("user", u);
 		response.setStatus(HttpServletResponse.SC_OK);
+		url = "/tablaproyectos/V/1";
 		}catch(NoResultException nre){
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			log.error("No existe ningun usuario con ese email\n");
 		}
+		log.info("redirigiendo a "+url);
 		return new RedirectView(url);
 	}
 	

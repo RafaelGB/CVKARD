@@ -36,8 +36,8 @@
 			                   		<ul style="list-style:none;">
 			                      		<li><h2><c:out value="${proyect.title}"></c:out></h2></li>
 			                      		<li><h4> Miembros: </h4></li>
-			                      		<c:forEach items="${participante}" var="p" >
-			                      		<li><c:out value="${p.name}"></c:out></li>
+			                      		<c:forEach items="${proyect.members}" var="members" >
+			                      		<li><c:out value="${members.name}"></c:out></li>
 			                      		</c:forEach>		                      	
 			                      	</ul>
 			                    </div>
@@ -82,27 +82,10 @@
 						
 						<h3>Explicacion Proyecto</h3>
 						<p><c:out value="${proyect.description}"></c:out></p>
-								
-						<div class="row">
-							<img src="${s}images/logo.png" alt="" WIDTH=140 HEIGHT=100/>
-							<img src="${s}images/d.png" alt="" WIDTH=140 HEIGHT=100/>
-							<img src="${s}images/s.png" alt="" WIDTH=140 HEIGHT=100/>
-							<img src="${s}images/m.png" alt="" WIDTH=140 HEIGHT=100/>
-							<img src="${s}images/v.png" alt="" WIDTH=140 HEIGHT=100/>
-							<img src="${s}images/f.png" alt="" WIDTH=100 HEIGHT=80 style="padding-top:1.8em;"/>
-						</div>
 					</div>
 					
 					<div class="box">
-						<h3>Codigo proyecto</h3>
-							<div class="row">
-			              		<div class="u3">
-			                   		<div class="colum1">							
-										<textarea name="message" id="message" placeholder="Codigo" rows="6" readonly></textarea>
-									</div>
-								</div>
-							</div><br>
-							<a href="#" class="button special small" style="float:right;">Ver en GITHUB</a>
+						<a href="${proyect.link}" class="button special small" style="float:right;">Ver en GITHUB</a>
 					</div>
 	          	</section>
         	</div>

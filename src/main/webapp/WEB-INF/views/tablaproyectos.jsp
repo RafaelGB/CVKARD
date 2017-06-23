@@ -62,7 +62,9 @@
 												<input type="checkbox" id="l${l.id}" name="checkedLang" value="${l.name}" ></input>
 												<label for="l${l.id}">${l.name}</label>
 												</c:forEach></li>
-													
+												<li>
+													<input type="text" name="link" id="link"  placeholder="Enlace al proyecto" style="width:250px;max-width:250px">	
+												</li>
 												
 				                    		</ul>
 				                    	</div>

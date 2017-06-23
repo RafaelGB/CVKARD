@@ -1,4 +1,5 @@
 package es.ucm.fdi.iw.model;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -108,5 +109,10 @@ public class Proyect {
 		this.assessment = assessment;
 	}
 	
+	public Proyect(){
+		tags = new ArrayList<Tag>();
+		languages = new ArrayList<Language>();
+		members = new ArrayList<User>();
+	}
 
 }

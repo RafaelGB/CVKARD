@@ -45,14 +45,12 @@
 								<div class="colum1">
 								<img src="/proyect/photo/${proyect.id}" alt="" width="200"
 										height="150/">
-									<form id="formImage" action="/proyect/photo/${proyect.id}"
-										style="visibility: hidden;" enctype="multipart/form-data"
-										method="post">
-										<input type="file" name="photo" size="40"> <input
-											name="${_csrf.parameterName}" type="hidden"
-											value="${_csrf.token}" />
+									<form id="image-form" action="/proyect/photo/${proyect.id}"
+										 enctype="multipart/form-data" method="post">
+										<input class="changingClass" disabled="disabled" type="file" name="photo" size="40"> 
+										<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
 										<div>
-											<input type="submit" value="Send">
+											<input class="changingClass" disabled="disabled" type="submit" value="Send">
 										</div>
 									</form>
 									<span style="color: blue;"> <%
@@ -65,8 +63,8 @@
 							<form id="confirmUpdate" action="/proyect/updateInfoProyect/${proyect.id}"
 								style="visibility: hidden;" method="post">
 								<input name="${_csrf.parameterName}" type="hidden"
-									value="${_csrf.token}" /> <input type="submit"
-									id="submit-form" />
+									value="${_csrf.token}" />
+								<input type="submit" id="submit-form" />
 							</form>
 							<div class="u">
 								<div class="colum1">
@@ -82,18 +80,22 @@
 										<li>Fecha del proyecto: 
 										
 											<input class="changingClass"
-											disabled="disabled" type="date" id="birthday-form"
+											disabled="disabled" type="date" id="date-form"
 											name="date-form" form="confirmUpdate"
 											value="<c:out value="${!empty proyect.date ? proyect.date : ''}"></c:out>">
-
+											<br></br>
 										</li>
-										<li id="selectorT" style="visibility: hidden;">Tags:<c:forEach items="${tags}" var="t">
-										<input type="checkbox" id="${t.id}" name="checkedTag" value="${t.name}" ></input>
-										<label for="${t.id}">${t.name}</label>
+										<li>Link al proyecto:
+											<input class="changingClass" disabled="disabled" type="text"
+											id="link-form" name="link-form" form="confirmUpdate"
+											value="<c:out value="${proyect.link}"></c:out>" />
+										</li>
+											
+										<li>Tags:<c:forEach items="${tags}" var="t">
+											${t.name}
 										</c:forEach></li>
-										<li id="selectorL" style="visibility: hidden;">Lenguajes:<c:forEach items="${lang}" var="l">
-										<input type="checkbox" id="l${l.id}" name="checkedTag" value="${l.name}" ></input>
-										<label for="l${l.id}">${l.name}</label>
+										<li>Lenguajes:<c:forEach items="${lang}" var="l">
+											${l.name}
 										</c:forEach></li>
 									
 									</ul>
@@ -150,21 +152,15 @@
 	<script> 
 	      function updateState(button){
 	    	  var $div=$('.changingClass');
-	    	  var $select = document.getElementById ("selector");
 	    	  var $update = document.getElementById ("update_button");
-	    	  var $image = document.getElementById ("formImage");
 	    	  if($update.style.visibility == 'hidden'){
 	    		  $div.attr('disabled',false);
-	    		  $select.style.visibility = 'visible';
 	    		  $update.style.visibility = 'visible';
-	    		  $image.style.visibility = "visible";
 	    		  button.innerHTML = "Desactivar edición";
 	    	  }
 	    	  else{
 	    		  $div.attr('disabled',true);
-	    		  $select.style.visibility = 'hidden';
 	    		  $update.style.visibility = "hidden";
-	    		  $image.style.visibility = "hidden";
 	    		  button.innerHTML = "Activar edición";
 	    	  }
 	      }
