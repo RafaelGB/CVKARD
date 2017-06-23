@@ -35,10 +35,12 @@
 			<div class="line">
 				<section id="main" class="container">
 					<div class="row">
-					 <form method="post" action="buscador/E/" style="float: inherit;">
+					<form action="/buscador/E" style="float: inherit;" method="post">
 						<ul class="actions" style="float: inherit;">
-							<li><input type="text" name="nick" id="nick"  placeholder="Escribe una oferta..." /></li>
-							<li><a href="#" class="button special" id="search_button">Buscar Empresas</a></li>
+							<li><input type="text" name="busqueda" id="busqueda"  placeholder="Nombre de la empresa..." /></li>
+							 <input name="${_csrf.parameterName}" type="hidden"
+									value="${_csrf.token}" />
+							<li><input type="submit" class="button special" id="search_button" value="Buscar Empresa"></li>
 						</ul>
 					</form>
 					</div>	

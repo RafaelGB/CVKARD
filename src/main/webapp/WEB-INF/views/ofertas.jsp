@@ -34,13 +34,15 @@
 			<div class="line">
 				<section id="main" class="container">
 					<div class="row">
-					 <form method="post" action="buscador/O/" style="float: inherit;">
-						<ul class="actions" style="float: inherit;">
-							<li><input type="text" name="nick" id="nick"  placeholder="escribe un nick..." /></li>
-							<li><a href="#" class="button special" id="search_button">Buscar Ofertas</a></li>
-						</ul>
-					</form>
-					</div>	
+						<form action="/buscador/O" style="float: inherit;" method="post">
+							<ul class="actions" style="float: inherit;">
+								<li><input type="text" name="busqueda" id="busqueda"  placeholder="Titulo de la oferta..." /></li>
+								 <input name="${_csrf.parameterName}" type="hidden"
+										value="${_csrf.token}" />
+								<li><input type="submit" class="button special" id="search_button" value="Buscar Ofertas"></li>
+							</ul>
+						</form>
+					</div>
 					<div class="box" id="site">
 						<a href="/home"> Home > </a> <a id="actual">Ofertas </a>
 
@@ -59,7 +61,7 @@
 									<ul style="list-style: none;">
 										<li>${f.title}</li>
 										<li>${f.description}</li>
-										
+
 										</br>
 										<li><a href="/ofertavista/${f.id}"
 											class="button special small">Oferta</a></li>
@@ -73,8 +75,8 @@
 									class="w3-bar-item w3-button"> &laquo; </a> <a
 									href="/ofertas/${pag}" class="w3-button"> ${pag} </a> <a
 									href="/ofertas/${(((pag)*4)+1) <= size ? pag+1 : pag}"
-									class="w3-button"> ${(((pag)*4)+1) <= size ? pag+1 : '-'}
-								</a> <a href="/ofertas/${(((pag+1)*4)+1) <= size ? pag+2 : pag}#"
+									class="w3-button"> ${(((pag)*4)+1) <= size ? pag+1 : '-'} </a>
+								<a href="/ofertas/${(((pag+1)*4)+1) <= size ? pag+2 : pag}#"
 									class="w3-button">${(((pag+1)*4)+1) <= size ? pag+2 : '-'}
 								</a> <a href="/ofertas/${(((pag+2)*4)+1)<= size ? pag+3 : pag}#"
 									class="w3-button">${(((pag+2)*4)+1) <= size ? pag+3 : '-'}
@@ -98,10 +100,11 @@
 
 	<!-- Scripts -->
 	<script>
-    function searchingCV(myLink){
-    	myLink.href = "/ofertavista/"+document.getElementById("nick").value;
-    }
-    </script>
+		function searchingCV(myLink) {
+			myLink.href = "/ofertavista/"
+					+ document.getElementById("nick").value;
+		}
+	</script>
 	<script src="${s}js/jquery.min.js"></script>
 	<script src="${s}js/jquery.dropotron.min.js"></script>
 	<script src="${s}js/login.js"></script>

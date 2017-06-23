@@ -32,10 +32,12 @@
         <div class="line">
           <section id="main" class="container"> 
 	          <div class="row">
-		           <form method="post" action="buscador/P/"+title style="float: inherit;">
+		           <form action="/buscador/P" style="float: inherit;" method="post">
 						<ul class="actions" style="float: inherit;">
-							<li><input type="text" name="title" id="title"  placeholder="Escribe el titulo del proyecto..." /></li>
-							<li><a href="#" class="button special" id="search_button">Buscar Proyectos</a></li>
+							<li><input type="text" name="busqueda" id="busqueda"  placeholder="Titulo del proyecto..." /></li>
+							 <input name="${_csrf.parameterName}" type="hidden"
+									value="${_csrf.token}" />
+							<li><input type="submit" class="button special" id="search_button" value="Buscar Proyectos"></li>
 						</ul>
 					</form>
 				</div>	
