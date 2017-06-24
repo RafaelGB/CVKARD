@@ -150,6 +150,7 @@
 		<h2>---------------------------Notas---------------------------</h2>
 		<h3>Los archivos de foto se guardan en /tmp por lo que no hay fotos subidas en el import.sql</h3>
 		<a href="https://github.com/RafaelGB/CVKARD"><h3>github del grupo</h3></a>
+		<br></br>
 		<h1>Cambios con respecto a la versión a la entrega de exámen</h1>
 		<h2>---------------------------Ya registrado como Admin (usuario:admin@ucm.es pass: adminUCM)---------------------------</h2>
         <ul>
@@ -160,10 +161,32 @@
             </li> 
             <li> 
                 <a href="http://localhost:8080/Ls/1">
-                <h3>Tabla ofertas de la empresa</h3></a>
-                <p>Muestra todas las ofertas propias de la usuario. Dentro de dicha página puedes editar y eliminar tus propias ofertas.<br/>
-                Por otro lado podrás añadir nuevas ofertas para captar a nuevos empleados.</p>
-            </li>          
+                <h3>Listado de lenguajes</h3></a>
+                 <p>A modo de lista se permite añadir y borrar tags a la base de datos.</p>               
+           </li> 
+            <li> 
+                <a href="http://localhost:8080/Usuarios/1">
+                <h3>Listado de usuarios</h3></a>
+                <p>A modo de lista se muestran todos los usuarios registrados.(solo informativo, sin funcionalidad)</p>               
+           </li>          
+        </ul>
+        <h2>---------------------------Mejoras de seguridad y funcionalidad---------------------------</h2>
+        <ul>
+            <li> 
+                <p>Se ha corregido la variable mal nombrada que impedía el uso de la descarga en la vista curriculum</p>               
+            </li> 
+            <li> 
+                 <p>se ha añadido c:out a los campos donde el usuario puede modificar contenido en la base de datos.IMpidiento inyeccion de js en el editor de texto por ejemplo.</p>               
+           </li> 
+            <li> 
+                <p>Ahora el modelo de proyecto cuenta con el campo link para enlazar al proyecto de github y se ha suprimido informacion innecesaria en su vista</p>               
+           </li>  
+           <li> 
+                <p>Ya estaba inluido pero ahora se  muestra correctamente una busqueda por filtro de lenguaje y por filtro de tags</p>         
+           </li>    
+           <li> 
+                <p>Se ha añadido un buscador en la vista de proyectos, ofertas y empresas respectivo a cada uno que filtra por nombre y muestra un listado paginado de lo encontrado o un mensaje de 'sin resultados'</p>               
+           </li>     
         </ul>	
 </body>
 </html>
